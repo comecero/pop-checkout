@@ -1,0 +1,49 @@
+﻿/* USER DEFINED */
+
+/* Main Colors */
+$brand-primary: #3181aa;
+$brand-success: #36ab0c;
+$brand-info: #5bc0de;
+$brand-danger: #d9534f;
+
+/* Alert Colors */
+$state-success-text: #3c763d;
+$state-success-bg: #dff0d8;
+
+$state-info-text: #31708f;
+$state-info-bg: #d9edf7;
+
+$state-danger-text: #a94442;
+$state-danger-bg: #f2dede;
+
+/* Button Text Colors */
+$btn-primary-color: #ffffff;
+$btn-success-color: #ffffff;
+$btn-info-color: #ffffff;
+$btn-danger-color: #ffffff;
+
+/* Fonts */
+$font-family-base: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-company-name: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-footer: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+/* Default button */
+$btn-default-color: #686868;
+$btn-default-bg: #ffffff;
+
+$header-bg-color: #d8d8d8;
+$header-color: #444444;
+$company-name-color: $header-color;
+$border-radius: 4px;
+$buynow-button-bg-color: #2196f3;
+$buynow-button-color: #ffffff;
+$body-bg-color: #ffffff;
+$body-color: #444444;
+$link-color: #40a5f5;
+
+/* NOT USER DEFINED */
+
+$btn-default-border: darken($btn-default-bg, 5%);
+$link-hover-color: darken($link-color, 10%);
+$buynow-button-bg-hover-color: darken($buynow-button-bg-color, 10%);
+$link-hover-decoration: none;

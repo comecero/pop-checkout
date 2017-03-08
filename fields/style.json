@@ -1,0 +1,137 @@
+﻿[
+  {
+    "name": "company-name-color",
+    "type": "color",
+    "label": "Company Name Text Color",
+    "description": "The color of the company name in the main page navigation / header. Note that if you upload a company logo, then the company name text is not displayed.",
+    "section": "Brand",
+    "required": true,
+    "default_value": "#ffffff",
+    "min_length": 5,
+    "max_length": 100
+  },
+  {
+    "name": "font-family-company-name",
+    "type": "string",
+    "label": "Company Name Font",
+    "description": "The font or fonts used in the company name in the main page navigation / header.",
+    "section": "Brand",
+    "required": true,
+    "default_value": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "min_length": 5,
+    "max_length": 100
+  },
+  {
+    "name": "font-family-base",
+    "type": "string",
+    "label": "Main Font",
+    "description": "The primary font or fonts used throughout the app.",
+    "section": "General",
+    "required": true,
+    "default_value": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "min_length": 5,
+    "max_length": 100
+  },
+  {
+    "name": "header-bg-color",
+    "type": "color",
+    "label": "Popup Header Background Color",
+    "description": "The background color of the popup main content area. Text will be placed in this section and therefore this color should have sharp contrast to the Popup Header Text Color.",
+    "section": "Header",
+    "required": true,
+    "default_value": "#d8d8d8"
+  },
+  {
+    "name": "header-color",
+    "type": "color",
+    "label": "Popup Header Text Color",
+    "description": "The main text color of the main content area. Should have a sharp contrast to the Popup Header Background Color.",
+    "section": "Header",
+    "required": true,
+    "default_value": "#444444"
+  },
+  {
+    "name": "body-bg-color",
+    "type": "color",
+    "label": "Popup Body Background Color",
+    "description": "The background color of the popup main content area. Text will be placed in this section and therefore this color should have sharp contrast to the Popup Body Text Color.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "body-color",
+    "type": "color",
+    "label": "Popup Body Text Color",
+    "description": "The text color of the main content area. Should have a sharp contrast to the Popup Body Background Color.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#444444"
+  },
+  {
+    "name": "link-color",
+    "type": "color",
+    "label": "Link Color",
+    "description": "The link color.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#40a5f5"
+  },
+  {
+    "name": "buynow-button-bg-color",
+    "type": "color",
+    "label": "Buy Now Button Background Color",
+    "description": "The color of the 'buy now' button.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#2196f3"
+  },
+  {
+    "name": "buynow-button-color",
+    "type": "color",
+    "label": "Buy Now Button Text Color",
+    "description": "The text color of the 'buy now' button.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "border-radius",
+    "type": "string",
+    "label": "Popup Border Radius",
+    "description": "Allows you to set a curve to the corners of the popup window.",
+    "section": "General",
+    "required": true,
+    "default_value": "4px",
+    "options":  [
+      {
+        "display": "Square corners",
+        "value": "0"
+      },
+      {
+        "display": "2 pixels",
+        "value": "2px"
+      },
+      {
+        "display": "4 pixels",
+        "value": "4px"
+      },
+      {
+        "display": "6 pixels",
+        "value": "6px"
+      },
+      {
+        "display": "8 pixels",
+        "value": "8px"
+      },
+      {
+        "display": "10 pixels",
+        "value": "10px"
+      },
+      {
+        "display": "12 pixels",
+        "value": "12px"
+      }
+    ]
+  }
+]

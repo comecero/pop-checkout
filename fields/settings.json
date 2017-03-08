@@ -1,0 +1,144 @@
+﻿[
+  {
+    "name": "allowed_origin_hosts",
+    "type": "text",
+    "label": "Allowed Popup Checkout Sites",
+    "description": "Supply the hostnames of websites that you want to allow the popup checkout to be launched from. Enter one per line. Provide the website hostname only (i.e. www.example.com - do not include https://).",
+    "section": "Technical",
+    "required": false
+  },
+  {
+    "name": "company_name",
+    "type": "string",
+    "label": "Company Name",
+    "description": "The company name that will appear on your cart pages",
+    "section": "Design",
+    "required": true,
+    "default_value": "Your Company Name",
+    "min_length": 1,
+    "max_length": 25
+  },
+  {
+    "name": "logo_popup",
+    "type": "image",
+    "label": "Company Icon",
+    "description": "The main company logo for the popup header. We recommend a square image.",
+    "section": "Design",
+    "required": false
+  },
+  {
+    "name": "use_product_icon",
+    "type": "boolean",
+    "label": "Use Product Icon?",
+    "description": "Indicates if you would like to use the product image as the popup header icon, if provided.",
+    "section": "Design",
+    "required": false,
+    "default_value":  false
+  },
+  {
+    "name": "popup_header_bg_image",
+    "type": "image",
+    "label": "Header Background Image",
+    "description": "A background image for the popup header.",
+    "section": "Design",
+    "required": false
+  },
+  {
+    "name": "web_font_import",
+    "type": "string",
+    "label": "Web Font Import",
+    "description": "If you would like to use external web fonts (such as Google Web Fonts) in your application, provide the URL for the font or fonts here. If you are using Google Web Fonts, go to the Google Web Fonts site, select and customize the font or fonts you want to use, and paste the font URL here. The font URL can be found within the 'href' value of the font link HTML provided by Google Web Fonts. You can then use these fonts in your font definitions under the app Style settings.",
+    "section": "Fonts",
+    "required": false,
+    "min_length": 40,
+    "max_length": 200
+  },
+  {
+    "name": "show_promo_code",
+    "type": "boolean",
+    "label": "Show Promo Code",
+    "description": "Do you want to provide an option for a user to supply a promotion / discount code? If you don't use promo codes, it is recommended to not display this field.",
+    "section": "Features",
+    "required": true,
+    "default_value": false
+  },
+  {
+    "name": "promo_code_name",
+    "type": "string",
+    "label": "Promo Code Name",
+    "description": "The name you use to refer to promo codes, i.e. Discount Code, Coupon Code, etc.",
+    "section": "Features",
+    "required": true,
+    "default_value": "Promo Code"
+  },
+  {
+    "name": "ask_vat_number",
+    "type": "boolean",
+    "label": "Request VAT Number",
+    "description": "If your account is configued to collect VAT from customers in the European Union, this allows you to specify if you want to allow customers to provide a VAT number with their order, which exempts them from VAT.",
+    "section": "Features",
+    "required": true,
+    "default_value": true
+  },
+  {
+    "name": "show_card_logos",
+    "type": "boolean",
+    "label": "Show Credit Card Logos",
+    "description": "Indicates if you would like to display logos for the types of credit cards accepted below the credit card fields.",
+    "section": "Features",
+    "required": true,
+    "default_value": true
+  },
+  {
+    "name": "enable_languages",
+    "type": "boolean",
+    "label": "Enable Languages",
+    "description": "Allows users to select from different languages during the checkout process. <strong>Note:</strong> This is currently a beta feature and should <strong>not</strong> be enabled for live orders.",
+    "section": "Features",
+    "required": true,
+    "default_value": false
+  },
+  {
+    "name": "main_shopping_url",
+    "type": "string",
+    "label": "Main Shopping URL",
+    "description": "In cases where the customer is redirected to complete an offsite payment (such as PayPal), this is the URL you want the customer returned to upon completion of their order.",
+    "section": "Routing",
+    "required":  false
+  },
+  {
+    "name": "receipt_close_button_text",
+    "type": "string",
+    "label": "Receipt Button Text",
+    "description": "Upon completion of an order, a mini-receipt is displayed with a button near the bottom that closes the popup when clicked. Select the text you would like to appear on this button.",
+    "section": "Features",
+    "required": true,
+    "default_value": "continue_shopping",
+    "options": [
+      {
+        "display": "Continue Shopping",
+        "value": "continue_shopping"
+      },
+      {
+        "display": "Continue",
+        "value": "continue"
+      },
+      {
+        "display": "Return",
+        "value": "return"
+      },
+      {
+        "display": "Close",
+        "value": "close"
+      },
+      {
+        "display": "Finish",
+        "value": "finish"
+      },
+      {
+        "display": "Don't display this button",
+        "value": "false"
+      }
+    ]
+  }
+]

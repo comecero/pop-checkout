@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="checkout">
+<head>
+    <title>Checkout</title>
+
+    <!-- Scale set to 1.0001 to address a bug in Safari on iOS 9.x -->
+    <meta name="viewport" content="initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no" />
+
+    <!-- CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="sass/style.css" rel="stylesheet" />
+    <link href="dist/css/loading-bar.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS, if supplied -->
+    <link href="settings/style.css" rel="stylesheet" />
+
+    <!-- Pull in the app and account settings. Must come before any app bootstrapping. -->
+    <script src="settings/app.js"></script>
+    <script src="settings/account.js"></script>
+
+    <!-- Load any custom fonts. Must come after the app settings are loaded. -->
+    <script src="dist/js/fonts.min.js"></script>
+
+    <!-- Frameworks. AngularJS is loaded here to enable ng-cloak as needed. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+
+</head>
+
+<body ng-app="checkout" allowtransparency="true" class="popup">
+
+    <ng-view autoscroll="true"></ng-view>
+
+    <!-- Modules (CDN)  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-animate.min.js"></script>
+
+    <!-- Main Application File. Must come before kit.js. -->
+    <script src="app/app.js"></script>
+
+    <!-- App Kit -->
+    <script src="dist/js/kit.js"></script>
+
+    <!-- Pages -->
+    <script src="dist/js/pages.js"></script>
+
+    <!-- Analytics -->
+    <script id="__pageview" data-manual-record src="analytics/pageview.js"></script>
+    <script id="__conversion" data-manual-record src="analytics/conversion.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="gettingStarted">
+<head>
+    <title>Getting Started with Popup Checkout</title>
+
+    <!-- Scale set to 1.0001 to address a bug in Safari on iOS 9.x -->
+    <meta name="viewport" content="initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no" />
+
+    <!-- CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../getting-started/style.css" rel="stylesheet" />
+
+    <!-- Pull in the app and account settings. Must come before any app bootstrapping. -->
+    <script src="../settings/app.js"></script>
+    <script src="../settings/account.js"></script>
+
+    <!-- Frameworks. AngularJS is loaded here to enable ng-cloak as needed. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+
+</head>
+
+<body ng-app="checkout" allowtransparency="true" class="popup">
+
+    <div class="container" ng-controller="GettingStartedController">
+
+        <div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="page-header">
+                        <h1 id="typography">Getting Started with Popup Checkout</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <p>Popup Checkout is a simple way to start taking orders from your website and offers a seamless checkout exprience for your customers. Integrating Popup Checkout is easy!</p>
+
+                <div ng-show="!data.product && data.loaded">
+                    <p>To see an example, you must first add a product to your account. Then reload this page to see the demo.</p>
+                    <p class="text-center">
+                        <a href="https://admin.comecero.com/#/products/add" class="btn btn-primary btn" target="_blank">Add a Product Now</a>
+                    </p>
+                </div>
+
+                <div ng-show="data.product">
+                    <h4>Let's see it in action!</h4>
+                    <p>Popup Checkout allows you to place buttons and links wherever you want customers to make a purchase. Click the button below to see an example.</p>
+                    <div ng-if="data.test">
+                        <p>
+                            To place a test order with the demo below, you can use the following details:
+                            <ul>
+                                <li>Card number: 4444555566661111</li>
+                                <li>Expiration Date: (any future date)</li>
+                                <li>CVC: (any three digit number)</li>
+                                <li>Other details: Whatever you want. Make sure you use your own email address as an email will be sent!</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <p class="text-center"><button class="btn btn-success popup-buy-now" data-product_id="{{data.product.product_id}}">{{data.product.name}} - Buy Now</button></p>
+                </div>
+
+                <h4>Adding Buttons to Your Site</h4>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Step 1:</strong> Add your Website to the App Settings</div>
+                    <div class="panel-body">
+
+                        <p>For security, we limit the websites that can embed your Popup Checkout to those that you specify.</p>
+
+                        <p>
+                            <ul>
+                                <li>Sign into your account</li>
+                                <li>From the left menu, click Apps</li>
+                                <li>Locate the Popup Checkout app, and click the arrow in the Launch button</li>
+                                <li>Click "Settings"</li>
+                                <li>
+                                    From within the settings, enter the hostname of the website that you intend to place the Popup Checkout.
+                                    <ul>
+                                        <li>Enter the hostname only, for example, if your website is <code>https://www.mysite.com</code>, you would only enter <code>www.mysite.com</code></li>
+                                        <li>If you would like to use on multiple websites, enter each hostname as a new line.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Step 2:</strong> Paste JavaScript</div>
+                    <div class="panel-body">
+
+                        <p>You need to include a JavaScript snippet on every page where you want to provide the option for customers to buy.</p>
+
+                        <p>
+                            Paste the following script reference near the bottom of your HTML page, just above the <code>&lt;/body&gt;</code> tag.<br /><br />
+                            <code>&lt;script src="{{data.src}}/dist/js/popup.js" id="_popup_script" data-popup-type="simple" type="text/javascript"&gt;</code>
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Step 3:</strong> Create Buttons</div>
+                    <div class="panel-body">
+
+                        <p>
+                            To configure a button or link to generate the popup when clicked, do the following:
+                            <ul>
+                                <li>Add the following class to the button or link: <code>popup-buy-now</code></li>
+                                <li>Add the following attribute to the button or link: <code>data-product_id="your-product-id-here"</code></li>
+                            </ul>
+                        </p>
+
+                        <p>
+                            Here's the button code for product_id {{data.product.product_id}}<br />
+                            <code>&lt;button class="popup-buy-now" data-product_id="{{data.product.product_id}}"&gt;Buy Now&lt;/button&gt;</code>
+                        </p>
+
+                        <p>
+                            Here's the link code for product_id {{data.product.product_id}}<br />
+                            <code>&lt;a href="#" class="popup-buy-now" data-product_id="{{data.product.product_id}}"&gt;Buy Now&lt;/a&gt;</code>
+                        </p>
+
+                        <p>
+                            You can specify additional parameters to customize the behavior.
+                            <ul>
+                                <li>data-quantity: Indicate the quantity of the item</li>
+                                <li>data-email: Pre-fill the customer's email address with the supplied value</li>
+                                <li>data-name: Pre-fill the customer's name with the supplied value</li>
+                                <li>data-currency: Set the cart currency</li>
+                                <li>data-promotion_code: Provide a promo code</li>
+                                <li>data-meta-*: Replace * with any value and the supplied value will be stored on the order's meta data</li>
+                            </ul>
+
+                            For example, here's a button that specifies the quantity, currency, promo code and a meta value:<br />
+                            <code>&lt;button class="popup-buy-now" data-product_id="{{data.product.product_id}}" data-quantity="1" data-currency="EUR" data-promotion_code="half-off" data-meta-ref="homepage"&gt;Buy Now&lt;/button&gt;</code>
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Modules (CDN)  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-sanitize.min.js"></script>
+
+    <!-- Main Application File. Must come before kit.js. -->
+    <script src="app.js"></script>
+
+    <!-- Controller -->
+    <script src="../getting-started/controller.js"></script>
+
+    <!-- App Kit -->
+    <script src="../dist/js/kit.js"></script>
+
+    <!-- Add the code so we can see a live demo on the page -->
+    <script src="../dist/js/popup.js" id="_popup_script" data-popup-type="simple" type="text/javascript"></script>
+
+</body>
+</html>
