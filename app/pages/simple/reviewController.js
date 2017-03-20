@@ -47,9 +47,6 @@
         // Get the cart or invoice that the payment is associated with
         $scope.data.sale = payment.cart || payment.invoice;
 
-        // Open the modal
-        openModal();
-
         // Set flags to indicate if we need to request the company name and phone number fields, which happens when they're required and not already populated.
         if (HelperService.isRequiredCustomerField('company_name', $scope.data.sale.options) && $scope.data.sale.customer.company_name == null) {
             $scope.options.showCompanyName = true;
@@ -92,20 +89,6 @@
         }
     });
 
-    var openModal = function () {
-
-        // We load a pageview when the modal opens so that we don't count pageviews for background loads.
-        if (window.__pageview && window.__pageview.recordPageLoad) {
-            window.__pageview.recordPageLoad();
-        }
-
-        $scope.modalInstance = $uibModal.open({
-            templateUrl: 'review.html',
-            backdrop: false,
-            scope: $scope
-        });
-    }
-
     $scope.downloadReceipt = function () {
         ApiService.getItemPdf($scope.data.payment.order.url).then(function (response) {
 
@@ -118,7 +101,19 @@
     }
 
     $scope.close = function () {
-        window.location = $scope.data.return_url;
+
+        // For mobile devices, the page opened in a new tab. Just close the tab. For desktop, the page is in the same so redirect back to the parent.
+        // This same page is resolved with different URLs in the app settings, so you can tell the nature of the page by looking at the path.
+        if ($location.path() == "review") {
+
+        } else {
+            window.location = $scope.data.return_url;
+        }
+    }
+
+    // Record a pageview.
+    if (window.__pageview && window.__pageview.recordPageLoad) {
+        window.__pageview.recordPageLoad();
     }
 
 }]);
