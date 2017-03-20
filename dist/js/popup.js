@@ -8,21 +8,153 @@ Copyright Comecero and other contributors. Released under MIT license. See LICEN
 var _popup = (function () {
 
     // Define variables to hold values that we'll set after we create our hidden iframe.
-    var iframe, iframeElem, iframeOrigin, src, appPath;
+    var childElem, iframe, childOrigin, src, appPath, mobile, iframeReady;
+
+    // isMobile.js v0.4.1
+    (function (global) {
+
+        var apple_phone = /iPhone/i,
+            apple_ipod = /iPod/i,
+            apple_tablet = /iPad/i,
+            android_phone = /(?=.*\bAndroid\b)(?=.*\bMobile\b)/i, // Match 'Android' AND 'Mobile'
+            android_tablet = /Android/i,
+            amazon_phone = /(?=.*\bAndroid\b)(?=.*\bSD4930UR\b)/i,
+            amazon_tablet = /(?=.*\bAndroid\b)(?=.*\b(?:KFOT|KFTT|KFJWI|KFJWA|KFSOWI|KFTHWI|KFTHWA|KFAPWI|KFAPWA|KFARWI|KFASWI|KFSAWI|KFSAWA)\b)/i,
+            windows_phone = /Windows Phone/i,
+            windows_tablet = /(?=.*\bWindows\b)(?=.*\bARM\b)/i, // Match 'Windows' AND 'ARM'
+            other_blackberry = /BlackBerry/i,
+            other_blackberry_10 = /BB10/i,
+            other_opera = /Opera Mini/i,
+            other_chrome = /(CriOS|Chrome)(?=.*\bMobile\b)/i,
+            other_firefox = /(?=.*\bFirefox\b)(?=.*\bMobile\b)/i, // Match 'Firefox' AND 'Mobile'
+            seven_inch = new RegExp(
+                '(?:' +         // Non-capturing group
+
+                'Nexus 7' +     // Nexus 7
+
+                '|' +           // OR
+
+                'BNTV250' +     // B&N Nook Tablet 7 inch
+
+                '|' +           // OR
+
+                'Kindle Fire' + // Kindle Fire
+
+                '|' +           // OR
+
+                'Silk' +        // Kindle Fire, Silk Accelerated
+
+                '|' +           // OR
+
+                'GT-P1000' +    // Galaxy Tab 7 inch
+
+                ')',            // End non-capturing group
+
+                'i');           // Case-insensitive matching
+
+        var match = function (regex, userAgent) {
+            return regex.test(userAgent);
+        };
+
+        var IsMobileClass = function (userAgent) {
+            var ua = userAgent || navigator.userAgent;
+
+            // Facebook mobile app's integrated browser adds a bunch of strings that
+            // match everything. Strip it out if it exists.
+            var tmp = ua.split('[FBAN');
+            if (typeof tmp[1] !== 'undefined') {
+                ua = tmp[0];
+            }
+
+            // Twitter mobile app's integrated browser on iPad adds a "Twitter for
+            // iPhone" string. Same probable happens on other tablet platforms.
+            // This will confuse detection so strip it out if it exists.
+            tmp = ua.split('Twitter');
+            if (typeof tmp[1] !== 'undefined') {
+                ua = tmp[0];
+            }
+
+            this.apple = {
+                phone: match(apple_phone, ua),
+                ipod: match(apple_ipod, ua),
+                tablet: !match(apple_phone, ua) && match(apple_tablet, ua),
+                device: match(apple_phone, ua) || match(apple_ipod, ua) || match(apple_tablet, ua)
+            };
+            this.amazon = {
+                phone: match(amazon_phone, ua),
+                tablet: !match(amazon_phone, ua) && match(amazon_tablet, ua),
+                device: match(amazon_phone, ua) || match(amazon_tablet, ua)
+            };
+            this.android = {
+                phone: match(amazon_phone, ua) || match(android_phone, ua),
+                tablet: !match(amazon_phone, ua) && !match(android_phone, ua) && (match(amazon_tablet, ua) || match(android_tablet, ua)),
+                device: match(amazon_phone, ua) || match(amazon_tablet, ua) || match(android_phone, ua) || match(android_tablet, ua)
+            };
+            this.windows = {
+                phone: match(windows_phone, ua),
+                tablet: match(windows_tablet, ua),
+                device: match(windows_phone, ua) || match(windows_tablet, ua)
+            };
+            this.other = {
+                blackberry: match(other_blackberry, ua),
+                blackberry10: match(other_blackberry_10, ua),
+                opera: match(other_opera, ua),
+                firefox: match(other_firefox, ua),
+                chrome: match(other_chrome, ua),
+                device: match(other_blackberry, ua) || match(other_blackberry_10, ua) || match(other_opera, ua) || match(other_firefox, ua) || match(other_chrome, ua)
+            };
+            this.seven_inch = match(seven_inch, ua);
+            this.any = this.apple.device || this.android.device || this.windows.device || this.other.device || this.seven_inch;
+
+            // excludes 'other' devices and ipods, targeting touchscreen phones
+            this.phone = this.apple.phone || this.android.phone || this.windows.phone;
+
+            // excludes 7 inch devices, classifying as phone or tablet is left to the user
+            this.tablet = this.apple.tablet || this.android.tablet || this.windows.tablet;
+
+            if (typeof window === 'undefined') {
+                return this;
+            }
+        };
+
+        var instantiate = function () {
+            var IM = new IsMobileClass();
+            IM.Class = IsMobileClass;
+            return IM;
+        };
+
+        if (typeof module !== 'undefined' && module.exports && typeof window === 'undefined') {
+            //node
+            module.exports = IsMobileClass;
+        } else if (typeof module !== 'undefined' && module.exports && typeof window !== 'undefined') {
+            //browserify
+            module.exports = instantiate();
+        } else if (typeof define === 'function' && define.amd) {
+            //AMD
+            define('isMobile', [], global.isMobile = instantiate());
+        } else {
+            global.isMobile = instantiate();
+        }
+
+    })(this);
+
+    // Detect the environment
+    mobile = isMobile.phone;
 
     // A function for sending messages to the child iframe
     var sendMessage = function (message) {
 
+        var settings = window.__settings || {};
+
         // Only send the message if the iFrame origin belongs to an allowed host
         var errorMsg = "This app is not properly configured to run from this website. To enable the payment window to launch from this website, you must supply the website hostname as an allowed origin in the app settings.";
         errorMsg += "\n\nTo configure the payment window to run from this website, sign in to your account, navigate to Apps, go to the settings for the app and add " + window.location.hostname + " to the list of allowed websites.";
-        var settings = window.__settings || {};
 
         // Always allow locahost as a valid origin host, and also allow if the origin host is the same as the page host.
-        if (window.location.hostname != "localhost" && window.location.hostname != "127.0.0.1" && (window.location.protocol + "//" + window.location.hostname != iframeOrigin)) {
+        if (window.location.hostname != "localhost" && window.location.hostname != "127.0.0.1" && (window.location.protocol + "//" + window.location.hostname != childOrigin)) {
             if (!settings.app || !settings.app.allowed_origin_hosts) {
                 alert(errorMsg);
-                close();
+                closeIframe();
                 return;
             }
 
@@ -30,12 +162,23 @@ var _popup = (function () {
             var validHosts = settings.app.allowed_origin_hosts.split(/[\n\s,]+/);
             if (validHosts.indexOf(window.location.hostname) == -1) {
                 alert(errorMsg);
-                close();
+                closeIframe();
                 return;
             }
         }
 
-        iframe.postMessage(JSON.stringify(message), iframeOrigin);
+        // Don't send the message until the iframe is ready.
+        if (iframeReady) {
+            childElem.postMessage(JSON.stringify(message), childOrigin);
+        } else {
+            var iframeReadyCheckInterval = setInterval(function () {
+                if (iframeReady) {
+                    clearInterval(iframeReadyCheckInterval);
+                    childElem.postMessage(JSON.stringify(message), childOrigin);
+                }
+            }, 20);
+        }
+
     }
 
     // Add a listener to receive messages from the child iframe
@@ -44,8 +187,8 @@ var _popup = (function () {
         if (message.data) {
 
             // Ignore messages that aren't from the iframe origin
-            if (message.origin != iframeOrigin) {
-                console.log("Attempting to receive a message from the iframe window that is not hosted by an allowed hostname: The hostname " + originHost + " is not listed as approved in the app settings. The message will be ignored.");
+            if (message.origin != childOrigin) {
+                console.log("Attempting to receive a message from the child window that is not hosted by an allowed hostname: The hostname " + message.origin + " is not listed as approved in the app settings. The message will be ignored.");
                 return;
             }
 
@@ -54,7 +197,17 @@ var _popup = (function () {
 
             // Examine the message and respond as necessary.
             if (obj.type == "close") {
-                close(obj.cart);
+
+                // If we have an iframe, close it
+                if (iframe) {
+                    closeIframe();
+                }
+
+                // Fire the onclose event with the current cart
+                if (_popup.onClose) {
+                    _popup.onClose(obj.cart);
+                }
+
             }
 
             if (obj.type == "on_load" && _popup.onLoad) {
@@ -65,14 +218,18 @@ var _popup = (function () {
                 window.location = obj.url;
             }
 
+            if (obj.type == "ready") {
+                iframeReady = true;
+            }
+
         }
 
     });
 
-    var open = function (cart) {
+    var openIframe = function (cart) {
 
         // Show the iframe
-        iframeElem.style.display = "block";
+        iframe.style.display = "block";
 
         // Send a message to the iframe
         sendMessage({ type: "add_to_cart", cart: JSON.stringify(cart) });
@@ -82,17 +239,30 @@ var _popup = (function () {
 
     }
 
-    var close = function (cart) {
+    var closeIframe = function () {
         // Hide the iframe
-
         setTimeout(function () {
             document.getElementById("_popup_iframe").style.display = "none";
         }, 250);
-
-        if (_popup.onClose) {
-            _popup.onClose(cart);
-        }
     }
+
+    var appendAsyncScript = function (url, callback) {
+
+        var head = document.getElementsByTagName("head")[0], done = false;
+        var script = document.createElement("script");
+        script.src = url;
+        script.type = "text/javascript";
+        script.async = 1;
+        // Attach handlers for all browsers
+        script.onload = script.onreadystatechange = function () {
+            if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+                done = true;
+                if (typeof callback === 'function') callback();
+            }
+        };
+        head.appendChild(script);
+
+    };
 
     var createCartJsonFromAttributes = function (elem) {
 
@@ -157,39 +327,104 @@ var _popup = (function () {
 
     }
 
-    var appendScript = function(url, success) {
+    var getClickables = function (onComplete) {
 
-        var script = document.createElement('script');
-        script.src = url;
+        // Watch for the body to complete loading; when done select the elements that should respond to click events.
+        var readyStateCheckInterval = setInterval(function () {
+            if (document.readyState === "complete") {
+                clearInterval(readyStateCheckInterval);
+                var clickables = document.getElementsByClassName("popup-buy-now");
+                onComplete(clickables);
+            }
+        }, 20);
 
-        var head = document.getElementsByTagName('head')[0],
-        done = false;
+    }
 
-        // Attach handlers for all browsers
-        script.onload = script.onreadystatechange = function () {
+    // Used for desktop and tablet environments and loads the iframe in the background for fast launch.
+    var addDesktopListeners = function (target) {
 
-            if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+        // First, append the iframe to the document.
+        iframe = document.createElement('iframe')
+        iframe.src = target;
+        iframe.setAttribute("id", "_popup_iframe");
+        iframe.setAttribute("frameborder", 0);
+        iframe.setAttribute("scrolling", "no");
+        iframe.setAttribute("allowtransparency", true);
+        iframe.setAttribute("sandbox", "allow-scripts allow-forms allow-same-origin allow-popups");
 
-                done = true;
+        // You can feed these in as a single string for most browsers but not IE (maybe others), so we'll load styles as an object.
+        iframe.style["display"] = "none";
+        iframe.style["z-index"] = 2147483647;
+        iframe.style["background"] = "rgba(0, 0, 0, 0.004)";
+        iframe.style["border"] = "0px none transparent";
+        iframe.style["overflow-x"] = "hidden";
+        iframe.style["overflow-y"] = "auto";
+        iframe.style["visibility"] = "visible";
+        iframe.style["margin"] = "0px";
+        iframe.style["padding"] = "0px";
+        iframe.style["-webkit-tap-highlight-color"] = "transparent";
+        iframe.style["position"] = "fixed";
+        iframe.style["left"] = "0px";
+        iframe.style["top"] = "0px";
+        iframe.style["width"] = "100%";
+        iframe.style["height"] = "100%";
 
-                // callback function provided as param
-                if (success) {
-                    success();
-                }
+        // Append to the body
+        document.body.appendChild(iframe);
 
-                script.onload = script.onreadystatechange = null;
-                head.removeChild(script);
+        // Get the content window from the appended iframe
+        childElem = document.getElementById("_popup_iframe").contentWindow;
 
-            };
+        // Set listeners for clicks that should launch the iframe.
+        getClickables(function (clickables) {
 
-        };
+            for (var i = 0; i < clickables.length; i++) {
+                clickables[i].addEventListener('click', function (event) {
 
-        head.appendChild(script);
+                    // Prevent any other native actions bound to this element.
+                    event.preventDefault();
 
-    };
+                    // Send a message to the iframe
+                    openIframe(createCartJsonFromAttributes(event.target));
 
-    // This loads the iframe as a hidden element on the page.
-    var initialize = function () {
+                });
+            }
+
+        });
+
+    }
+
+    // Used for mobile environments.
+    var addMobileListeners = function (target) {
+
+        // Set listeners for clicks that should launch the iframe.
+        getClickables(function (clickables) {
+
+            for (var i = 0; i < clickables.length; i++) {
+                clickables[i].addEventListener('click', function (event) {
+
+                    // Prevent any other native actions bound to this element.
+                    event.preventDefault();
+
+                    // Send the cart json into the url
+                    var q = encodeURIComponent(JSON.stringify(createCartJsonFromAttributes(event.target)));
+
+                    // Pop the window
+                    childElem = window.open(target + "?cart=" + q);
+
+                    // Tell the iframe the URL that generated the popup.
+                    sendMessage({ type: "set_parent_url", url: window.location.href });
+
+                });
+            }
+
+        });
+    }
+
+    // This prepares the page for popup
+    var initialize = function (callback) {
+
+        readyCallback = callback;
 
         // Get the element that loaded the script
         var script = document.getElementById("_popup_script");
@@ -199,85 +434,54 @@ var _popup = (function () {
             // Define the local and remote origins and scriptPaths
             src = script.getAttribute("src");
 
+            // The app path is the "root" of the app, which is the grandparent of the src directory
+            var pathArray = src.split("/").slice(-3);
+            appPath = src.substring(0, src.length - pathArray.join("/").length);
+
+            // Set the type of checkout to invoke. The default is "simple" if not provided.
+            var type = script.getAttribute("data-popup-type") || "simple";
+
+            // Set the UI. Not all checkout types will have different UIs. Set as "basic" if not provided.
+            var ui = script.getAttribute("data-popup-ui") || "basic";
+
+            // Set the environment, mobile or desktop based on what we discovered in the function at the top.
+            var environment = mobile ? "m" : "d";
+
+            // Define the target URL
+            var target = appPath + '#/' + type + "-" + environment;
+
             // Define the iframe origin
             var i = -1, x = 3; // We're looking for the 3rd instance of / in the src, which will signify the end of the origin
             while (x-- && i++ < src.length) {
                 i = src.indexOf("/", i);
                 if (i < 0) break;
             }
-            iframeOrigin = src.substring(0, i);
+            childOrigin = src.substring(0, i);
 
-            // If a fully qualified URL. The app path is the src + the first directory
-            if (src.substring(0, 8) == "https://" || src.substring(0, 8) == "http://") {
-                appPath = src.substring(0, src.split("/", 4).join("/").length);
-            } else {
-                appPath = src.substring(0, src.split("/", 1).join("/").length);
-                // Relative URL so the iframe origin is the current hostname
-                iframeOrigin = window.location.protocol + "//" + window.location.hostname;
+            // If not a fully qualified URL, set the childOrigin to the parent's origin.
+            if (src.substring(0, 8) != "https://" && src.substring(0, 8) != "http://") {
+                childOrigin = window.location.protocol + "//" + window.location.hostname;
             }
 
-            // Load the app settings to determine allowed origins for the iframe.
-            appendScript(appPath + "/settings/app.js");
+            appendAsyncScript(appPath + "settings/app.js", function () {
 
-            // Set the type of iframe to invoke. The default is "simple" if not provided.
-            var type = script.getAttribute("data-popup-type") || "simple";
-
-            iframeElem = document.createElement('iframe')
-            iframeElem.src = appPath + '/#/' + type;
-            iframeElem.setAttribute("id", "_popup_iframe");
-            iframeElem.setAttribute("frameborder", 0);
-            iframeElem.setAttribute("scrolling", "no");
-            iframeElem.setAttribute("allowtransparency", true);
-            iframeElem.setAttribute("sandbox", "allow-scripts allow-forms allow-same-origin allow-popups");
-
-            // You can feed these in as a single string for most browsers but not IE (maybe others), so we'll load styles as an object.
-            iframeElem.style["display"] = "none";
-            iframeElem.style["z-index"] = 2147483647;
-            iframeElem.style["background"] = "rgba(0, 0, 0, 0.004)";
-            iframeElem.style["border"] = "0px none transparent";
-            iframeElem.style["overflow-x"] = "hidden";
-            iframeElem.style["overflow-y"] = "auto";
-            iframeElem.style["visibility"] = "visible";
-            iframeElem.style["margin"] = "0px";
-            iframeElem.style["padding"] = "0px";
-            iframeElem.style["-webkit-tap-highlight-color"] = "transparent";
-            iframeElem.style["position"] = "fixed";
-            iframeElem.style["left"] = "0px";
-            iframeElem.style["top"] = "0px";
-            iframeElem.style["width"] = "100%";
-            iframeElem.style["height"] = "100%";
-
-            var appendIframe = function () {
-
-                // Append to the body
-                document.body.appendChild(iframeElem);
-
-                // Get the content window from the appended iframe
-                iframe = document.getElementById("_popup_iframe").contentWindow;
-
-                // Set listeners for clicks that should launch the iframe.
-                var clickables = document.getElementsByClassName("popup-buy-now");
-
-                for (var i = 0; i < clickables.length; i++) {
-                    clickables[i].addEventListener('click', function (event) {
-
-                        // Prevent any other native actions bound to this element.
-                        event.preventDefault();
-
-                        // Send a message to the iframe
-                        open(createCartJsonFromAttributes(event.target));
-
-                    });
+                // Wire up the listeners
+                if (mobile) {
+                    // Wire up the buttons to listen for the click events to open a new tab
+                    addMobileListeners(target);
+                    if (callback) callback();
+                } else {
+                    // Append the iframe to the body when ready
+                    var interval = setInterval(function () {
+                        if (document.body) {
+                            addDesktopListeners(target);
+                            clearInterval(interval);
+                            if (callback) callback();
+                        }
+                    }, 20);
                 }
-            }
 
-            // Append to the body when ready
-            var interval = setInterval(function () {
-                if (document.body) {
-                    appendIframe();
-                    clearInterval(interval);
-                }
-            }, 20);
+            });
 
         } else {
             console.warn("The script tag that loads popup.js must contain the attribute id=\"_popup_script\"");
@@ -287,11 +491,17 @@ var _popup = (function () {
 
     return {
         // Define a public API
-        initialize: initialize,
-        open: open,
-        close: close
+        initialize: initialize
     };
 
 })();
 
-_popup.initialize();
+// If embedded as a script reference (rather than a JavaScript reference), invoke the initialize function automatically. Otherwise, it's invoked by the snippet.
+(function () {
+    var script = document.getElementById("_popup_script");
+    if (script) {
+        if (!script["data-self-init"]) {
+            _popup.initialize();
+        }
+    }
+})();
