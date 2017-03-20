@@ -96,6 +96,15 @@
     "default_value": "#ffffff"
   },
   {
+    "name": "form-error-bg-color",
+    "type": "color",
+    "label": "Input Background Error Color",
+    "description": "The color for form inputs when the value is not valid.",
+    "section": "Main Content Area",
+    "required": true,
+    "default_value": "#fce3e3"
+  },
+  {
     "name": "border-radius",
     "type": "string",
     "label": "Popup Border Radius",

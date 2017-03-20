@@ -2062,8 +2062,8 @@ app.directive('conversion', ['SettingsService', 'StorageService', function (Sett
                             js.setAttribute("data-order_id", order_id);
 
                             // Remove any existing
-                            if (document.getElementById("app_conversionload") != null) {
-                                head.removeChild(document.getElementById("app_conversionload"));
+                            if (document.getElementById("__conversion") != null) {
+                                head.removeChild(document.getElementById("__conversion"));
                             }
 
                             // Add again to force reload.
@@ -3046,49 +3046,52 @@ app.directive('customerBackgroundSave', ['CartService', '$timeout', function (Ca
                             params = utils.mergeParams(params, null, null);
                             
                             if (scope.cart) {
-                                
+
                                 // Use the ngModel attribute to get the property name
                                 var property = input.getAttribute("ng-model");
-                                
-                                // Strip everything before customer.
-                                property = property.split("customer.")[1];
-                                
-                                scope.cart.customer[property] = inputNg.val();
 
-                                // If set that billing is same as shipping, set all shipping values to null so that the API doesn't receive any of the data set on the view.
-                                if (scope.shippingIsBilling) {
-                                    if (cartCopy.customer.shipping_address) {
-                                        cartCopy.customer.shipping_address.name = null;
-                                        cartCopy.customer.shipping_address.address_1 = null;
-                                        cartCopy.customer.shipping_address.address_2 = null;
-                                        cartCopy.customer.shipping_address.city = null;
-                                        cartCopy.customer.shipping_address.state_prov = null;
-                                        cartCopy.customer.shipping_address.postal_code = null;
-                                        cartCopy.customer.shipping_address.country = null;
+                                if (property) {
+
+                                    // Strip everything before customer.
+                                    property = property.split("customer.")[1];
+
+                                    scope.cart.customer[property] = inputNg.val();
+
+                                    // If set that billing is same as shipping, set all shipping values to null so that the API doesn't receive any of the data set on the view.
+                                    if (scope.shippingIsBilling) {
+                                        if (cartCopy.customer.shipping_address) {
+                                            cartCopy.customer.shipping_address.name = null;
+                                            cartCopy.customer.shipping_address.address_1 = null;
+                                            cartCopy.customer.shipping_address.address_2 = null;
+                                            cartCopy.customer.shipping_address.city = null;
+                                            cartCopy.customer.shipping_address.state_prov = null;
+                                            cartCopy.customer.shipping_address.postal_code = null;
+                                            cartCopy.customer.shipping_address.country = null;
+                                        }
                                     }
+
+                                    CartService.update(cartCopy, scope.params, true).then(function (cart) {
+
+                                        // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
+                                        if (scope.cart) {
+                                            cart.customer = scope.cart.customer;
+                                        }
+
+                                        // Sync the scope to the response.
+                                        scope.cart = cart;
+
+                                    }, function (error) {
+                                        scope.error = error;
+                                    });
                                 }
-                                
-                                CartService.update(cartCopy, scope.params, true).then(function (cart) {
-                                    
-                                    // In the event that there were changes to the view between the time the call was sent and returned, we don't want to overwrite them. As a result, we won't sync the server customer values with the model.
-                                    if (scope.cart) {
-                                        cart.customer = scope.cart.customer;
-                                    }
-                                    
-                                    // Sync the scope to the response.
-                                    scope.cart = cart;
-
-                                }, function (error) {
-                                    scope.error = error;
-                                });
                             }
                         }, 25);
                     });
                 });
-   
+
             }
         };
-    }]);
+}]);
 
 app.directive('creditCardImage', [function () {
         
@@ -4420,6 +4423,7 @@ app.service("CartService", ['$http', '$q', '$rootScope', 'ApiService', 'PaymentS
                     }
 
                     // Set the item into the cart
+                    cart.items = cart.items || [];
                     cart.items.push(item);
                     location.search(property, null);
 

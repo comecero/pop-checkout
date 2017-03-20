@@ -27,6 +27,14 @@
     "required": false
   },
   {
+    "name": "favicon",
+    "type": "image",
+    "label": "Favicon",
+    "description": "The page favicon image. Providing a square image is highly recommended; images that are not square will automatically be cropped square. For maximum compatibility, the image you provide should be no larger than 196 x 196 pixels.",
+    "section": "Design",
+    "required": false
+  },
+  {
     "name": "use_product_icon",
     "type": "boolean",
     "label": "Use Product Icon?",

@@ -5,6 +5,7 @@
 /* Button Text Colors */
 /* Fonts */
 /* Default button */
+/* Inputs */
 /* NOT USER DEFINED */
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
@@ -5833,7 +5834,6 @@ body {
   color: #444444;
   /* This ensures that the initial width is sufficient to prevent input stacking, which ensures the appropriate initial height. */
   min-width: 275px;
-  /*background-color: transparent;*/
   background: rgba(0, 0, 0, 0.6);
   /* R, G, B, A */ }
 
@@ -5843,7 +5843,7 @@ body {
   top: 50%;
   left: 50%;
   margin-top: -50px;
-  margin-left: -100px; }
+  margin-left: -15px; }
 
 /* Start animations */
 .animate-show.ng-hide {
@@ -5869,7 +5869,19 @@ body {
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   border: 0;
-  background-color: #fff; }
+  background-color: #fff;
+  margin: 0 auto;
+  max-width: 400px; }
+
+.non-modal .modal-content {
+  margin-top: 35px;
+  margin-bottom: 35px; }
+
+@media (max-width: 400px) {
+  .non-modal .modal-content {
+    height: 100vh;
+    margin-top: 0;
+    margin-bottom: 0; } }
 
 .modal.in .modal-dialog {
   -webkit-transition: -webkit-transform 0.6s ease-out;
@@ -5896,7 +5908,7 @@ body {
 
 /* End overrides of bootstrap modal structure */
 /* Start header */
-.dialog-simple .modal-header, .dialog-expanded .modal-header {
+.dialog-basic .modal-header, .dialog-expanded .modal-header {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px; }
 
@@ -5916,7 +5928,7 @@ body {
   font-weight: bold;
   font-size: 120%;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #444444; }
+  color: #3a3a3a; }
 
 a, a:link, a:visited {
   color: #40a5f5; }
@@ -5932,7 +5944,7 @@ a, a:link, a:visited {
 /* Error overrides */
 .has-error .form-control {
   border-color: #ccc;
-  background-color: #fdf6f6; }
+  background-color: #fce3e3; }
 
 /* End Error overrides */
 /* Alert overrides */
@@ -5981,12 +5993,16 @@ a, a:link, a:visited {
 
 /* End branding */
 /* Start form */
-.form-title {
+.form-title, .form-subtitle {
   margin: 0 0 16px; }
 
 .form-title span {
   font-size: 18px;
   font-weight: 700; }
+
+.form-subtitle span {
+  font-size: 15px;
+  font-weight: 200; }
 
 .form-title .fa-check {
   color: #4caf50;
@@ -6211,7 +6227,7 @@ iframe {
   padding: 20px 20px 30px 20px; }
 
 /* Mobile devices */
-@media (max-width: 375px) {
+@media (max-width: 400px) {
   iframe {
     width: 100%; }
   .modal-content {
@@ -6224,7 +6240,7 @@ iframe {
     width: 100%;
     margin: 0;
     max-width: unset; }
-  .dialog-simple .modal-header {
+  .dialog-basic .modal-header {
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
   .form-control {
@@ -6245,13 +6261,8 @@ li.dropdown, .pointer {
   margin-right: 7px; }
 
 /* Promo code */
-.promo-code button {
-  background-color: #2196f3;
-  color: #ffffff; }
-
-.promo-code label {
-  cursor: pointer;
-  color: #40a5f5; }
+.input-group-btn .btn.apply-promo-code {
+  border: 1px solid #5bc0de; }
 
 /* Global footer  */
 .global-footer {
@@ -6268,6 +6279,18 @@ li.dropdown, .pointer {
   margin-bottom: 10px; }
 
 /* Spacers */
+.spacer-t0 {
+  margin-top: 0px; }
+
+.spacer-b0 {
+  margin-bottom: 0px; }
+
+.spacer-r0 {
+  margin-right: 0px; }
+
+.spacer-l0 {
+  margin-left: 0px; }
+
 .spacer-t5 {
   margin-top: 5px; }
 

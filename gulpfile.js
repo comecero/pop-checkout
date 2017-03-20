@@ -10,7 +10,7 @@ var fs = require("fs");
 var header = require('gulp-header');
 
 gulp.task("concat-pages-js", function () {
-    return gulp.src(["./app/pages/**/*.js"])
+    return gulp.src(["./app/shared/*.js", "./app/pages/**/*.js"])
       .pipe(concat("pages.js"))
       .pipe(gulp.dest("./dist/js/"));
 });
@@ -59,7 +59,8 @@ gulp.task('zip', function (done) {
     // Read the version number
     var version = fs.readFileSync("./version.html", "utf8");
 
-    return gulp.src(["./**", "!./.git", "!./.vs", "!./.git/*", "!./settings/**", "!./settings/", "!./.gitattributes", "!./.gitignore", "!./*.sln", "!./Web.config", "!./Web.Debug.config"])
-    .pipe(zip("cart-" + version + ".zip"))
+    return gulp.src(["./**", "!./.git", "!./.vs", "!./.git/*", "!./settings/**", "!./settings/", "!./analytics/**", "!./analytics/", "!./.gitattributes", "!./.gitignore", "!./*.sln", "!./Web.config", "!./Web.Debug.config"])
+    .pipe(header('\ufeff'))
+    .pipe(zip("pop-" + version + ".zip"))
     .pipe(gulp.dest("./"));
 });

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" ng-app="gettingStarted">
 <head>
-    <title>Getting Started with Popup Checkout</title>
+    <title>Getting Started with Pay on Page Checkout</title>
 
     <!-- Scale set to 1.0001 to address a bug in Safari on iOS 9.x -->
     <meta name="viewport" content="initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no" />
@@ -18,136 +18,234 @@
     <!-- Frameworks. AngularJS is loaded here to enable ng-cloak as needed. -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
 
+    <!-- Highlight.js -->
+    <script src="../dist/js/highlight.pack.js"></script>
+    <link href="../dist/css/code-highlight.css" rel="stylesheet" />
+    <style type="text/css">
+        pre code {
+            white-space: unset;
+        }
+        .pointer {
+            cursor: pointer;
+        }
+    </style>
+
 </head>
 
 <body ng-app="checkout" allowtransparency="true" class="popup">
 
     <div class="container" ng-controller="GettingStartedController">
 
-        <div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="page-header">
-                        <h1 id="typography">Getting Started with Popup Checkout</h1>
-                    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h1 id="typography">Getting Started with Pay on Page Checkout</h1>
                 </div>
             </div>
-
-            <div>
-                <p>Popup Checkout is a simple way to start taking orders from your website and offers a seamless checkout exprience for your customers. Integrating Popup Checkout is easy!</p>
-
-                <div ng-show="!data.product && data.loaded">
-                    <p>To see an example, you must first add a product to your account. Then reload this page to see the demo.</p>
-                    <p class="text-center">
-                        <a href="https://admin.comecero.com/#/products/add" class="btn btn-primary btn" target="_blank">Add a Product Now</a>
-                    </p>
-                </div>
-
-                <div ng-show="data.product">
-                    <h4>Let's see it in action!</h4>
-                    <p>Popup Checkout allows you to place buttons and links wherever you want customers to make a purchase. Click the button below to see an example.</p>
-                    <div ng-if="data.test">
-                        <p>
-                            To place a test order with the demo below, you can use the following details:
-                            <ul>
-                                <li>Card number: 4444555566661111</li>
-                                <li>Expiration Date: (any future date)</li>
-                                <li>CVC: (any three digit number)</li>
-                                <li>Other details: Whatever you want. Make sure you use your own email address as an email will be sent!</li>
-                            </ul>
-                        </p>
-                    </div>
-                    <p class="text-center"><button class="btn btn-success popup-buy-now" data-product_id="{{data.product.product_id}}">{{data.product.name}} - Buy Now</button></p>
-                </div>
-
-                <h4>Adding Buttons to Your Site</h4>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong>Step 1:</strong> Add your Website to the App Settings</div>
-                    <div class="panel-body">
-
-                        <p>For security, we limit the websites that can embed your Popup Checkout to those that you specify.</p>
-
-                        <p>
-                            <ul>
-                                <li>Sign into your account</li>
-                                <li>From the left menu, click Apps</li>
-                                <li>Locate the Popup Checkout app, and click the arrow in the Launch button</li>
-                                <li>Click "Settings"</li>
-                                <li>
-                                    From within the settings, enter the hostname of the website that you intend to place the Popup Checkout.
-                                    <ul>
-                                        <li>Enter the hostname only, for example, if your website is <code>https://www.mysite.com</code>, you would only enter <code>www.mysite.com</code></li>
-                                        <li>If you would like to use on multiple websites, enter each hostname as a new line.</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </p>
-
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong>Step 2:</strong> Paste JavaScript</div>
-                    <div class="panel-body">
-
-                        <p>You need to include a JavaScript snippet on every page where you want to provide the option for customers to buy.</p>
-
-                        <p>
-                            Paste the following script reference near the bottom of your HTML page, just above the <code>&lt;/body&gt;</code> tag.<br /><br />
-                            <code>&lt;script src="{{data.src}}/dist/js/popup.js" id="_popup_script" data-popup-type="simple" type="text/javascript"&gt;</code>
-                        </p>
-
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading"><strong>Step 3:</strong> Create Buttons</div>
-                    <div class="panel-body">
-
-                        <p>
-                            To configure a button or link to generate the popup when clicked, do the following:
-                            <ul>
-                                <li>Add the following class to the button or link: <code>popup-buy-now</code></li>
-                                <li>Add the following attribute to the button or link: <code>data-product_id="your-product-id-here"</code></li>
-                            </ul>
-                        </p>
-
-                        <p>
-                            Here's the button code for product_id {{data.product.product_id}}<br />
-                            <code>&lt;button class="popup-buy-now" data-product_id="{{data.product.product_id}}"&gt;Buy Now&lt;/button&gt;</code>
-                        </p>
-
-                        <p>
-                            Here's the link code for product_id {{data.product.product_id}}<br />
-                            <code>&lt;a href="#" class="popup-buy-now" data-product_id="{{data.product.product_id}}"&gt;Buy Now&lt;/a&gt;</code>
-                        </p>
-
-                        <p>
-                            You can specify additional parameters to customize the behavior.
-                            <ul>
-                                <li>data-quantity: Indicate the quantity of the item</li>
-                                <li>data-email: Pre-fill the customer's email address with the supplied value</li>
-                                <li>data-name: Pre-fill the customer's name with the supplied value</li>
-                                <li>data-currency: Set the cart currency</li>
-                                <li>data-promotion_code: Provide a promo code</li>
-                                <li>data-meta-*: Replace * with any value and the supplied value will be stored on the order's meta data</li>
-                            </ul>
-
-                            For example, here's a button that specifies the quantity, currency, promo code and a meta value:<br />
-                            <code>&lt;button class="popup-buy-now" data-product_id="{{data.product.product_id}}" data-quantity="1" data-currency="EUR" data-promotion_code="half-off" data-meta-ref="homepage"&gt;Buy Now&lt;/button&gt;</code>
-                        </p>
-
-                    </div>
-                </div>
-
-            </div>
-
         </div>
+
+        <p>Pay on Page Checkout is a simple way to start taking orders from your website and offers a seamless checkout experience for your customers. Integrating Pay on Page Checkout is easy!</p>
+
+        <div ng-show="!data.product && data.loaded">
+            <p>To see an example, you must first add a product to your account. Then reload this page to see the demo.</p>
+            <p class="text-center">
+                <a href="https://admin.comecero.com/#/products/add" class="btn btn-primary btn" target="_blank">Add a Product Now</a>
+            </p>
+        </div>
+
+        <div ng-show="data.product">
+            <h4>See it in Action</h4>
+            <p>Pay on Page Checkout allows you to place buttons and links wherever you want customers to make a purchase. Click the button below to see an example.</p>
+            <div ng-if="data.test">
+                <p>
+                    To place a test order with the demo below, you can use the following details:
+                    <ul>
+                        <li>Card number: 4444555566661111</li>
+                        <li>Expiration Date: (any future date)</li>
+                        <li>CVC: (any three digit number)</li>
+                        <li>Other details: Whatever you want. Make sure you use your own email address as an email will be sent!</li>
+                    </ul>
+                </p>
+            </div>
+            <p class="text-center"><button class="btn btn-success popup-buy-now" data-product_id="{{data.product.product_id}}">{{data.product.name}} - Buy Now</button></p>
+        </div>
+
+        <h4>Adding Buttons to Your Site</h4>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Step 1:</strong> Add your Website to the App Settings</div>
+            <div class="panel-body">
+
+                <p>For security, we limit the websites that can embed your Pay on Page Checkout to those that you specify.</p>
+
+                <p>
+                    <ul>
+                        <li>Sign into your account</li>
+                        <li>From the left menu, click Apps</li>
+                        <li>Locate the Pay on Page Checkout app, and click the arrow in the Launch button</li>
+                        <li>Click "Settings"</li>
+                        <li>
+                            From within the settings, enter the hostname of the website that you intend to place the Pay on Page Checkout.
+                            <ul>
+                                <li>Enter the hostname only, for example, if your website is <code>https://www.mysite.com</code>, you would only enter <code>www.mysite.com</code></li>
+                                <li>If you would like to use on multiple websites, enter each hostname as a new line.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </p>
+
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Step 2:</strong> Paste JavaScript</div>
+            <div class="panel-body">
+
+                <p>You need to include a JavaScript snippet on every page where you want to provide the option for customers to buy.</p>
+
+                <p>
+                    Paste the following script reference near the bottom of your HTML page, just above the <code>&lt;/body&gt;</code> tag.<br /><br />
+                    <code>&lt;script src="{{data.src}}/dist/js/popup.js" id="_popup_script" data-popup-type="simple" data-popup-ui="basic" type="text/javascript"&gt;</code>
+                </p>
+
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Step 3:</strong> Create Buttons</div>
+            <div class="panel-body">
+
+                <p>
+                    To configure a button or link to generate the popup when clicked, do the following:
+                    <ul>
+                        <li>Add the following class to the button or link: <code>popup-buy-now</code></li>
+                        <li>Add the following attribute to the button or link: <code>data-product_id="your-product-id-here"</code></li>
+                    </ul>
+                </p>
+
+                <h4>A simple button</h4>
+                <p class="well">
+                    Here's the button code for product_id {{data.product.product_id}}<br />
+                    <code>&lt;button class="popup-buy-now" data-product_id="{{data.product.product_id}}"&gt;Buy Now&lt;/button&gt;</code>
+                    <br /><br />
+                    <button class="popup-buy-now" data-product_id="{{data.product.product_id}}">Buy Now</button>
+                </p>
+
+                <h4>A link</h4>
+                <p class="well">
+                    Here's the link code for product_id {{data.product.product_id}}<br />
+                    <code>&lt;a href="#" class="popup-buy-now" data-product_id="{{data.product.product_id}}"&gt;Buy Now&lt;/a&gt;</code>
+                    <br /><br />
+                    <a href="#" class="popup-buy-now" data-product_id="{{data.product.product_id}}">Buy Now</a>
+                </p>
+
+                <p>
+                    You can specify additional parameters to customize the behavior.
+                    <ul>
+                        <li>data-quantity: Indicate the quantity of the item</li>
+                        <li>data-email: Pre-fill the customer's email address with the supplied value</li>
+                        <li>data-name: Pre-fill the customer's name with the supplied value</li>
+                        <li>data-currency: Set the cart currency.</li>
+                        <li>data-promotion_code: Provide a promo code</li>
+                        <li>data-meta-*: Replace * with any value and the supplied value will be stored on the order's meta data</li>
+                    </ul>
+
+                    For example, here's a button that specifies the quantity, currency, promo code and a meta value:<br />
+                    <code>&lt;button class="popup-buy-now" data-product_id="{{data.product.product_id}}" data-quantity="1" data-currency="EUR" data-promotion_code="half-off" data-meta-ref="homepage"&gt;Buy Now&lt;/button&gt;</code>
+                </p>
+
+            </div>
+        </div>
+
+        <div class="row spacer-b20">&nbsp;</div>
+
+        <h4>Asynchronous Loading (Optional)</h4>
+        <p>
+            Instead of the integration method described above, it is possible to load Pay on Page Checkout asynchronously, which provides some additional features such as
+            subscribing to events when the popup is opened or closed, and allows you to include the code with the <code>&lt;head&gt;&lt;/head&gt;</code> section
+            of your webiste without a significant performance penalty.
+        </p>
+        <p>
+            To load Pay on Page checkout asynchronously, include the snippet below in your page (usually within the <code>&lt;head&gt;&lt;/head&gt;</code> tags). You'll notice
+            in the example below of two events that you can listen to; if you don't intend to use the onLoad and onClose events, don't include these optional lines in your code.
+        </p>
+        
+<pre><code>
+&lt;script&gt;
+
+    function loadApp(s,a,l,e){var i=document.getElementsByTagName("head")[0],n=!1,d=document.createElement("script");
+    d.src=s,d.id="_popup_script",d["data-popup-type"]=a,d["data-popup-ui"]=l,d["data-self-init"]=1,d.type="text/javascript",d.async=1,d.onload=d.onreadystatechange=function()
+    {n||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState||(n=!0,_popup.initialize(function(){"function"==typeof e&&e()}))},i.appendChild(d)} 
+
+    // loadApp(script URL, type_of_popup, ui, callback).
+    loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.js", "simple", "basic", function() {
+        
+        // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
+        _popup.onLoad = function(cart) {
+            console.log(cart)
+        } 
+        // Optional, listen for when the popup is closed. A copy of the cart at the time the popup is closed is provided.
+        _popup.onClose = function(cart) {
+            console.log(cart)
+        }   
+                           
+    });
+
+&lt;/script&gt;                        
+</code></pre>
+
+<a class="pointer" ng-click="showUncompressed = true" ng-show="!showUncompressed">Show uncompressed snippet</a>
+<a class="pointer" ng-click="showUncompressed = false" ng-show="showUncompressed">Hide uncompressed snippet</a>
+
+<pre ng-show="showUncompressed"><code>
+// The below code is the same as the example above, just uncompressed for easier review.
+// For increased performance, the compressed version is generally used in production environments.
+&lt;script&gt;
+function loadApp(url, type, ui, callback) {
+var head = document.getElementsByTagName("head")[0], done = false;
+var script = document.createElement("script");
+script.src = url;
+script.id = "_popup_script";
+script["data-popup-type"] = type;
+script["data-popup-ui"] = ui;
+script["data-self-init"] = 1;
+script.type = "text/javascript";
+script.async = 1;
+// Attach handlers for all browsers
+script.onload = script.onreadystatechange = function () {
+    if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+        done = true;
+        // Initialize
+        _popup.initialize(function() {
+        if (typeof callback === 'function') callback();
+    });
+    }
+};
+head.appendChild(script);
+}  
+
+// loadApp(script URL, type_of_popup, ui, callback).
+loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.js", "simple", "basic", function() {
+        
+    // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
+    _popup.onLoad = function(cart) {
+        console.log(cart)
+    } 
+    // Optional, listen for when the popup is closed. A copy of the cart at the time the popup is closed is provided.
+    _popup.onClose = function(cart) {
+        console.log(cart)
+    }   
+                           
+});
+
+&lt;/script&gt;                        
+</code></pre>
 
     </div>
 
-    <!-- Modules (CDN)  -->
+    <div class="spacer-b20">&nbsp;</div>
+
+  <!-- Modules (CDN)  -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-sanitize.min.js"></script>
 
