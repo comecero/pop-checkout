@@ -87,7 +87,7 @@
                         <li>
                             From within the settings, enter the hostname of the website that you intend to place the Pay on Page Checkout.
                             <ul>
-                                <li>Enter the hostname only, for example, if your website is <code>https://www.mysite.com</code>, you would only enter <code>www.mysite.com</code></li>
+                                <li>Enter the hostname only. For example, if your website is <code>https://www.mysite.com</code>, you would only enter <code>www.mysite.com</code></li>
                                 <li>If you would like to use on multiple websites, enter each hostname as a new line.</li>
                             </ul>
                         </li>
@@ -105,7 +105,7 @@
 
                 <p>
                     Paste the following script reference near the bottom of your HTML page, just above the <code>&lt;/body&gt;</code> tag.<br /><br />
-                    <code>&lt;script src="{{data.src}}/dist/js/popup.js" id="_popup_script" data-popup-type="simple" data-popup-ui="basic" type="text/javascript"&gt;</code>
+                    <code>&lt;script src="{{data.src}}/dist/js/popup.min.js" id="_popup_script" data-popup-type="simple" data-popup-ui="basic" type="text/javascript"&gt;&lt;/script&gt;</code>
                 </p>
 
             </div>
@@ -163,11 +163,11 @@
         <p>
             Instead of the integration method described above, it is possible to load Pay on Page Checkout asynchronously, which provides some additional features such as
             subscribing to events when the popup is opened or closed, and allows you to include the code with the <code>&lt;head&gt;&lt;/head&gt;</code> section
-            of your webiste without a significant performance penalty.
+            of your website without a significant performance penalty.
         </p>
         <p>
             To load Pay on Page checkout asynchronously, include the snippet below in your page (usually within the <code>&lt;head&gt;&lt;/head&gt;</code> tags). You'll notice
-            in the example below of two events that you can listen to; if you don't intend to use the onLoad and onClose events, don't include these optional lines in your code.
+            two events in the example below that you can listen to; if you don't intend to use the onLoad and onClose events, don't include these optional lines in your code.
         </p>
         
 <pre><code>
@@ -177,8 +177,8 @@
     d.src=s,d.id="_popup_script",d["data-popup-type"]=a,d["data-popup-ui"]=l,d["data-self-init"]=1,d.type="text/javascript",d.async=1,d.onload=d.onreadystatechange=function()
     {n||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState||(n=!0,_popup.initialize(function(){"function"==typeof e&&e()}))},i.appendChild(d)} 
 
-    // loadApp(script URL, type_of_popup, ui, callback).
-    loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.js", "simple", "basic", function() {
+    // loadApp(script_url, type_of_popup, ui, callback).
+    loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.min.js", "simple", "basic", function() {
         
         // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
         _popup.onLoad = function(cart) {
@@ -224,13 +224,14 @@ script.onload = script.onreadystatechange = function () {
 head.appendChild(script);
 }  
 
-// loadApp(script URL, type_of_popup, ui, callback).
-loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.js", "simple", "basic", function() {
+// loadApp(script_url, type_of_popup, ui, callback).
+loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.min.js", "simple", "basic", function() {
         
     // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
     _popup.onLoad = function(cart) {
         console.log(cart)
     } 
+
     // Optional, listen for when the popup is closed. A copy of the cart at the time the popup is closed is provided.
     _popup.onClose = function(cart) {
         console.log(cart)
@@ -259,7 +260,7 @@ loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.js", "simple", "basi
     <script src="../dist/js/kit.js"></script>
 
     <!-- Add the code so we can see a live demo on the page -->
-    <script src="../dist/js/popup.js" id="_popup_script" data-popup-type="simple" type="text/javascript"></script>
+    <script src="../dist/js/popup.min.js" id="_popup_script" data-popup-type="simple" type="text/javascript"></script>
 
 </body>
 </html>
