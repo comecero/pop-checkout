@@ -1,0 +1,19 @@
+{
+  "name": "comecero-pop-checkout",
+  "version": "1.0.1",
+  "description": "A shopping cart that provides a simple, popup checkout experience",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comecero/pop-checkout.git"
+  },
+  "author": "Comecero, LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/comecero/cart/issues"
+  },
+  "homepage": "https://github.com/comecero/cart#readme",
+  "devDependencies": {
+    "grunt-angular-gettext": "^2.3.5"
+  }
+}

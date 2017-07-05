@@ -176,7 +176,7 @@
                     <div class="col-xs-12">
                         <table class="order-summary">
                             <tr>
-                                <td>Subtotal</td>
+                                <td translate>Subtotal</td>
                                 <td class="text-right">{{data.cart.formatted.subtotal}}</td>
                             </tr>
                             <tr ng-if="data.cart.shipping">
@@ -184,7 +184,7 @@
                                 <td class="text-right">{{data.cart.formatted.shipping}}</td>
                             </tr>
                             <tr ng-if="data.cart.tax">
-                                <td>Taxes</td>
+                                <td translate>Tax</td>
                                 <td class="text-right">{{data.cart.formatted.tax}}</td>
                             </tr>
                         </table>
@@ -228,7 +228,7 @@
             <div class="row" ng-show="helpers.supportsPaymentMethod('credit_card', data.cart.options) && helpers.supportsPaymentMethod('paypal', data.cart.options)">
                 <div class="col-xs-12 text-center">
                     <div class="other-payment">
-                        <span>Choose other payment method</span>
+                        <span translate>Choose other payment method</span>
                     </div>
                 </div>
             </div>
