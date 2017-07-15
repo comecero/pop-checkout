@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.1
+Comecero Popup Cart version: ﻿1.0.2
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -328,7 +328,7 @@ app.controller("SimpleDesktopController", ['$scope', 'CartService', 'GeoService'
 
     var scrollTop = function () {
         var elem = document.getElementsByClassName("modal");
-        if (elem) {
+        if (elem && elem.length) {
             elem[0].scrollTop = 0;
         }
     }

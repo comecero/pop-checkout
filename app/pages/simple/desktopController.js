@@ -169,7 +169,7 @@
 
     var scrollTop = function () {
         var elem = document.getElementsByClassName("modal");
-        if (elem) {
+        if (elem && elem.length) {
             elem[0].scrollTop = 0;
         }
     }
