@@ -19,7 +19,7 @@ window.__settings.app = {
     "ask_vat_number": true,
     "show_card_logos": true,
     "receipt_close_button_text": "finish",
-    "allowed_origin_hosts": "www.iomatic.net",
+    "allowed_origin_hosts": "www.iomatic.net,api.comecero.com",
     "favicon_medium": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/md_favicon.ico",
     "favicon_large": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/lg_favicon.ico",
     "favicon_square": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/sq_favicon.ico",

@@ -378,7 +378,7 @@
                     event.preventDefault();
 
                     // Send a message to the iframe
-                    openIframe(createCartJsonFromAttributes(event.target));
+                    openIframe(createCartJsonFromAttributes(event.currentTarget));
 
                 });
             }
@@ -400,7 +400,7 @@
                     event.preventDefault();
 
                     // Send the cart json into the url
-                    var q = encodeURIComponent(JSON.stringify(createCartJsonFromAttributes(event.target)));
+                    var q = encodeURIComponent(JSON.stringify(createCartJsonFromAttributes(event.currentTarget)));
 
                     // Pop the window
                     childElem = window.open(target + "?cart=" + q);
