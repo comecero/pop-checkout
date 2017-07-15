@@ -1,4 +1,4 @@
-﻿<a name="1.0.1"></a>
+﻿<a name="1.0.2"></a>
 # 1.0.2
 
 - Bug fix when creating buttons using image elements
