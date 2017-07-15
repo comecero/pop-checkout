@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.0
+Comecero Popup Cart version: ﻿1.0.2
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -385,7 +385,7 @@ var _popup = (function () {
                     event.preventDefault();
 
                     // Send a message to the iframe
-                    openIframe(createCartJsonFromAttributes(event.target));
+                    openIframe(createCartJsonFromAttributes(event.currentTarget));
 
                 });
             }
@@ -407,7 +407,7 @@ var _popup = (function () {
                     event.preventDefault();
 
                     // Send the cart json into the url
-                    var q = encodeURIComponent(JSON.stringify(createCartJsonFromAttributes(event.target)));
+                    var q = encodeURIComponent(JSON.stringify(createCartJsonFromAttributes(event.currentTarget)));
 
                     // Pop the window
                     childElem = window.open(target + "?cart=" + q);
