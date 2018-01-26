@@ -1,4 +1,9 @@
-﻿<a name="1.0.2"></a>
+﻿<a name="1.0.3"></a>
+# 1.0.3
+
+- Integrate kit 1.0.4. See kit changelog for details.
+
+<a name="1.0.2"></a>
 # 1.0.2
 
 - Bug fix when creating buttons using image elements
