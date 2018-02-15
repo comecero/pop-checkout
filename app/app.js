@@ -53,25 +53,69 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
     var settings = SettingsService.get();
 
     if (settings.app.enable_languages) {
-        $rootScope.languages = [
-            {
-                code: "en",
-                name: "English"
-            },
-            {
-                code: "fr",
-                name: "français"
-            },
-            {
-                code: "es",
-                name: "Español"
-            },
-            {
-                code: "ru",
-                name: "русский"
-            }
-        ]
-    }
+            $rootScope.languages = [
+                {
+                    code: "en",
+                    name: "English"
+                },        
+                {
+                    code: "cs",
+                    name: "čeština"
+                },
+                {
+                    code: "de",
+                    name: "Deutsche"
+                },
+                {
+                    code: "el",
+                    name: "Ελληνικά"
+                },
+                {
+                    code: "es",
+                    name: "Español"
+                },                
+                {
+                    code: "fi",
+                    name: "Suomalainen"
+                },
+                {
+                    code: "fr",
+                    name: "français"
+                },            
+                {
+                    code: "it",
+                    name: "italiano"
+                },
+                {
+                    code: "ja",
+                    name: "日本語"
+                },
+                {
+                    code: "ko",
+                    name: "한국어"
+                },
+                {
+                    code: "nl",
+                    name: "Nederlands"
+                },
+                {
+                    code: "pl",
+                    name: "Polskie"
+                },
+                {
+                    code: "pt",
+                    name: "Português"
+                },
+                {
+                    code: "ru",
+                    name: "русский"
+                },            
+                {
+                    code: "sv",
+                    name: "svenska"
+                }
+            ]
+        }
 
     // Listen for messages from the parent that hosts the iframe.
     window.addEventListener("message", function (message) {

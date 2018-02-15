@@ -211,7 +211,3 @@ msgstr ""
 #: ./app/pages/simple/review.html:69
 msgid "VAT Number"
 msgstr ""
-
-#: ./app/pages/simple/checkout.html:203
-msgid "{{settings.app.promo_code_name}}"
-msgstr ""
