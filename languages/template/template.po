@@ -4,88 +4,134 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: ./app/pages/simple/checkout.html:88
+#: ./app/pages/pay/pay.html:185
 msgid "Address"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:295
-#: ./app/pages/simple/review.html:175
-msgid "An email has been sent to {{data.payment.order.customer.email}}."
+#: ./app/pages/pay/pay.html:193
+msgid "Address 2"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:34
+#: ./app/pages/pay/pay.html:56
+msgid "Amount"
 msgstr ""
 
 #: ./dist/js/kit.js:4314
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:146
+#: ./app/pages/review/review.html:58
+msgid "Billing Address"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:137
+msgid "Cancel"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:283
 msgid "Card Number"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:231
-msgid "Choose other payment method"
+#: ./app/pages/pay/pay.html:253
+msgid "Choose a Payment Method"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:96
+#: ./app/pages/pay/pay.html:203
 msgid "City"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:305
-#: ./app/pages/simple/review.html:185
-msgid "Close"
-msgstr ""
-
-#: ./app/pages/simple/checkout.html:78
-#: ./app/pages/simple/review.html:44
+#: ./app/pages/pay/pay.html:169
 msgid "Company Name"
 msgstr ""
 
-#: ./app/pages/simple/review.html:117
-msgid "Confirm Payment"
+#: ./app/pages/pay/pay.html:347
+#: ./app/pages/review/review.html:137
+msgid "Complete Payment"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:303
-#: ./app/pages/simple/review.html:183
-msgid "Continue"
+#: ./index.html:76
+msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:302
-#: ./app/pages/simple/review.html:182
-msgid "Continue Shopping"
+#: ./app/pages/pay/pay.html:234
+msgid "Country"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:274
-#: ./app/pages/simple/review.html:154
-msgid "Discount"
+#: ./app/pages/receipt/receipt.html:58
+msgid "Create Account"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:216
-msgid "Discount applied."
+#: ./app/pages/receipt/receipt.html:29
+msgid "Date"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:48
-msgid "Email Address"
+#: ./app/pages/pay/pay.html:33
+#: ./app/pages/pay/pay.html:48
+#: ./app/pages/receipt/receipt.html:103
+#: ./app/pages/receipt/receipt.html:111
+#: ./app/pages/review/review.html:102
+#: ./app/pages/review/review.html:31
+#: ./app/pages/review/review.html:45
+#: ./app/pages/review/review.html:94
+msgid "Description"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:125
-#: ./app/pages/simple/review.html:62
-msgid "Enter VAT Number"
+#: ./app/pages/pay/pay.html:159
+msgid "Email"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:306
-#: ./app/pages/simple/review.html:186
-msgid "Finish"
+#: ./app/pages/pay/pay.html:296
+msgid "Expiration Month"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:58
-msgid "Name"
+#: ./app/pages/pay/pay.html:305
+msgid "Expiration Year"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:223
-msgid "Pay Now"
+#: ./app/pages/receipt/receipt.html:86
+msgid "Expires"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:68
-#: ./app/pages/simple/review.html:55
+#: ./app/pages/pay/pay.html:151
+msgid "Full Name"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:111
+msgid "Have an account?"
+msgstr ""
+
+#: ./app/pages/receipt/receipt.html:70
+msgid "Made By"
+msgstr ""
+
+#: ./app/pages/receipt/receipt.html:151
+msgid "Make Another Payment"
+msgstr ""
+
+#: ./app/templates/fields.html:54
+msgid "No"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:128
+#: ./app/pages/receipt/receipt.html:49
+msgid "Password"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:274
+msgid "Pay with a new card"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:248
+#: ./app/pages/receipt/receipt.html:96
+msgid "Payment Details"
+msgstr ""
+
+#: ./app/pages/receipt/receipt.html:83
+msgid "Payment Method"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:177
 msgid "Phone"
 msgstr ""
 
@@ -98,8 +144,74 @@ msgstr ""
 msgid "Please make a selection"
 msgstr ""
 
+#: ./app/pages/pay/pay.html:205
+msgid "Please provide a city"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:171
+msgid "Please provide a company name"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:236
+msgid "Please provide a country"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:153
+msgid "Please provide a name"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:179
+msgid "Please provide a phone"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:219
+msgid "Please provide a region / province"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:213
+msgid "Please provide a state / province"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:288
+msgid "Please provide a valid card number"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:161
+msgid "Please provide a valid email address"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:299
+msgid "Please provide a valid expiration month"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:308
+msgid "Please provide a valid expiration year"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:316
+msgid "Please provide a valid security code"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:42
+#: ./app/pages/review/review.html:39
+msgid "Please provide a value"
+msgstr ""
+
 #: ./dist/js/kit.js:3715
 msgid "Please provide a value."
+msgstr ""
+
+#: ./app/pages/pay/pay.html:227
+msgid "Please provide a zip / postal code"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:187
+#: ./app/pages/pay/pay.html:195
+msgid "Please provide an address"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:59
+msgid "Please provide an amount"
 msgstr ""
 
 #: ./dist/js/kit.js:1233
@@ -118,53 +230,85 @@ msgstr ""
 msgid "Please supply a number without decimals"
 msgstr ""
 
-#: ./app/shared/commonDirectives.js:106
-msgid "Postal Code"
+#: ./app/pages/receipt/receipt.html:16
+msgid "Receipt"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:313
-#: ./app/pages/simple/review.html:193
-msgid "Print receipt"
+#: ./app/pages/pay/pay.html:217
+msgid "Region / Province"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:102
-msgid "Region"
+#: ./app/pages/review/review.html:24
+msgid "Return to PayPal to try your payment again."
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:304
-#: ./app/pages/simple/review.html:184
-msgid "Return"
+#: ./app/pages/pay/pay.html:334
+#: ./app/pages/review/review.html:87
+msgid "Review &amp; Finish"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:278
-#: ./app/pages/simple/review.html:158
+#: ./app/pages/review/review.html:15
+msgid "Review Your Payment"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:323
+msgid "Save this card to my account"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:314
+msgid "Security Code"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:75
+#: ./app/pages/pay/pay.html:76
+#: ./app/pages/receipt/receipt.html:127
+#: ./app/pages/receipt/receipt.html:128
+#: ./app/pages/review/review.html:118
+#: ./app/pages/review/review.html:119
 msgid "Shipping"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:223
-msgid "Submit Order"
+#: ./app/pages/review/review.html:71
+msgid "Shipping Address"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:179
-#: ./app/pages/simple/review.html:96
+#: ./app/pages/pay/pay.html:112
+#: ./app/pages/pay/pay.html:138
+msgid "Sign In"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:144
+msgid "Sign out"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:211
+msgid "State / Province"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:69
+#: ./app/pages/pay/pay.html:70
+#: ./app/pages/receipt/receipt.html:121
+#: ./app/pages/receipt/receipt.html:122
+#: ./app/pages/review/review.html:112
+#: ./app/pages/review/review.html:113
 msgid "Subtotal"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:262
-#: ./app/pages/simple/review.html:142
-msgid "Summary"
-msgstr ""
-
-#: ./app/pages/simple/checkout.html:187
-#: ./app/pages/simple/checkout.html:282
-#: ./app/pages/simple/review.html:104
-#: ./app/pages/simple/review.html:162
+#: ./app/pages/pay/pay.html:81
+#: ./app/pages/pay/pay.html:82
+#: ./app/pages/receipt/receipt.html:133
+#: ./app/pages/receipt/receipt.html:134
+#: ./app/pages/review/review.html:124
+#: ./app/pages/review/review.html:125
 msgid "Tax"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:252
-#: ./app/pages/simple/review.html:132
-msgid "Thank you for your purchase!"
+#: ./app/pages/receipt/receipt.html:146
+msgid "Thank you for your payment"
+msgstr ""
+
+#: ./app/pages/receipt/receipt.html:25
+msgid "Thank you! Your payment is complete."
 msgstr ""
 
 #: ./dist/js/kit.js:4308
@@ -201,13 +345,42 @@ msgstr[1] ""
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:286
-#: ./app/pages/simple/review.html:108
-#: ./app/pages/simple/review.html:166
+#: ./app/pages/receipt/receipt.html:36
+msgid "To manage your account online, create an account."
+msgstr ""
+
+#: ./app/pages/pay/pay.html:340
+#: ./app/pages/pay/pay.html:341
+#: ./app/pages/pay/pay.html:87
+#: ./app/pages/pay/pay.html:88
+#: ./app/pages/receipt/receipt.html:139
+#: ./app/pages/receipt/receipt.html:140
+#: ./app/pages/review/review.html:130
+#: ./app/pages/review/review.html:131
 msgid "Total"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:132
-#: ./app/pages/simple/review.html:69
-msgid "VAT Number"
+#: ./app/pages/pay/pay.html:118
+#: ./app/pages/receipt/receipt.html:39
+msgid "Username"
+msgstr ""
+
+#: ./app/templates/fields.html:52
+msgid "Yes"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:103
+msgid "Your Information"
+msgstr ""
+
+#: ./app/pages/pay/pay.html:22
+msgid "Your Payment"
+msgstr ""
+
+#: ./app/pages/receipt/receipt.html:64
+msgid "Your account has been created."
+msgstr ""
+
+#: ./app/pages/pay/pay.html:225
+msgid "Zip / Postal Code"
 msgstr ""
