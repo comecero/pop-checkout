@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.2
+Comecero Popup Cart version: ﻿1.0.3
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
