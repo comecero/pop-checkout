@@ -1,4 +1,4 @@
-﻿app.controller("SimpleMobileController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, $uibModal, $timeout, gettextCatalog, $location, $document) {
+﻿app.controller("SimpleMobileController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'LanguageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, LanguageService, $uibModal, $timeout, gettextCatalog, $location, $document) {
 
     // Define a place to hold your data
     $scope.data = {};
@@ -33,13 +33,19 @@
     // Start the spinner
     showSpinner();
 
+    // Set the language, if provided as a query parameter
+    var language = $location.search().language;
+    if (language) {
+        LanguageService.setLanguage(language);
+    }
+
     // Load the pageview.
     if (window.__pageview && window.__pageview.recordPageLoad) {
         window.__pageview.recordPageLoad();
     }
 
     // Get the cart from the query parameters
-    cart = $location.search().cart;
+    var cart = $location.search().cart;
     if (cart) {
         cart = JSON.parse(cart);
         $location.search("cart", null);

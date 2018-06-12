@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.3
+Comecero Popup Cart version: ﻿1.0.4
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -432,7 +432,7 @@ var _popup = (function () {
         if (script) {
 
             // Define the local and remote origins and scriptPaths
-            src = script.getAttribute("src");
+            var src = script.getAttribute("src");
 
             // The app path is the "root" of the app, which is the grandparent of the src directory
             var pathArray = src.split("/").slice(-3);
@@ -447,8 +447,15 @@ var _popup = (function () {
             // Set the environment, mobile or desktop based on what we discovered in the function at the top.
             var environment = mobile ? "m" : "d";
 
+            // Set the langauge, if provided. Otherwise, the language will be automatically selected.
+            var language = script.getAttribute("data-language");
+
             // Define the target URL
             var target = appPath + '#/' + type + "-" + environment;
+
+            if (language) {
+                target += "?language=" + language;
+            }
 
             // Define the iframe origin
             var i = -1, x = 3; // We're looking for the 3rd instance of / in the src, which will signify the end of the origin

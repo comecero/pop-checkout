@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.3
+Comecero Popup Cart version: ﻿1.0.4
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -157,7 +157,7 @@ app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', fu
     window.location = "getting-started";
 
 }]);
-app.controller("SimpleDesktopController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, $uibModal, $timeout, gettextCatalog, $location, $document) {
+app.controller("SimpleDesktopController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'LanguageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, LanguageService, $uibModal, $timeout, gettextCatalog, $location, $document) {
 
     // Define a place to hold your data
     $scope.data = {};
@@ -187,6 +187,12 @@ app.controller("SimpleDesktopController", ['$scope', 'CartService', 'GeoService'
             "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/simple-d/review/{{payment_id}}",
             "cancel_url": SettingsService.get().app.main_shopping_url || localStorage.getItem("parent_url")
         }
+    }
+
+    // Set the language, if provided as a query parameter
+    var language = $location.search().language;
+    if (language) {
+        LanguageService.setLanguage(language);
     }
 
     // Get the current cart
@@ -351,7 +357,7 @@ app.controller("SimpleDesktopController", ['$scope', 'CartService', 'GeoService'
     });
 
 }]);
-app.controller("SimpleMobileController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, $uibModal, $timeout, gettextCatalog, $location, $document) {
+app.controller("SimpleMobileController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'LanguageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, LanguageService, $uibModal, $timeout, gettextCatalog, $location, $document) {
 
     // Define a place to hold your data
     $scope.data = {};
@@ -386,13 +392,19 @@ app.controller("SimpleMobileController", ['$scope', 'CartService', 'GeoService',
     // Start the spinner
     showSpinner();
 
+    // Set the language, if provided as a query parameter
+    var language = $location.search().language;
+    if (language) {
+        LanguageService.setLanguage(language);
+    }
+
     // Load the pageview.
     if (window.__pageview && window.__pageview.recordPageLoad) {
         window.__pageview.recordPageLoad();
     }
 
     // Get the cart from the query parameters
-    cart = $location.search().cart;
+    var cart = $location.search().cart;
     if (cart) {
         cart = JSON.parse(cart);
         $location.search("cart", null);

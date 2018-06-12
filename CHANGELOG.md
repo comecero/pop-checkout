@@ -1,4 +1,10 @@
-﻿<a name="1.0.4"></a>
+﻿<a name="1.0.5"></a>
+# 1.0.5
+
+- Integrate kit 1.0.7. See kit changelog for details.
+- Add option to specify customer language via parameter
+
+<a name="1.0.4"></a>
 # 1.0.4
 
 - Remove third party CDNs and replace with Comecero CDN for static assets
