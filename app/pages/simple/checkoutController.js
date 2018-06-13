@@ -36,9 +36,6 @@
     // Set the language if supplied by an explicit parameter
     setLanguage($location.search());
 
-    // Start the spinner
-    showSpinner();
-
     // Load the pageview.
     if (window.__pageview && window.__pageview.recordPageLoad) {
         window.__pageview.recordPageLoad();
@@ -59,6 +56,7 @@
 
         // Examine the message and respond as necessary.
         if (data.type = "add_to_cart" && data.cart) {
+            showSpinner();
             setCart(JSON.parse(data.cart));
         }
 
@@ -66,14 +64,12 @@
 
     // If new tab (mobile), run the setCart function on load.
     if (env == "mobile") {
+        showSpinner();
         setCart(cart);
     }
 
     // A function to create the cart
     function setCart(cart) {
-
-        // Set an items array if not provided.
-        cart.items = cart.items || [{}];
 
         // Update the cart. There might not be a cart at this point; if not, the CartService.update process will create and return a new cart for the user.
         CartService.update(cart, $scope.data.params, true).then(function (cart) {
@@ -217,7 +213,7 @@
     function showSpinner() {
         $scope.spinnerTimeout = $timeout(function () {
             $scope.options.showSpinner = true;
-        }, 300);
+        }, 350);
     }
 
     function hideSpinner() {
