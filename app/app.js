@@ -4,10 +4,26 @@ app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 
 
     // Define routes
     $routeProvider.when("/", { templateUrl: "app/pages/index/index.html", reloadOnSearch: false });
-    $routeProvider.when("/simple-d", { templateUrl: "app/pages/simple/desktop.html", reloadOnSearch: false });
-    $routeProvider.when("/simple-m", { templateUrl: "app/pages/simple/mobile.html", reloadOnSearch: false });
-    $routeProvider.when("/simple-d/review/:id", { templateUrl: "app/pages/simple/review.html" });
-    $routeProvider.when("/simple-m/review/:id", { templateUrl: "app/pages/simple/review.html" });
+    $routeProvider.when("/simple-d", {
+        templateUrl: "app/pages/simple/desktop.html", reloadOnSearch: false, resolve: {
+            test: function ($route) { $route.current.params.env = "desktop"; }
+        }
+    });
+    $routeProvider.when("/simple-m", {
+        templateUrl: "app/pages/simple/mobile.html", reloadOnSearch: false, resolve: {
+            test: function ($route) { $route.current.params.env = "mobile"; }
+        }
+    });
+    $routeProvider.when("/simple-d/review/:id", {
+        templateUrl: "app/pages/simple/review.html", resolve: {
+            test: function ($route) { $route.current.params.env = "desktop"; }
+        }
+    });
+    $routeProvider.when("/simple-m/review/:id", {
+        templateUrl: "app/pages/simple/review.html", resolve: {
+            test: function ($route) { $route.current.params.env = "mobile"; }
+        }
+    });
 
     // Non-handled routes.
     var notFoundUrl = window.__settings.app.not_found_url;
