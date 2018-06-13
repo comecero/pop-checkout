@@ -53,13 +53,11 @@
 
     // If iframe modal (desktop), handle targeted messages from the parent window.
     $scope.$on("messageReceived", function (event, data) {
-
         // Examine the message and respond as necessary.
         if (data.type = "add_to_cart" && data.cart) {
             showSpinner();
             setCart(JSON.parse(data.cart));
         }
-
     });
 
     // If new tab (mobile), run the setCart function on load.

@@ -152,6 +152,11 @@ app.directive('insertHtml', function () {
         }
     }
 });
+app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
+
+    window.location = "getting-started";
+
+}]);
 app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'LanguageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', '$routeParams', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, LanguageService, $uibModal, $timeout, gettextCatalog, $location, $document, $routeParams) {
 
     // Determine the environment, mobile or desktop
@@ -207,13 +212,11 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
     // If iframe modal (desktop), handle targeted messages from the parent window.
     $scope.$on("messageReceived", function (event, data) {
-
         // Examine the message and respond as necessary.
         if (data.type = "add_to_cart" && data.cart) {
             showSpinner();
             setCart(JSON.parse(data.cart));
         }
-
     });
 
     // If new tab (mobile), run the setCart function on load.
@@ -519,9 +522,4 @@ app.controller("ReviewController", ['$scope', '$location', '$routeParams', 'Cart
 
 }]);
 
-app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
-
-    window.location = "getting-started";
-
-}]);
 //# sourceMappingURL=pages.js.map
