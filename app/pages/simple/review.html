@@ -68,8 +68,8 @@
                             <div class="input-group">
                                 <input class="form-control customer-background-save" name="tax_number" type="text" ng-model="data.sale.customer.tax_number" placeholder="{{'VAT Number' | translate}}">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" ng-if="data.sale.object == 'cart'" update-cart="data.sale" error="data.error" params="data.params" type="button"><i class="fa fa-check"></i></button>
-                                    <button class="btn btn-default" ng-if="data.sale.object == 'invoice'" update-invoice="data.sale" error="data.error" params="data.params" type="button"><i class="fa fa-check"></i></button>
+                                    <button class="btn btn-default" ng-if="data.sale.object == 'cart'" update-cart="data.sale" error="data.error" params="data.saleParams" type="button"><i class="fa fa-check"></i></button>
+                                    <button class="btn btn-default" ng-if="data.sale.object == 'invoice'" update-invoice="data.sale" error="data.error" params="data.saleParams" type="button"><i class="fa fa-check"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -123,6 +123,7 @@
                 </div>
             </div>
             <!-- End payment page -->
+
             <!-- Begin receipt -->
             <div ng-show="data.payment" class="modal-body animate-show">
 
