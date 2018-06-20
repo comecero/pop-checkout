@@ -4,26 +4,9 @@ app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 
 
     // Define routes
     $routeProvider.when("/", { templateUrl: "app/pages/index/index.html", reloadOnSearch: false });
-    $routeProvider.when("/simple-d", {
-        templateUrl: "app/pages/simple/desktop.html", reloadOnSearch: false, resolve: {
-            test: function ($route) { $route.current.params.env = "desktop"; }
-        }
-    });
-    $routeProvider.when("/simple-m", {
-        templateUrl: "app/pages/simple/mobile.html", reloadOnSearch: false, resolve: {
-            test: function ($route) { $route.current.params.env = "mobile"; }
-        }
-    });
-    $routeProvider.when("/simple-d/review/:id", {
-        templateUrl: "app/pages/simple/review.html", resolve: {
-            test: function ($route) { $route.current.params.env = "desktop"; }
-        }
-    });
-    $routeProvider.when("/simple-m/review/:id", {
-        templateUrl: "app/pages/simple/review.html", resolve: {
-            test: function ($route) { $route.current.params.env = "mobile"; }
-        }
-    });
+    $routeProvider.when("/simple-mod", { templateUrl: "app/pages/simple/modal.html", reloadOnSearch: false, resolve: { asModal: function ($route) { return true } } });
+    $routeProvider.when("/simple", { templateUrl: "app/pages/simple/non-modal.html", reloadOnSearch: false, resolve: { asModal: function ($route) { return false } } });
+    $routeProvider.when("/simple/review/:id", { templateUrl: "app/pages/simple/review.html"});
 
     // Non-handled routes.
     var notFoundUrl = window.__settings.app.not_found_url;
@@ -69,70 +52,68 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
 
     var settings = SettingsService.get();
 
-    if (settings.app.enable_languages) {
-            $rootScope.languages = [
-                {
-                    code: "en",
-                    name: "English"
-                },        
-                {
-                    code: "cs",
-                    name: "čeština"
-                },
-                {
-                    code: "de",
-                    name: "Deutsche"
-                },
-                {
-                    code: "el",
-                    name: "Ελληνικά"
-                },
-                {
-                    code: "es",
-                    name: "Español"
-                },                
-                {
-                    code: "fi",
-                    name: "Suomalainen"
-                },
-                {
-                    code: "fr",
-                    name: "français"
-                },            
-                {
-                    code: "it",
-                    name: "italiano"
-                },
-                {
-                    code: "ja",
-                    name: "日本語"
-                },
-                {
-                    code: "ko",
-                    name: "한국어"
-                },
-                {
-                    code: "nl",
-                    name: "Nederlands"
-                },
-                {
-                    code: "pl",
-                    name: "Polskie"
-                },
-                {
-                    code: "pt",
-                    name: "Português"
-                },
-                {
-                    code: "ru",
-                    name: "русский"
-                },            
-                {
-                    code: "sv",
-                    name: "svenska"
-                }
-            ]
+    $rootScope.languages = [
+        {
+            code: "en",
+            name: "English"
+        },
+        {
+            code: "cs",
+            name: "čeština"
+        },
+        {
+            code: "de",
+            name: "Deutsche"
+        },
+        {
+            code: "el",
+            name: "Ελληνικά"
+        },
+        {
+            code: "es",
+            name: "Español"
+        },
+        {
+            code: "fi",
+            name: "Suomalainen"
+        },
+        {
+            code: "fr",
+            name: "français"
+        },
+        {
+            code: "it",
+            name: "italiano"
+        },
+        {
+            code: "ja",
+            name: "日本語"
+        },
+        {
+            code: "ko",
+            name: "한국어"
+        },
+        {
+            code: "nl",
+            name: "Nederlands"
+        },
+        {
+            code: "pl",
+            name: "Polskie"
+        },
+        {
+            code: "pt",
+            name: "Português"
+        },
+        {
+            code: "ru",
+            name: "русский"
+        },
+        {
+            code: "sv",
+            name: "svenska"
         }
+    ]
 
     // Listen for messages from the parent that hosts the iframe.
     window.addEventListener("message", function (message) {

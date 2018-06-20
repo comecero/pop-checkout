@@ -159,8 +159,8 @@ app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', fu
 }]);
 app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'LanguageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', '$routeParams', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, LanguageService, $uibModal, $timeout, gettextCatalog, $location, $document, $routeParams) {
 
-    // Determine the environment, mobile or desktop
-    var env = $routeParams.env;
+    // Determine if you are running as a modal
+    var asModal = $scope.$resolve.asModal;
 
     // Define a place to hold your data
     $scope.data = {};
@@ -183,11 +183,12 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
     // Build your payment method models
     $scope.data.card = { "type": "credit_card" };
+
     $scope.data.paypal = {
         "type": "paypal",
         data: {
             // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
-            "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/" + "simple-" + env.substring(0, 1) + "/review/{{payment_id}}",
+            "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/" + "simple/review/{{payment_id}}",
             "cancel_url": SettingsService.get().app.main_shopping_url || localStorage.getItem("parent_url")
         }
     }
@@ -220,7 +221,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     });
 
     // If new tab (mobile), run the setCart function on load.
-    if (env == "mobile") {
+    if (!asModal) {
         showSpinner();
         setCart(cart);
     }
@@ -238,7 +239,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             hideSpinner();
 
             // Show the checkout form
-            showForm(env);
+            showForm(asModal);
 
             // Override the header image, as necessary.
             if ($scope.settings.app.use_product_icon && cart.items[0].product.images[0]) {
@@ -261,19 +262,19 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             hideSpinner();
 
             // Open the form
-            showForm(env);
+            showForm(asModal);
         });
     }
 
     // Show the form, either by modal launch or unhiding if mobile and launched in a new tab.
-    function showForm(env) {
+    function showForm(asModal) {
 
         // We load a pageview when the modal opens so that we don't count pageviews for background loads.
         if (window.__pageview && window.__pageview.recordPageLoad) {
             window.__pageview.recordPageLoad();
         }
 
-        if (env == "desktop") {
+        if (asModal) {
 
             // Launch the modal
             $scope.modalInstance = $uibModal.open({
@@ -303,7 +304,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
             case "paypal":
                 // Redirect to PayPal to make the payment.
-                if (env == "desktop") {
+                if (asModal) {
                     sendMessage({ type: "redirect", url: payment.response_data.redirect_url }, $scope.settings.app.allowed_origin_hosts);
                 } else {
                     window.location = payment.response_data.redirect_url;
@@ -315,7 +316,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
                 $scope.data.payment = payment;
 
                 // Scroll to top
-                scrollTop(env);
+                scrollTop(asModal);
 
                 // Load the conversion
                 if (window.__conversion && window.__conversion.recordConversion) {
@@ -356,7 +357,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
     // Handle if the user closes the tab directly.
     window.onbeforeunload = function () {
-        if (env == "desktop")
+        if (asModal)
             onModalClose();
     }
 
@@ -379,9 +380,9 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             $timeout.cancel($scope.spinnerTimeout);
     }
 
-    function scrollTop(env) {
+    function scrollTop(asModal) {
 
-        if (env == "desktop") {
+        if (asModal) {
             // Scroll to the top of the modal location
                 var elem = document.getElementsByClassName("modal");
                 if (elem && elem.length) {
@@ -397,7 +398,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     // Watch for error to be populated, and if so, scroll to it.
     $scope.$watch("data.error", function (newVal, oldVal) {
         if ($scope.data.error) {
-            scrollTop(env);
+            scrollTop(asModal);
         }
     });
 

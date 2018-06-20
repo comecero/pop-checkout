@@ -1,7 +1,7 @@
 ﻿var _popup = (function () {
 
     // Define variables to hold values that we'll set after we create our hidden iframe.
-    var childElem, iframe, childOrigin, src, appPath, mobile, iframeReady;
+    var childElem, iframe, childOrigin, src, appPath, asModal, iframeReady;
 
     // isMobile.js v0.4.1
     (function (global) {
@@ -131,8 +131,8 @@
 
     })(this);
 
-    // Detect the environment
-    mobile = isMobile.phone;
+    // Detect the environment so we can determine if we open in a new tab or modal.
+    asModal = !isMobile.phone;
 
     // A function for sending messages to the child iframe
     var sendMessage = function (message) {
@@ -333,8 +333,8 @@
 
     }
 
-    // Used for desktop and tablet environments and loads the iframe in the background for fast launch.
-    var addDesktopListeners = function (target) {
+    // Used when launching in a modal, usually used in desktop and tablet environments
+    var addModalListeners = function (target) {
 
         // First, append the iframe to the document.
         iframe = document.createElement('iframe')
@@ -387,8 +387,8 @@
 
     }
 
-    // Used for mobile environments.
-    var addMobileListeners = function (target) {
+    // Used when launching in a new tab / window, usually used in mobile environments.
+    var addNonModalListeners = function (target) {
 
         // Set listeners for clicks that should launch the iframe.
         getClickables(function (clickables) {
@@ -437,14 +437,25 @@
             // Set the UI. Not all checkout types will have different UIs. Set as "basic" if not provided.
             var ui = script.getAttribute("data-popup-ui") || "basic";
 
-            // Set the environment, mobile or desktop based on what we discovered in the function at the top.
-            var environment = mobile ? "m" : "d";
-
             // Set the langauge, if provided. Otherwise, the language will be automatically selected.
             var language = script.getAttribute("data-language");
 
+            // Determine if the user has specified explicitily to use the modal or non modal. If so, overwrite the default choice.
+            var setAsModal = script.getAttribute("data-as-modal");
+            if (setAsModal) {
+                if (setAsModal === "true")
+                    asModal = true;
+                if (setAsModal === "false")
+                    asModal = false;
+            }
+
             // Define the target URL
-            var target = appPath + '#/' + type + "-" + environment;
+            var target = appPath + '#/' + type;
+
+            // If modal, append to the URL path.
+            if (asModal) {
+                target = target + "-mod";
+            }
 
             if (language) {
                 target += "?language=" + language;
@@ -466,15 +477,15 @@
             appendAsyncScript(appPath + "settings/app.js", function () {
 
                 // Wire up the listeners
-                if (mobile) {
+                if (!asModal) {
                     // Wire up the buttons to listen for the click events to open a new tab
-                    addMobileListeners(target);
+                    addNonModalListeners(target);
                     if (callback) callback();
                 } else {
                     // Append the iframe to the body when ready
                     var interval = setInterval(function () {
                         if (document.body) {
-                            addDesktopListeners(target);
+                            addModalListeners(target);
                             clearInterval(interval);
                             if (callback) callback();
                         }
