@@ -334,11 +334,15 @@
     }
 
     // Used when launching in a modal, usually used in desktop and tablet environments
-    var addModalListeners = function (target) {
+    var addModalListeners = function (target, language) {
 
         // First, append the iframe to the document.
         iframe = document.createElement('iframe')
         iframe.src = target;
+
+        if (language)
+            iframe.src += "?language=" + language;
+
         iframe.setAttribute("id", "_popup_iframe");
         iframe.setAttribute("frameborder", 0);
         iframe.setAttribute("scrolling", "no");
@@ -388,7 +392,7 @@
     }
 
     // Used when launching in a new tab / window, usually used in mobile environments.
-    var addNonModalListeners = function (target) {
+    var addNonModalListeners = function (target, language) {
 
         // Set listeners for clicks that should launch the iframe.
         getClickables(function (clickables) {
@@ -403,7 +407,11 @@
                     var q = encodeURIComponent(JSON.stringify(createCartJsonFromAttributes(event.currentTarget)));
 
                     // Pop the window
-                    childElem = window.open(target + "?cart=" + q);
+                    var url = target + "?cart=" + q;
+                    if (language)
+                        url += "&language=" + language;
+
+                    childElem = window.open(url);
 
                     // Tell the iframe the URL that generated the popup.
                     sendMessage({ type: "set_parent_url", url: window.location.href });
@@ -457,10 +465,6 @@
                 target = target + "-mod";
             }
 
-            if (language) {
-                target += "?language=" + language;
-            }
-
             // Define the iframe origin
             var i = -1, x = 3; // We're looking for the 3rd instance of / in the src, which will signify the end of the origin
             while (x-- && i++ < src.length) {
@@ -479,13 +483,13 @@
                 // Wire up the listeners
                 if (!asModal) {
                     // Wire up the buttons to listen for the click events to open a new tab
-                    addNonModalListeners(target);
+                    addNonModalListeners(target, language);
                     if (callback) callback();
                 } else {
                     // Append the iframe to the body when ready
                     var interval = setInterval(function () {
                         if (document.body) {
-                            addModalListeners(target);
+                            addModalListeners(target, language);
                             clearInterval(interval);
                             if (callback) callback();
                         }
