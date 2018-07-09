@@ -196,11 +196,6 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     // Set the language if supplied by an explicit parameter
     setLanguage($location.search());
 
-    // Load the pageview.
-    if (window.__pageview && window.__pageview.recordPageLoad) {
-        window.__pageview.recordPageLoad();
-    }
-
     // Get the cart from the query parameters
     var cart = $location.search().cart;
     if (cart) {
