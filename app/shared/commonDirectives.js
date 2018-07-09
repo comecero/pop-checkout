@@ -77,7 +77,7 @@
                         scope.expMonth = result.substring(0, 2);
                     }
 
-                    if (result.length == 7) {
+                    if (result.length >= 7) {
                         scope.expYear = utils.right(result, 2);
                     }
 

@@ -1,6 +1,6 @@
 {
   "name": "comecero-pop-checkout",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "A shopping cart that provides a simple, popup checkout experience",
   "main": "index.html",
   "repository": {
@@ -19,6 +19,7 @@
     "gulp-batch": "1.0.5",
     "gulp-concat": "2.6.0",
     "gulp-less": "3.1.0",
+    "gulp-sass": "3.1.0",
     "gulp-rename": "1.2.2",
     "gulp-uglify": "2.0.0",
     "gulp-watch": "4.3.9",

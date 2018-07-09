@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.3
+Comecero Popup Cart version: ﻿1.0.5
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -8,7 +8,7 @@ Copyright Comecero and other contributors. Released under MIT license. See LICEN
 var _popup = (function () {
 
     // Define variables to hold values that we'll set after we create our hidden iframe.
-    var childElem, iframe, childOrigin, src, appPath, mobile, iframeReady;
+    var childElem, iframe, childOrigin, src, appPath, asModal, iframeReady;
 
     // isMobile.js v0.4.1
     (function (global) {
@@ -138,8 +138,8 @@ var _popup = (function () {
 
     })(this);
 
-    // Detect the environment
-    mobile = isMobile.phone;
+    // Detect the environment so we can determine if we open in a new tab or modal.
+    asModal = !isMobile.phone;
 
     // A function for sending messages to the child iframe
     var sendMessage = function (message) {
@@ -340,12 +340,16 @@ var _popup = (function () {
 
     }
 
-    // Used for desktop and tablet environments and loads the iframe in the background for fast launch.
-    var addDesktopListeners = function (target) {
+    // Used when launching in a modal, usually used in desktop and tablet environments
+    var addModalListeners = function (target, language) {
 
         // First, append the iframe to the document.
         iframe = document.createElement('iframe')
         iframe.src = target;
+
+        if (language)
+            iframe.src += "?language=" + language;
+
         iframe.setAttribute("id", "_popup_iframe");
         iframe.setAttribute("frameborder", 0);
         iframe.setAttribute("scrolling", "no");
@@ -394,8 +398,8 @@ var _popup = (function () {
 
     }
 
-    // Used for mobile environments.
-    var addMobileListeners = function (target) {
+    // Used when launching in a new tab / window, usually used in mobile environments.
+    var addNonModalListeners = function (target, language) {
 
         // Set listeners for clicks that should launch the iframe.
         getClickables(function (clickables) {
@@ -410,7 +414,11 @@ var _popup = (function () {
                     var q = encodeURIComponent(JSON.stringify(createCartJsonFromAttributes(event.currentTarget)));
 
                     // Pop the window
-                    childElem = window.open(target + "?cart=" + q);
+                    var url = target + "?cart=" + q;
+                    if (language)
+                        url += "&language=" + language;
+
+                    childElem = window.open(url);
 
                     // Tell the iframe the URL that generated the popup.
                     sendMessage({ type: "set_parent_url", url: window.location.href });
@@ -432,7 +440,7 @@ var _popup = (function () {
         if (script) {
 
             // Define the local and remote origins and scriptPaths
-            src = script.getAttribute("src");
+            var src = script.getAttribute("src");
 
             // The app path is the "root" of the app, which is the grandparent of the src directory
             var pathArray = src.split("/").slice(-3);
@@ -444,11 +452,25 @@ var _popup = (function () {
             // Set the UI. Not all checkout types will have different UIs. Set as "basic" if not provided.
             var ui = script.getAttribute("data-popup-ui") || "basic";
 
-            // Set the environment, mobile or desktop based on what we discovered in the function at the top.
-            var environment = mobile ? "m" : "d";
+            // Set the langauge, if provided. Otherwise, the language will be automatically selected.
+            var language = script.getAttribute("data-language");
+
+            // Determine if the user has specified explicitily to use the modal or non modal. If so, overwrite the default choice.
+            var setAsModal = script.getAttribute("data-as-modal");
+            if (setAsModal) {
+                if (setAsModal === "true")
+                    asModal = true;
+                if (setAsModal === "false")
+                    asModal = false;
+            }
 
             // Define the target URL
-            var target = appPath + '#/' + type + "-" + environment;
+            var target = appPath + '#/' + type;
+
+            // If modal, append to the URL path.
+            if (asModal) {
+                target = target + "-mod";
+            }
 
             // Define the iframe origin
             var i = -1, x = 3; // We're looking for the 3rd instance of / in the src, which will signify the end of the origin
@@ -466,15 +488,15 @@ var _popup = (function () {
             appendAsyncScript(appPath + "settings/app.js", function () {
 
                 // Wire up the listeners
-                if (mobile) {
+                if (!asModal) {
                     // Wire up the buttons to listen for the click events to open a new tab
-                    addMobileListeners(target);
+                    addNonModalListeners(target, language);
                     if (callback) callback();
                 } else {
                     // Append the iframe to the body when ready
                     var interval = setInterval(function () {
                         if (document.body) {
-                            addDesktopListeners(target);
+                            addModalListeners(target, language);
                             clearInterval(interval);
                             if (callback) callback();
                         }

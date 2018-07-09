@@ -1,4 +1,11 @@
-﻿<a name="1.0.4"></a>
+﻿<a name="1.0.5"></a>
+# 1.0.5
+
+- Integrate kit 1.0.8. See kit changelog for details.
+- Add option to specify customer language via parameter
+- Combine mobile and desktop checkout controllers into a single controller with shared logic
+
+<a name="1.0.4"></a>
 # 1.0.4
 
 - Remove third party CDNs and replace with Comecero CDN for static assets
