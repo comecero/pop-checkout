@@ -250,6 +250,16 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             }
 
         }, function (error) {
+
+            // If an error due to an invalid promotion code, re-run without the promotion code.
+            if (error.code) {
+                if (error.code == "invalid_promotion_code") {
+                    delete cart.promotion_code;
+                    setCart(cart);
+                    return;
+                }
+            }
+
             // Error creating / updating the cart
             $scope.data.error = error;
 
