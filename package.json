@@ -1,6 +1,6 @@
 {
   "name": "comecero-pop-checkout",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A shopping cart that provides a simple, popup checkout experience",
   "main": "index.html",
   "repository": {
