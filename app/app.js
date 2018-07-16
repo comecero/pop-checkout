@@ -6,7 +6,7 @@ app.config(['$httpProvider', '$routeProvider', '$locationProvider', '$provide', 
     $routeProvider.when("/", { templateUrl: "app/pages/index/index.html", reloadOnSearch: false });
     $routeProvider.when("/simple-mod", { templateUrl: "app/pages/simple/modal.html", reloadOnSearch: false, resolve: { asModal: function ($route) { return true } } });
     $routeProvider.when("/simple", { templateUrl: "app/pages/simple/non-modal.html", reloadOnSearch: false, resolve: { asModal: function ($route) { return false } } });
-    $routeProvider.when("/simple/review/:id", { templateUrl: "app/pages/simple/review.html"});
+    $routeProvider.when("/simple/review/:id", { templateUrl: "app/pages/simple/review.html" });
 
     // Non-handled routes.
     var notFoundUrl = window.__settings.app.not_found_url;
@@ -112,6 +112,10 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
         {
             code: "sv",
             name: "svenska"
+        },
+        {
+            code: "zh",
+            name: "中文"
         }
     ]
 
