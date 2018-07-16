@@ -25,6 +25,7 @@
         pre code {
             white-space: unset;
         }
+
         .pointer {
             cursor: pointer;
         }
@@ -159,7 +160,34 @@
 
         <div class="row spacer-b20">&nbsp;</div>
 
-        <h4>Asynchronous Loading (Optional)</h4>
+        <h3>Advanced Features</h3>
+        <hr />
+
+        <h4>Provide Full Cart Data</h4>
+        <p>
+            The basic integration allows you to send in basic data about the cart. You can send in a full cart object adding the <code>data-cart</code> attribute to your button or link and include the full cart object as a JSON string.
+        </p>
+
+        <pre><code>&lt;button class="popup-buy-now" data-cart='{"promotion_code": "half-price", "items":[{"product_id":"1001", "quantity":1 }], "customer": {"name": "Joe Blow", "email": "joe@example.com", "billing_address": {"address_1": "123 Main St.", "city": "Ville", "state_prov": "OH", "postal_code": "43081", "country": "US"}}}'&gt;Buy Now&lt;/button&gt;</code></pre>
+
+        <div class="row spacer-b20">&nbsp;</div>
+
+        <h4>Launch POP Checkout with JavaScript</h4>
+        <p>
+            When POP Checkout is initialized, a variable <code>_popup</code> is set on the page. This variable contains a function that can be used to trigger POP Checkout from JavaScript, as seen in the example below.
+        </p>
+
+<pre>
+<code>
+var cart = {items: [{product_id:"1001"}]};
+_popup.open(cart);
+</code>
+</pre>
+        <p>
+            Note that this variable is not set until POP Checkout has fully initialized. Therefore, it is best to use Asynchronous Loading (described below) and use the <code>_popup.open(cart)</code> function within the <code>loadApp()</code> function callback, thereby ensuring that POP Checkout is ready before you call the <code>open</code> function.
+        </p>
+
+        <h4>Asynchronous Loading</h4>
         <p>
             Instead of the integration method described above, it is possible to load Pay on Page Checkout asynchronously, which provides some additional features such as
             subscribing to events when the popup is opened or closed, and allows you to include the code with the <code>&lt;head&gt;&lt;/head&gt;</code> section
@@ -169,16 +197,15 @@
             To load Pay on Page checkout asynchronously, include the snippet below in your page (usually within the <code>&lt;head&gt;&lt;/head&gt;</code> tags). You'll notice
             two events in the example below that you can listen to; if you don't intend to use the onLoad and onClose events, don't include these optional lines in your code.
         </p>
-        
+
 <pre><code>
 &lt;script&gt;
-
     function loadApp(s,a,l,e){var i=document.getElementsByTagName("head")[0],n=!1,d=document.createElement("script");
     d.src=s,d.id="_popup_script",d["data-popup-type"]=a,d["data-popup-ui"]=l,d["data-self-init"]=1,d.type="text/javascript",d.async=1,d.onload=d.onreadystatechange=function()
     {n||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState||(n=!0,_popup.initialize(function(){"function"==typeof e&&e()}))},i.appendChild(d)} 
-
+    
     // loadApp(script_url, type_of_popup, ui, callback).
-    loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.min.js", "simple", "basic", function() {
+    loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
         
         // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
         _popup.onLoad = function(cart) {
@@ -190,12 +217,11 @@
         }   
                            
     });
-
 &lt;/script&gt;                        
 </code></pre>
 
-<a class="pointer" ng-click="showUncompressed = true" ng-show="!showUncompressed">Show uncompressed snippet</a>
-<a class="pointer" ng-click="showUncompressed = false" ng-show="showUncompressed">Hide uncompressed snippet</a>
+        <a class="pointer" ng-click="showUncompressed = true" ng-show="!showUncompressed">Show uncompressed snippet</a>
+        <a class="pointer" ng-click="showUncompressed = false" ng-show="showUncompressed">Hide uncompressed snippet</a>
 
 <pre ng-show="showUncompressed"><code>
 // The below code is the same as the example above, just uncompressed for easier review.
@@ -223,30 +249,29 @@ script.onload = script.onreadystatechange = function () {
 };
 head.appendChild(script);
 }  
-
 // loadApp(script_url, type_of_popup, ui, callback).
-loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.min.js", "simple", "basic", function() {
+loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
         
     // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
     _popup.onLoad = function(cart) {
         console.log(cart)
     } 
-
     // Optional, listen for when the popup is closed. A copy of the cart at the time the popup is closed is provided.
     _popup.onClose = function(cart) {
         console.log(cart)
-    }   
+    }
                            
 });
-
 &lt;/script&gt;                        
 </code></pre>
+
+        <div class="row spacer-b20">&nbsp;</div>
 
     </div>
 
     <div class="spacer-b20">&nbsp;</div>
 
-  <!-- Modules (CDN)  -->
+    <!-- Modules (CDN)  -->
     <script src="https://static.comecero.com/libraries/angularjs/1.5.9/angular-route.min.js"></script>
     <script src="https://static.comecero.com/libraries/angularjs/1.5.9/angular-sanitize.min.js"></script>
 
