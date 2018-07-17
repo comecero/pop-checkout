@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.5
+Comecero Popup Cart version: ﻿1.0.6
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -223,6 +223,14 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
     // A function to create the cart
     function setCart(cart) {
+
+        // If the customer email has been provided and is invalid, remove it.
+        if (cart && cart.customer && cart.customer.email && !utils.isValidEmail(cart.customer.email)) {
+            delete cart.customer.email;
+        }
+
+        // Make a copy of the input so you can determine what information has been provided in advance for use in the view.
+        $scope.data.input = angular.copy(cart);
 
         // Update the cart. There might not be a cart at this point; if not, the CartService.update process will create and return a new cart for the user.
         CartService.update(cart, $scope.data.params, true).then(function (cart) {
