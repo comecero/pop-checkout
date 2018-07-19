@@ -116,7 +116,7 @@
   },
   {
     "name": "hide_email_if_provided",
-    "type": "bool",
+    "type": "boolean",
     "label": "Hide email, if provided",
     "description": "Indicates if you wish to hide the customer email address field, if you provide the customer's email address when POP Checkout loads.",
     "section": "Features",
@@ -125,7 +125,7 @@
   },
   {
     "name": "hide_name_if_provided",
-    "type": "bool",
+    "type": "boolean",
     "label": "Hide name, if provided",
     "description": "Indicates if you wish to hide the customer name field, if you provide the customer's name when POP Checkout loads.",
     "section": "Features",
