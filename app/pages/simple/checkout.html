@@ -40,7 +40,7 @@
             </div>
 
             <div ng-show="helpers.supportsPaymentMethod('credit_card', data.cart.options)">
-                <div class="row">
+                <div class="row" ng-hide="data.input.customer.email && settings.app.hide_email_if_provided">
                     <div class="col-xs-12" ng-class="{ 'seamless-input top': helpers.isCustomerField('name', data.cart.options) || helpers.isCustomerField('phone', data.cart.options) }">
                         <div class="form-group" show-errors="data.cart.options">
                             <div class="inner-addon left-addon">
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" ng-show="helpers.isCustomerField('name', data.cart.options)">
+                <div class="row" ng-hide="!helpers.isCustomerField('name', data.cart.options) || (data.input.customer.name && settings.app.hide_name_if_provided)">
                     <div class="col-xs-12 seamless-input" ng-class="{ 'bottom': !helpers.isCustomerField('phone', data.cart.options), 'middle': helpers.isCustomerField('phone', data.cart.options) }">
                         <div class="form-group" show-errors="data.cart.options">
                             <div class="inner-addon left-addon">

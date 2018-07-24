@@ -190,11 +190,11 @@ _popup.open(cart);
         <h4>Asynchronous Loading</h4>
         <p>
             It is possible to load POP Checkout asynchronously, which provides some additional features such as
-            subscribing to events when the popup is opened or closed, and allows you to include the code with the <code>&lt;head&gt;&lt;/head&gt;</code> section
+            subscribing to events when the popup is opened or closed, and allows you to include the code within the <code>&lt;head&gt;&lt;/head&gt;</code> section
             of your website without a performance penalty.
         </p>
         <p>
-            To load POP checkout asynchronously, include the snippet below in your page (usually within the <code>&lt;head&gt;&lt;/head&gt;</code> tags). You'll notice
+            To load POP Checkout asynchronously, include the snippet below in your page (usually within the <code>&lt;head&gt;&lt;/head&gt;</code> tags). You'll notice
             two events in the example below that you can listen to; if you don't intend to use the onLoad and onClose events, don't include these optional lines in your code.
         </p>
 
@@ -209,12 +209,17 @@ _popup.open(cart);
         
         // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
         _popup.onLoad = function(cart) {
-            console.log(cart)
+           // console.log(cart)
         } 
+
         // Optional, listen for when the popup is closed. A copy of the cart at the time the popup is closed is provided.
         _popup.onClose = function(cart) {
-            console.log(cart)
+           // console.log(cart)
         }   
+
+        // Want to open POP Checkout programatically? Here's a code sample:
+        // var cart = { items: [{ product_id: "1001" }] }
+        // _popup.open(cart);
                            
     });
 &lt;/script&gt;                        
@@ -254,12 +259,17 @@ loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
         
     // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
     _popup.onLoad = function(cart) {
-        console.log(cart)
+       // console.log(cart)
     } 
+
     // Optional, listen for when the popup is closed. A copy of the cart at the time the popup is closed is provided.
     _popup.onClose = function(cart) {
-        console.log(cart)
+       // console.log(cart)
     }
+
+    // Want to open POP Checkout programatically? Here's a code sample:
+    // var cart = { items: [{ product_id: "1001" }] }
+    // _popup.open(cart);
                            
 });
 &lt;/script&gt;                        
@@ -278,13 +288,13 @@ loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
             The language can be a fully-qualified locale (such as de-DE) or a two letter language code (such as de).
         </p>
 
-        <h4>Dispaly as Modal or Tab</h4>
+        <h4>Display as Modal or Tab</h4>
         <p>
-            POP Checkout automatically determines, based on the user's environment, if it should launch in as a modal (page overlay) or a new browser tab. For the best user experience, POP Checkout loads as an overlay on larger devices such as desktop computers and tablets, and as a new tab on small devices such as a phone.
+            POP Checkout automatically determines, based on the user's environment, if it should launch as a modal (page overlay) or a new browser tab. For the best user experience, POP Checkout loads as an overlay on larger devices such as desktop computers, laptops and tablets, and as a new tab on small devices such as a phone.
         </p>
 
         <p>
-            However, you can override this behavior and by indicating how you wish POP Checkout to load with the <code>data-as-modal</code> HTML attribute on the script, as seen in the example below. If you set <code>data-as-modal</code> to <code>true</code>, POP Checkout will always load as a modal (overlay). If you set <code>data-as-modal</code> to <code>false</code>, POP Checkout will always launch in a new tab.
+            However, you can override this behavior by indicating how you wish POP Checkout to load with the <code>data-as-modal</code> HTML attribute on the script, as seen in the example below. If you set <code>data-as-modal</code> to <code>true</code>, POP Checkout will always load as a modal (overlay). If you set <code>data-as-modal</code> to <code>false</code>, POP Checkout will always launch in a new tab.
         </p>
 
         <pre><code>&lt;script src="{{data.src}}/dist/js/popup.min.js" id="_popup_script" data-as-modal="true" type="text/javascript"&gt;&lt;/script&gt;</code></pre>

@@ -1,4 +1,12 @@
-﻿<a name="1.0.5"></a>
+﻿<a name="1.0.6"></a>
+# 1.0.6
+
+- Integrate kit 1.0.9. See kit changelog for details.
+- Add support for the following language: Chinese
+- Add feature to trigger POP Checkout programatically rather than button click
+- Ignore invalid promotion codes that are sent in as cart parameters
+
+<a name="1.0.5"></a>
 # 1.0.5
 
 - Integrate kit 1.0.8. See kit changelog for details.

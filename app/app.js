@@ -59,7 +59,7 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
         },
         {
             code: "cs",
-            name: "čeština"
+            name: "Čeština"
         },
         {
             code: "de",
@@ -79,11 +79,11 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
         },
         {
             code: "fr",
-            name: "français"
+            name: "Français"
         },
         {
             code: "it",
-            name: "italiano"
+            name: "Italiano"
         },
         {
             code: "ja",
@@ -107,14 +107,14 @@ app.run(['$rootScope', 'SettingsService', function ($rootScope, SettingsService)
         },
         {
             code: "ru",
-            name: "русский"
+            name: "Русский"
         },
         {
             code: "sv",
-            name: "svenska"
+            name: "Svenska"
         },
         {
-            code: "zh",
+            code: "zh-CN",
             name: "中文"
         }
     ]

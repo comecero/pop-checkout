@@ -41,7 +41,7 @@
     "description": "Indicates if you would like to use the product image as the popup header icon, if provided.",
     "section": "Design",
     "required": false,
-    "default_value":  false
+    "default_value": false
   },
   {
     "name": "popup_header_bg_image",
@@ -112,7 +112,25 @@
     "label": "Main Shopping URL",
     "description": "In cases where the customer is redirected to complete an offsite payment (such as PayPal), this is the URL you want the customer returned to upon completion of their order.",
     "section": "Routing",
-    "required":  false
+    "required": false
+  },
+  {
+    "name": "hide_email_if_provided",
+    "type": "boolean",
+    "label": "Hide email, if provided",
+    "description": "Indicates if you wish to hide the customer email address field, if you provide the customer's email address when POP Checkout loads.",
+    "section": "Features",
+    "required": false,
+    "default_value": false
+  },
+  {
+    "name": "hide_name_if_provided",
+    "type": "boolean",
+    "label": "Hide name, if provided",
+    "description": "Indicates if you wish to hide the customer name field, if you provide the customer's name when POP Checkout loads.",
+    "section": "Features",
+    "required": false,
+    "default_value": false
   },
   {
     "name": "receipt_close_button_text",
