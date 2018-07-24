@@ -1,9 +1,9 @@
 ﻿var _popup = (function () {
 
     // Define variables to hold values that we'll set after we create our hidden iframe.
-    var childElem, iframe, childOrigin, src, appPath, asModal, iframeReady;
+    var childElem, iframe, childOrigin, src, appPath, asModal, iframeReady, open;
 
-    // isMobile.js v0.4.1
+    // isMobile.js v0.4.1, https://github.com/kaimallea/isMobile
     (function (global) {
 
         var apple_phone = /iPhone/i,
@@ -403,23 +403,33 @@
                     // Prevent any other native actions bound to this element.
                     event.preventDefault();
 
-                    // Send the cart json into the url
-                    var q = encodeURIComponent(JSON.stringify(createCartJsonFromAttributes(event.currentTarget)));
+                    // Create the cart
+                    var cart = createCartJsonFromAttributes(event.currentTarget);
 
-                    // Pop the window
-                    var url = target + "?cart=" + q;
-                    if (language)
-                        url += "&language=" + language;
-
-                    childElem = window.open(url);
-
-                    // Tell the iframe the URL that generated the popup.
-                    sendMessage({ type: "set_parent_url", url: window.location.href });
+                    // Open the tab
+                    openTab(cart, target, language);
 
                 });
             }
 
         });
+    }
+
+    function openTab(cart, target, language) {
+
+        // Send the cart json into the url
+        var q = encodeURIComponent(JSON.stringify(cart));
+
+        // Pop the window
+        var url = target + "?cart=" + q;
+        if (language)
+            url += "&language=" + language;
+
+        childElem = window.open(url);
+
+        // Tell the tab the URL that generated the popup.
+        sendMessage({ type: "set_parent_url", url: window.location.href });
+
     }
 
     // This prepares the page for popup
@@ -482,17 +492,33 @@
 
                 // Wire up the listeners
                 if (!asModal) {
+
                     // Wire up the buttons to listen for the click events to open a new tab
                     addNonModalListeners(target, language);
+
+                    // Set an open function that the user can call to manually trigger the popup
+                    _popup.open = function (cart) {
+                        openTab(cart, target, language);
+                    }
+
                     if (callback) callback();
                 } else {
+
                     // Append the iframe to the body when ready
                     var interval = setInterval(function () {
+
                         if (document.body) {
                             addModalListeners(target, language);
                             clearInterval(interval);
+
+                            // Set an open function that the user can call to manually trigger the popup
+                            _popup.open = function (cart) {
+                                openIframe(cart);
+                            }
+
                             if (callback) callback();
                         }
+
                     }, 20);
                 }
 

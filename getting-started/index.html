@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" ng-app="gettingStarted">
 <head>
-    <title>Getting Started with Pay on Page Checkout</title>
+    <title>Getting Started with POP Checkout</title>
 
     <!-- Scale set to 1.0001 to address a bug in Safari on iOS 9.x -->
     <meta name="viewport" content="initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no" />
@@ -25,6 +25,7 @@
         pre code {
             white-space: unset;
         }
+
         .pointer {
             cursor: pointer;
         }
@@ -39,12 +40,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <h1 id="typography">Getting Started with Pay on Page Checkout</h1>
+                    <h1 id="typography">Getting Started with POP Checkout</h1>
                 </div>
             </div>
         </div>
 
-        <p>Pay on Page Checkout is a simple way to start taking orders from your website and offers a seamless checkout experience for your customers. Integrating Pay on Page Checkout is easy!</p>
+        <p>POP ("Pay on Page") Checkout is a simple way to start taking orders from your website and offers a seamless checkout experience for your customers. Integrating POP Checkout is easy!</p>
 
         <div ng-show="!data.product && data.loaded">
             <p>To see an example, you must first add a product to your account. Then reload this page to see the demo.</p>
@@ -55,7 +56,7 @@
 
         <div ng-show="data.product">
             <h4>See it in Action</h4>
-            <p>Pay on Page Checkout allows you to place buttons and links wherever you want customers to make a purchase. Click the button below to see an example.</p>
+            <p>POP Checkout allows you to place buttons and links wherever you want customers to make a purchase. Click the button below to see an example.</p>
             <div ng-if="data.test">
                 <p>
                     To place a test order with the demo below, you can use the following details:
@@ -76,16 +77,16 @@
             <div class="panel-heading"><strong>Step 1:</strong> Add your Website to the App Settings</div>
             <div class="panel-body">
 
-                <p>For security, we limit the websites that can embed your Pay on Page Checkout to those that you specify.</p>
+                <p>For security, we limit the websites that can embed your POP Checkout to those that you specify.</p>
 
                 <p>
                     <ul>
                         <li>Sign into your account</li>
                         <li>From the left menu, click Apps</li>
-                        <li>Locate the Pay on Page Checkout app, and click the arrow in the Launch button</li>
+                        <li>Locate the POP Checkout app, and click the arrow in the Launch button</li>
                         <li>Click "Settings"</li>
                         <li>
-                            From within the settings, enter the hostname of the website that you intend to place the Pay on Page Checkout.
+                            From within the settings, enter the hostname of the website that you intend to place the POP Checkout.
                             <ul>
                                 <li>Enter the hostname only. For example, if your website is <code>https://www.mysite.com</code>, you would only enter <code>www.mysite.com</code></li>
                                 <li>If you would like to use on multiple websites, enter each hostname as a new line.</li>
@@ -104,8 +105,8 @@
                 <p>You need to include a JavaScript snippet on every page where you want to provide the option for customers to buy.</p>
 
                 <p>
-                    Paste the following script reference near the bottom of your HTML page, just above the <code>&lt;/body&gt;</code> tag.<br /><br />
-                    <code>&lt;script src="{{data.src}}/dist/js/popup.min.js" id="_popup_script" data-popup-type="simple" data-popup-ui="basic" type="text/javascript"&gt;&lt;/script&gt;</code>
+                    Paste the following script reference near the bottom of your HTML page, just above the <code>&lt;/body&gt;</code> tag.
+                    <pre><code>&lt;script src="{{data.src}}/dist/js/popup.min.js" id="_popup_script" type="text/javascript"&gt;&lt;/script&gt;</code></pre>
                 </p>
 
             </div>
@@ -125,7 +126,7 @@
 
                 <h4>A simple button</h4>
                 <p class="well">
-                    Here's the button code for product_id {{data.product.product_id}}<br />
+                    Here's the button code for product_id {{data.product.product_id}}. Try it!<br />
                     <code>&lt;button class="popup-buy-now" data-product_id="{{data.product.product_id}}"&gt;Buy Now&lt;/button&gt;</code>
                     <br /><br />
                     <button class="popup-buy-now" data-product_id="{{data.product.product_id}}">Buy Now</button>
@@ -133,7 +134,7 @@
 
                 <h4>A link</h4>
                 <p class="well">
-                    Here's the link code for product_id {{data.product.product_id}}<br />
+                    Here's the link code for product_id {{data.product.product_id}}. Try it!<br />
                     <code>&lt;a href="#" class="popup-buy-now" data-product_id="{{data.product.product_id}}"&gt;Buy Now&lt;/a&gt;</code>
                     <br /><br />
                     <a href="#" class="popup-buy-now" data-product_id="{{data.product.product_id}}">Buy Now</a>
@@ -159,43 +160,73 @@
 
         <div class="row spacer-b20">&nbsp;</div>
 
-        <h4>Asynchronous Loading (Optional)</h4>
+        <h3>Advanced Features</h3>
+        <hr />
+
+        <h4>Provide Full Cart Data</h4>
         <p>
-            Instead of the integration method described above, it is possible to load Pay on Page Checkout asynchronously, which provides some additional features such as
-            subscribing to events when the popup is opened or closed, and allows you to include the code with the <code>&lt;head&gt;&lt;/head&gt;</code> section
-            of your website without a significant performance penalty.
+            The basic integration allows you to send in basic data about the cart. You can send in a full cart object adding the <code>data-cart</code> attribute to your button or link and include the full cart object as a JSON string.
+        </p>
+
+        <pre><code>&lt;button class="popup-buy-now" data-cart='{"promotion_code": "half-price", "items":[{"product_id":"1001", "quantity":1 }], "customer": {"name": "Joe Blow", "email": "joe@example.com", "billing_address": {"address_1": "123 Main St.", "city": "Ville", "state_prov": "OH", "postal_code": "43081", "country": "US"}}}'&gt;Buy Now&lt;/button&gt;</code></pre>
+
+        <div class="row spacer-b20">&nbsp;</div>
+
+        <h4>Launch POP Checkout with JavaScript</h4>
+        <p>
+            When POP Checkout is initialized, a variable <code>_popup</code> is set on the page. This variable contains a function that can be used to trigger POP Checkout from JavaScript, as seen in the example below.
+        </p>
+
+<pre>
+<code>
+var cart = {items: [{product_id:"1001"}]};
+_popup.open(cart);
+</code>
+</pre>
+        <p>
+            Note that this variable is not set until POP Checkout has fully initialized. Therefore, it is best to use Asynchronous Loading (described below) and use the <code>_popup.open(cart)</code> function within the <code>loadApp()</code> function callback, thereby ensuring that POP Checkout is ready before you call the <code>open</code> function.
+        </p>
+
+        <h4>Asynchronous Loading</h4>
+        <p>
+            It is possible to load POP Checkout asynchronously, which provides some additional features such as
+            subscribing to events when the popup is opened or closed, and allows you to include the code within the <code>&lt;head&gt;&lt;/head&gt;</code> section
+            of your website without a performance penalty.
         </p>
         <p>
-            To load Pay on Page checkout asynchronously, include the snippet below in your page (usually within the <code>&lt;head&gt;&lt;/head&gt;</code> tags). You'll notice
+            To load POP Checkout asynchronously, include the snippet below in your page (usually within the <code>&lt;head&gt;&lt;/head&gt;</code> tags). You'll notice
             two events in the example below that you can listen to; if you don't intend to use the onLoad and onClose events, don't include these optional lines in your code.
         </p>
-        
+
 <pre><code>
 &lt;script&gt;
-
     function loadApp(s,a,l,e){var i=document.getElementsByTagName("head")[0],n=!1,d=document.createElement("script");
     d.src=s,d.id="_popup_script",d["data-popup-type"]=a,d["data-popup-ui"]=l,d["data-self-init"]=1,d.type="text/javascript",d.async=1,d.onload=d.onreadystatechange=function()
     {n||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState||(n=!0,_popup.initialize(function(){"function"==typeof e&&e()}))},i.appendChild(d)} 
-
+    
     // loadApp(script_url, type_of_popup, ui, callback).
-    loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.min.js", "simple", "basic", function() {
+    loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
         
         // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
         _popup.onLoad = function(cart) {
-            console.log(cart)
+           // console.log(cart)
         } 
+
         // Optional, listen for when the popup is closed. A copy of the cart at the time the popup is closed is provided.
         _popup.onClose = function(cart) {
-            console.log(cart)
+           // console.log(cart)
         }   
+
+        // Want to open POP Checkout programatically? Here's a code sample:
+        // var cart = { items: [{ product_id: "1001" }] }
+        // _popup.open(cart);
                            
     });
-
 &lt;/script&gt;                        
 </code></pre>
 
-<a class="pointer" ng-click="showUncompressed = true" ng-show="!showUncompressed">Show uncompressed snippet</a>
-<a class="pointer" ng-click="showUncompressed = false" ng-show="showUncompressed">Hide uncompressed snippet</a>
+        <a class="pointer" ng-click="showUncompressed = true" ng-show="!showUncompressed">Show uncompressed snippet</a>
+        <a class="pointer" ng-click="showUncompressed = false" ng-show="showUncompressed">Hide uncompressed snippet</a>
 
 <pre ng-show="showUncompressed"><code>
 // The below code is the same as the example above, just uncompressed for easier review.
@@ -223,30 +254,60 @@ script.onload = script.onreadystatechange = function () {
 };
 head.appendChild(script);
 }  
-
 // loadApp(script_url, type_of_popup, ui, callback).
-loadApp("https://apps.comecero.com/popup-cart/dist/js/popup.min.js", "simple", "basic", function() {
+loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
         
     // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
     _popup.onLoad = function(cart) {
-        console.log(cart)
+       // console.log(cart)
     } 
 
     // Optional, listen for when the popup is closed. A copy of the cart at the time the popup is closed is provided.
     _popup.onClose = function(cart) {
-        console.log(cart)
-    }   
+       // console.log(cart)
+    }
+
+    // Want to open POP Checkout programatically? Here's a code sample:
+    // var cart = { items: [{ product_id: "1001" }] }
+    // _popup.open(cart);
                            
 });
-
 &lt;/script&gt;                        
 </code></pre>
+
+        <div class="spacer-b20">&nbsp;</div>
+
+        <h4>Language Parameter</h4>
+        <p>
+            POP Checkout will automatically determine the user's language from the browser settings and will select the language accordingly. However, you can override the language of the user's browser by adding the following HTML attribute to the script:
+        </p>
+
+        <pre><code>&lt;script src="{{data.src}}/dist/js/popup.min.js" id="_popup_script" data-language="de" type="text/javascript"&gt;&lt;/script&gt;</code></pre>
+
+        <p>
+            The language can be a fully-qualified locale (such as de-DE) or a two letter language code (such as de).
+        </p>
+
+        <h4>Display as Modal or Tab</h4>
+        <p>
+            POP Checkout automatically determines, based on the user's environment, if it should launch as a modal (page overlay) or a new browser tab. For the best user experience, POP Checkout loads as an overlay on larger devices such as desktop computers, laptops and tablets, and as a new tab on small devices such as a phone.
+        </p>
+
+        <p>
+            However, you can override this behavior by indicating how you wish POP Checkout to load with the <code>data-as-modal</code> HTML attribute on the script, as seen in the example below. If you set <code>data-as-modal</code> to <code>true</code>, POP Checkout will always load as a modal (overlay). If you set <code>data-as-modal</code> to <code>false</code>, POP Checkout will always launch in a new tab.
+        </p>
+
+        <pre><code>&lt;script src="{{data.src}}/dist/js/popup.min.js" id="_popup_script" data-as-modal="true" type="text/javascript"&gt;&lt;/script&gt;</code></pre>
+
+        <p>
+            For best results, we generally recommend that you allow POP Checkout to determine the best launch method. If you do not supply the <code>data-as-modal</code> attribute, the launch method will be automatically selected.
+        </p>
 
     </div>
 
     <div class="spacer-b20">&nbsp;</div>
 
-  <!-- Modules (CDN)  -->
+    <!-- Modules (CDN)  -->
     <script src="https://static.comecero.com/libraries/angularjs/1.5.9/angular-route.min.js"></script>
     <script src="https://static.comecero.com/libraries/angularjs/1.5.9/angular-sanitize.min.js"></script>
 

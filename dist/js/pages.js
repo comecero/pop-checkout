@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.5
+Comecero Popup Cart version: ﻿1.0.6
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -196,11 +196,6 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     // Set the language if supplied by an explicit parameter
     setLanguage($location.search());
 
-    // Load the pageview.
-    if (window.__pageview && window.__pageview.recordPageLoad) {
-        window.__pageview.recordPageLoad();
-    }
-
     // Get the cart from the query parameters
     var cart = $location.search().cart;
     if (cart) {
@@ -229,6 +224,14 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     // A function to create the cart
     function setCart(cart) {
 
+        // If the customer email has been provided and is invalid, remove it.
+        if (cart && cart.customer && cart.customer.email && !utils.isValidEmail(cart.customer.email)) {
+            delete cart.customer.email;
+        }
+
+        // Make a copy of the input so you can determine what information has been provided in advance for use in the view.
+        $scope.data.input = angular.copy(cart);
+
         // Update the cart. There might not be a cart at this point; if not, the CartService.update process will create and return a new cart for the user.
         CartService.update(cart, $scope.data.params, true).then(function (cart) {
 
@@ -255,6 +258,16 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             }
 
         }, function (error) {
+
+            // If an error due to an invalid promotion code, re-run without the promotion code.
+            if (error.code) {
+                if (error.code == "invalid_promotion_code") {
+                    delete cart.promotion_code;
+                    setCart(cart);
+                    return;
+                }
+            }
+
             // Error creating / updating the cart
             $scope.data.error = error;
 
