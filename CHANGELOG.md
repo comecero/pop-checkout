@@ -1,4 +1,10 @@
-﻿<a name="1.0.6"></a>
+﻿<a name="1.0.7"></a>
+# 1.0.7
+
+- Bug fix to ensure messages are sent to the parent page when POP Checkout is loaded in a new tab
+- Integrate kit 1.0.10. See kit changelog for details.
+
+<a name="1.0.6"></a>
 # 1.0.6
 
 - Integrate kit 1.0.9. See kit changelog for details.
