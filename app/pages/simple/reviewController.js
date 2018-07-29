@@ -101,14 +101,7 @@
     }
 
     $scope.close = function () {
-
-        // For mobile devices, the page opened in a new tab. Just close the tab. For desktop, the page is in the same so redirect back to the parent.
-        // This same page is resolved with different URLs in the app settings, so you can tell the nature of the page by looking at the path.
-        if ($location.path() == "review") {
-
-        } else {
-            window.location = $scope.data.return_url;
-        }
+        window.location = $scope.data.return_url;
     }
 
     // Record a pageview.

@@ -189,7 +189,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
         data: {
             // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
             "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/" + "simple/review/{{payment_id}}",
-            "cancel_url": SettingsService.get().app.main_shopping_url || localStorage.getItem("parent_url")
+            "cancel_url": SettingsService.get().app.main_shopping_url || localStorage.getItem("parent_url") || window.location.href
         }
     }
 
@@ -298,9 +298,9 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
             // Handle with the modal is closed or dismissed
             $scope.modalInstance.result.then(function () {
-                onModalClose();
+                $scope.close();
             }, function (error) {
-                onModalClose();
+                $scope.close();
             });
 
         } else {
@@ -339,14 +339,14 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
     }
 
-    function onModalClose() {
+    $scope.close = function () {
+
+        // Clear any errors
+        $scope.data.error = null;
 
         // Remove any payment info
         $scope.data.card = { "type": "credit_card" };
         $scope.data.exp = null;
-
-        // Clear any errors.
-        $scope.data.error = null;
 
         // Send a close event to the parent.
         sendMessage({ type: "close", cart: $scope.data.cart }, $scope.settings.app.allowed_origin_hosts);
@@ -356,9 +356,6 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             $scope.data.payment = null;
         }
 
-    }
-
-    $scope.close = function () {
         // If a modal, close it
         if ($scope.modalInstance) {
             $scope.modalInstance.close();
@@ -370,8 +367,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
     // Handle if the user closes the tab directly.
     window.onbeforeunload = function () {
-        if (asModal)
-            onModalClose();
+        $scope.close();
     }
 
     function setLanguage(params) {
@@ -519,14 +515,7 @@ app.controller("ReviewController", ['$scope', '$location', '$routeParams', 'Cart
     }
 
     $scope.close = function () {
-
-        // For mobile devices, the page opened in a new tab. Just close the tab. For desktop, the page is in the same so redirect back to the parent.
-        // This same page is resolved with different URLs in the app settings, so you can tell the nature of the page by looking at the path.
-        if ($location.path() == "review") {
-
-        } else {
-            window.location = $scope.data.return_url;
-        }
+        window.location = $scope.data.return_url;
     }
 
     // Record a pageview.
