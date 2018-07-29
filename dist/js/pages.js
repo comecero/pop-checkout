@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.6
+Comecero Popup Cart version: ﻿1.0.7
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -152,11 +152,6 @@ app.directive('insertHtml', function () {
         }
     }
 });
-app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
-
-    window.location = "getting-started";
-
-}]);
 app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'LanguageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', '$routeParams', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, LanguageService, $uibModal, $timeout, gettextCatalog, $location, $document, $routeParams) {
 
     // Determine if you are running as a modal
@@ -294,13 +289,6 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
                 templateUrl: 'app/pages/simple/checkout.html',
                 backdrop: false,
                 scope: $scope
-            });
-
-            // Handle with the modal is closed or dismissed
-            $scope.modalInstance.result.then(function () {
-                $scope.close();
-            }, function (error) {
-                $scope.close();
             });
 
         } else {
@@ -514,8 +502,10 @@ app.controller("ReviewController", ['$scope', '$location', '$routeParams', 'Cart
         });
     }
 
-    $scope.close = function () {
-        window.location = $scope.data.return_url;
+    // Handle if the user closes the tab directly.
+    window.onbeforeunload = function () {
+        // Send a close event to the parent.
+        sendMessage({ type: "close", cart: $scope.data.sale }, $scope.settings.app.allowed_origin_hosts);
     }
 
     // Record a pageview.
@@ -525,4 +515,9 @@ app.controller("ReviewController", ['$scope', '$location', '$routeParams', 'Cart
 
 }]);
 
+app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
+
+    window.location = "getting-started";
+
+}]);
 //# sourceMappingURL=pages.js.map

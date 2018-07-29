@@ -100,8 +100,10 @@
         });
     }
 
-    $scope.close = function () {
-        window.location = $scope.data.return_url;
+    // Handle if the user closes the tab directly.
+    window.onbeforeunload = function () {
+        // Send a close event to the parent.
+        sendMessage({ type: "close", cart: $scope.data.sale }, $scope.settings.app.allowed_origin_hosts);
     }
 
     // Record a pageview.
