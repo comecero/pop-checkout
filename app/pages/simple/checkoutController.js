@@ -138,6 +138,13 @@
                 scope: $scope
             });
 
+            // Handle with the modal is closed or dismissed
+            $scope.modalInstance.result.then(function () {
+                $scope.close();
+            }, function (error) {
+                $scope.close();
+            });
+
         } else {
             // Show the checkout form
             $scope.options.showForm = true;
