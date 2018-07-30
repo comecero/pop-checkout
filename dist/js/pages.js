@@ -152,6 +152,11 @@ app.directive('insertHtml', function () {
         }
     }
 });
+app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
+
+    window.location = "getting-started";
+
+}]);
 app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'LanguageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', '$routeParams', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, LanguageService, $uibModal, $timeout, gettextCatalog, $location, $document, $routeParams) {
 
     // Determine if you are running as a modal
@@ -502,6 +507,10 @@ app.controller("ReviewController", ['$scope', '$location', '$routeParams', 'Cart
         });
     }
 
+    $scope.close = function () {
+        window.location = $scope.data.return_url;
+    }
+
     // Handle if the user closes the tab directly.
     window.onbeforeunload = function () {
         // Send a close event to the parent.
@@ -515,9 +524,4 @@ app.controller("ReviewController", ['$scope', '$location', '$routeParams', 'Cart
 
 }]);
 
-app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
-
-    window.location = "getting-started";
-
-}]);
 //# sourceMappingURL=pages.js.map
