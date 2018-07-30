@@ -187,6 +187,10 @@ _popup.open(cart);
             Note that this variable is not set until POP Checkout has fully initialized. Therefore, it is best to use Asynchronous Loading (described below) and use the <code>_popup.open(cart)</code> function within the <code>loadApp()</code> function callback, thereby ensuring that POP Checkout is ready before you call the <code>open</code> function.
         </p>
 
+        <p>
+            <i><b>Note: </b>Most browsers include automated popup blockers by default. Since POP Checkout is loaded in a new tab on mobile devices, you should invoke the <code>_popup.open()</code> function in response to a user "click" to prevent the new tab from being blocked by the browser.</i>
+        </p>
+
         <h4>Asynchronous Loading</h4>
         <p>
             It is possible to load POP Checkout asynchronously, which provides some additional features such as
@@ -207,14 +211,14 @@ _popup.open(cart);
     // loadApp(script_url, type_of_popup, ui, callback).
     loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
         
-        // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
-        _popup.onLoad = function(cart) {
-           // console.log(cart)
+        // Optional, listen for the when the popup is opened. See the Callback Functions documentation below for details.
+        _popup.onLoad = function(data) {
+           // console.log(data)
         } 
 
-        // Optional, listen for when the popup is closed. A copy of the cart at the time the popup is closed is provided.
-        _popup.onClose = function(cart) {
-           // console.log(cart)
+        // Optional, listen for when the popup is closed. See the Callback Functions documentation below for details.
+        _popup.onClose = function(data) {
+           // console.log(data)
         }   
 
         // Want to open POP Checkout programatically? Below is a code sample.
@@ -258,14 +262,14 @@ head.appendChild(script);
 // loadApp(script_url, type_of_popup, ui, callback).
 loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
         
-    // Optional, listen for the when the popup is opened. A copy of the cart at the time the popup is loaded is provided.
-    _popup.onLoad = function(cart) {
-       // console.log(cart)
+    // Optional, listen for the when the popup is opened. See the Callback Functions documentation below for details.
+    _popup.onLoad = function(data) {
+       // console.log(data)
     } 
 
-    // Optional, listen for when the popup is closed. A copy of the cart at the time the popup is closed is provided.
-    _popup.onClose = function(cart) {
-       // console.log(cart)
+    // Optional, listen for when the popup is closed. See the Callback Functions documentation below for details.
+    _popup.onClose = function(data) {
+       // console.log(data)
     }
 
     // Want to open POP Checkout programatically? Below is a code sample.
@@ -278,6 +282,19 @@ loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
 </code></pre>
 
         <div class="spacer-b20">&nbsp;</div>
+
+        <h4>Callback Functions</h4>
+        <p>
+            When using aynchronous loading, you have access to callback functions.
+            <ul>
+                <li><code>_popup.onLoad(data)</code> A function that is called when POP Checkout is initially loaded and displayed to the user. The <code>data</code> paramter includes a property <code>cart</code> that provides a copy of the cart at the time POP Checkout is initially loaded.</li>
+                <li><code>_popup.onClose(data)</code> A function that is called when POP Checkout is closed. The <code>data</code> paramter includes a property <code>cart</code> that provides a copy of the cart and a property <code>order</code> that provides a copy of the order at the time POP Checkout is closed. Note that if the customer did not complete a payment before POP Checkout was closed, <code>order</code> will be null.</li>
+            </ul>
+        </p>
+
+        <p>
+            <i><b>Note: </b>In the case of mobile devices, POP Checkout is loaded in a new tab rather than a modal overlay to provide a better user experience. While not common, if the user clicks the browser "Reload" button on the new tab, it will trigger the <code>_popup.onClose()</code> function, even though POP Checkout has not actually been closed.</i>
+        </p>
 
         <h4>Language Parameter</h4>
         <p>

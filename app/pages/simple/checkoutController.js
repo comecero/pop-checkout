@@ -11,7 +11,7 @@
     $scope.settings = SettingsService.get();
     $scope.helpers = HelperService;
     $scope.options = { showSpinner: false, showForm: false };
-    $scope.paymentParams = { expand: "payment_method,payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options", show: "payment_method.*,payment_method.data.*,date_created,order.order_id,order.subtotal,order.total,order.tax,order.discount,order.currency,order.customer.name,order.tax_inclusive,order.customer.customer_id,order.customer.email,order.customer.username,order.customer.billing_address.*,order.items.item_id,order.items.quantity,order.items.price,order.items.price_original,order.items.subtotal,order.items.subtotal_original,order.items.total,order.items.total_original,order.items.name,order.items.subscription.description,order.shipping_item.quantity,order.shipping_item.name,order.shipping_item.price,order.shipping_item.price_original,order.shipping_item.subtotal,order.shipping_item.subtotal_original,order.shipping_item.total,order.shipping_item.total_original,order.items.product.images.link_square,order.options.customer_optional_fields,order,cart.options.*,invoice.options.customer_optional_fields" };
+    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options" };
 
     // Set the cart parameters
     $scope.data.params = {};
@@ -21,6 +21,7 @@
     // Set default values.
     $scope.data.payment_method = {}; // Will be populated from the user's input into the form.
     $scope.data.header_image = $scope.settings.app.logo_popup_square || "images/default_popup_icon.png";
+    $scope.data.order = null;
 
     // Build your payment method models
     $scope.data.card = { "type": "credit_card" };
@@ -146,10 +147,16 @@
     // Handle a successful payment
     $scope.onPaymentSuccess = function (payment) {
 
+        $scope.data.order = payment.order;
+
         // Handle the payment response, depending on the type.
         switch (payment.payment_method.type) {
 
             case "paypal":
+
+                // Clear the onbeforeunload event to prevent a "close" event from being sent to the parent.
+                window.onbeforeunload = null;
+
                 // Redirect to PayPal to make the payment.
                 if (asModal) {
                     sendMessage({ type: "redirect", url: payment.response_data.redirect_url }, $scope.settings.app.allowed_origin_hosts);
@@ -178,16 +185,20 @@
         // Clear any errors
         $scope.data.error = null;
 
+        // Unregister the onbeforeunload event so you don't get a feedback loop.
+        window.onbeforeunload = null;
+
         // Remove any payment info
         $scope.data.card = { "type": "credit_card" };
         $scope.data.exp = null;
 
         // Send a close event to the parent.
-        sendMessage({ type: "close", cart: $scope.data.cart }, $scope.settings.app.allowed_origin_hosts);
+        sendMessage({ type: "close", cart: $scope.data.cart, order: $scope.data.order }, $scope.settings.app.allowed_origin_hosts);
 
-        // If scope.data.payment, then they are closing a successful payment. Set the payment to null so any future load will not show the receipt.
+        // If scope.data.payment, then they are closing a successful payment. Set the payment to null so any future load will not show the receipt. Reset the order to null.
         if ($scope.data.payment) {
             $scope.data.payment = null;
+            $scope.data.order = null;
         }
 
         // If a modal, close it

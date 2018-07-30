@@ -198,13 +198,15 @@
 
                 // Fire the onclose event with the current cart
                 if (_popup.onClose) {
-                    _popup.onClose(obj.cart);
+                    var data = { cart: obj.cart, order: obj.order };
+                    _popup.onClose(data);
                 }
 
             }
 
             if (obj.type == "on_load" && _popup.onLoad) {
-                _popup.onLoad(obj.cart);
+                var data = { cart: obj.cart };
+                _popup.onLoad(data);
             }
 
             if (obj.type == "redirect") {
