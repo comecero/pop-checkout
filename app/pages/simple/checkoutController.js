@@ -131,18 +131,12 @@
 
         if (asModal) {
 
-            // Launch the modal
+            // Launch the modal. If you enable ESC support (keyboard: true) you will get a double onClose event unless you refactor how close is handled.
             $scope.modalInstance = $uibModal.open({
                 templateUrl: 'app/pages/simple/checkout.html',
                 backdrop: false,
+                keyboard: false,
                 scope: $scope
-            });
-
-            // Handle with the modal is closed or dismissed
-            $scope.modalInstance.result.then(function () {
-                $scope.close();
-            }, function (error) {
-                $scope.close();
             });
 
         } else {

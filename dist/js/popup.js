@@ -550,7 +550,7 @@ var _popup = (function () {
 (function () {
     var script = document.getElementById("_popup_script");
     if (script) {
-        if (!script["data-self-init"]) {
+        if (!script.getAttribute("data-self-init")) {
             _popup.initialize();
         }
     }

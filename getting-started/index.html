@@ -205,7 +205,7 @@ _popup.open(cart);
 <pre><code>
 &lt;script&gt;
     function loadApp(s,a,l,e){var i=document.getElementsByTagName("head")[0],n=!1,d=document.createElement("script");
-    d.src=s,d.id="_popup_script",d["data-popup-type"]=a,d["data-popup-ui"]=l,d["data-self-init"]=1,d.type="text/javascript",d.async=1,d.onload=d.onreadystatechange=function()
+    d.src=s,d.id="_popup_script",d.type="text/javascript",d.async=1,d.setAttribute("data-popup-type", a),d.setAttribute("data-popup-ui", l),d.setAttribute("data-self-init", 1),d.onload=d.onreadystatechange=function()
     {n||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState||(n=!0,_popup.initialize(function(){"function"==typeof e&&e()}))},i.appendChild(d)} 
     
     // loadApp(script_url, type_of_popup, ui, callback).
@@ -242,11 +242,11 @@ var head = document.getElementsByTagName("head")[0], done = false;
 var script = document.createElement("script");
 script.src = url;
 script.id = "_popup_script";
-script["data-popup-type"] = type;
-script["data-popup-ui"] = ui;
-script["data-self-init"] = 1;
 script.type = "text/javascript";
 script.async = 1;
+script.setAttribute("data-popup-type", type);
+script.setAttribute("data-popup-ui", ui);
+script.setAttribute("data-self-init", 1);
 // Attach handlers for all browsers
 script.onload = script.onreadystatechange = function () {
     if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
