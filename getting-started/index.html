@@ -191,6 +191,10 @@ _popup.open(cart);
             <i><b>Note: </b>Most browsers include automated popup blockers by default. Since POP Checkout is loaded in a new tab on mobile devices, you should invoke the <code>_popup.open()</code> function in response to a user "click" to prevent the new tab from being blocked by the browser.</i>
         </p>
 
+        <p>
+            <i>For example, if you attempt to launch POP Checkout automatically on page load (without a user click event), it will launch successfully on desktop devices because POP Checkout loads in an overlay and not a new tab. However, it will most likely be blocked on mobile devices which attempt to load POP Checkout in a new tab. If you choose to launch POP Checkout using the <code>_popup.open()</code> function, make certain you test your implementation from a mobile device (or emulating a mobile device) to ensure POP Checkout is not blocked.</i>
+        </p>
+
         <h4>Asynchronous Loading</h4>
         <p>
             It is possible to load POP Checkout asynchronously, which provides some additional features such as
@@ -291,6 +295,8 @@ loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
                 <li><code>_popup.onClose(data)</code> A function that is called when POP Checkout is closed. The <code>data</code> paramter includes a property <code>cart</code> that provides a copy of the cart and a property <code>order</code> that provides a copy of the order at the time POP Checkout is closed. Note that if the customer did not complete a payment before POP Checkout was closed, <code>order</code> will be null.</li>
             </ul>
         </p>
+
+        <p>If there is an error creating the cart when POP Checkout is launched (perhaps an invalid payload is provided, a timeout or other system error), <code>data.cart</code> property will return as <code>undefined</code>. To prevent exceptions in your code, it is recommended that you confirm that <code>data.cart</code> is defined before attempting to use it.</p>
 
         <p>
             <i><b>Note: </b>In the case of mobile devices, POP Checkout is loaded in a new tab rather than a modal overlay to provide a better user experience. While not common, if the user clicks the browser "Reload" button on the new tab, it will trigger the <code>_popup.onClose()</code> function, even though POP Checkout has not actually been closed.</i>
