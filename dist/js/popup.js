@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.6
+Comecero Popup Cart version: ﻿1.0.7
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -205,13 +205,15 @@ var _popup = (function () {
 
                 // Fire the onclose event with the current cart
                 if (_popup.onClose) {
-                    _popup.onClose(obj.cart);
+                    var data = { cart: obj.cart, order: obj.order };
+                    _popup.onClose(data);
                 }
 
             }
 
             if (obj.type == "on_load" && _popup.onLoad) {
-                _popup.onLoad(obj.cart);
+                var data = { cart: obj.cart };
+                _popup.onLoad(data);
             }
 
             if (obj.type == "redirect") {
@@ -548,7 +550,7 @@ var _popup = (function () {
 (function () {
     var script = document.getElementById("_popup_script");
     if (script) {
-        if (!script["data-self-init"]) {
+        if (!script.getAttribute("data-self-init")) {
             _popup.initialize();
         }
     }

@@ -29,5 +29,5 @@ window.__settings.app = {
     "favicon": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0104031097523ImmD8I4TE/sm_favicon.ico",
     "logo_popup_square": "https://d2czr3b90zl0wc.cloudfront.net/KO0000/0129764384415ImO1VJ6b3/sq_iomatic_star.png",
     "web_font_import": "https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800",
-    "main_shopping_url": "http://www.iomatic.net"
+    "main_shopping_url": "http://www.example.com"
 }

@@ -2,6 +2,7 @@
 
     // Define a place to hold your data
     $scope.data = {};
+    $scope.data.order = null;
     $scope.options = {};
 
     // Define the payment_id
@@ -63,8 +64,13 @@
     // Handle a successful payment
     $scope.onPaymentSuccess = function (payment) {
 
+        $scope.data.order = payment.order;
+
         // If the payment comes back with a redirect URL, it means significant changes to the cart have been done that has changed the payment amount significantly enough that the buyer must re-approve the total through PayPal. Redirect.
         if (payment.response_data.redirect_url) {
+
+            // Clear the onbeforeunload event to prevent a "close" event from being sent to the parent.
+            window.onbeforeunload = null;
 
             // Redirect to the supplied redirect URL.
             window.location.replace(payment.response_data.redirect_url);
@@ -101,14 +107,13 @@
     }
 
     $scope.close = function () {
+        window.location = $scope.data.return_url;
+    }
 
-        // For mobile devices, the page opened in a new tab. Just close the tab. For desktop, the page is in the same so redirect back to the parent.
-        // This same page is resolved with different URLs in the app settings, so you can tell the nature of the page by looking at the path.
-        if ($location.path() == "review") {
-
-        } else {
-            window.location = $scope.data.return_url;
-        }
+    // Handle if the user closes the tab directly.
+    window.onbeforeunload = function () {
+        // Send a close event to the parent.
+        sendMessage({ type: "close", cart: $scope.data.sale, order: $scope.data.order }, $scope.settings.app.allowed_origin_hosts);
     }
 
     // Record a pageview.

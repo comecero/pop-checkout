@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.6
+Comecero Popup Cart version: ﻿1.0.7
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -170,7 +170,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     $scope.settings = SettingsService.get();
     $scope.helpers = HelperService;
     $scope.options = { showSpinner: false, showForm: false };
-    $scope.paymentParams = { expand: "payment_method,payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options", show: "payment_method.*,payment_method.data.*,date_created,order.order_id,order.subtotal,order.total,order.tax,order.discount,order.currency,order.customer.name,order.tax_inclusive,order.customer.customer_id,order.customer.email,order.customer.username,order.customer.billing_address.*,order.items.item_id,order.items.quantity,order.items.price,order.items.price_original,order.items.subtotal,order.items.subtotal_original,order.items.total,order.items.total_original,order.items.name,order.items.subscription.description,order.shipping_item.quantity,order.shipping_item.name,order.shipping_item.price,order.shipping_item.price_original,order.shipping_item.subtotal,order.shipping_item.subtotal_original,order.shipping_item.total,order.shipping_item.total_original,order.items.product.images.link_square,order.options.customer_optional_fields,order,cart.options.*,invoice.options.customer_optional_fields" };
+    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options" };
 
     // Set the cart parameters
     $scope.data.params = {};
@@ -180,6 +180,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     // Set default values.
     $scope.data.payment_method = {}; // Will be populated from the user's input into the form.
     $scope.data.header_image = $scope.settings.app.logo_popup_square || "images/default_popup_icon.png";
+    $scope.data.order = null;
 
     // Build your payment method models
     $scope.data.card = { "type": "credit_card" };
@@ -189,7 +190,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
         data: {
             // The following tokens are allowed in the URL: {{payment_id}}, {{order_id}}, {{customer_id}}, {{invoice_id}}. The tokens will be replaced with the actual values upon redirect.
             "success_url": window.location.href.substring(0, window.location.href.indexOf("#")) + "#/" + "simple/review/{{payment_id}}",
-            "cancel_url": SettingsService.get().app.main_shopping_url || localStorage.getItem("parent_url")
+            "cancel_url": SettingsService.get().app.main_shopping_url || localStorage.getItem("parent_url") || window.location.href
         }
     }
 
@@ -289,18 +290,12 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
         if (asModal) {
 
-            // Launch the modal
+            // Launch the modal. If you enable ESC support (keyboard: true) you will get a double onClose event unless you refactor how close is handled.
             $scope.modalInstance = $uibModal.open({
                 templateUrl: 'app/pages/simple/checkout.html',
                 backdrop: false,
+                keyboard: false,
                 scope: $scope
-            });
-
-            // Handle with the modal is closed or dismissed
-            $scope.modalInstance.result.then(function () {
-                onModalClose();
-            }, function (error) {
-                onModalClose();
             });
 
         } else {
@@ -312,10 +307,16 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     // Handle a successful payment
     $scope.onPaymentSuccess = function (payment) {
 
+        $scope.data.order = payment.order;
+
         // Handle the payment response, depending on the type.
         switch (payment.payment_method.type) {
 
             case "paypal":
+
+                // Clear the onbeforeunload event to prevent a "close" event from being sent to the parent.
+                window.onbeforeunload = null;
+
                 // Redirect to PayPal to make the payment.
                 if (asModal) {
                     sendMessage({ type: "redirect", url: payment.response_data.redirect_url }, $scope.settings.app.allowed_origin_hosts);
@@ -339,26 +340,27 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
     }
 
-    function onModalClose() {
+    $scope.close = function () {
+
+        // Clear any errors
+        $scope.data.error = null;
+
+        // Unregister the onbeforeunload event so you don't get a feedback loop.
+        window.onbeforeunload = null;
 
         // Remove any payment info
         $scope.data.card = { "type": "credit_card" };
         $scope.data.exp = null;
 
-        // Clear any errors.
-        $scope.data.error = null;
-
         // Send a close event to the parent.
-        sendMessage({ type: "close", cart: $scope.data.cart }, $scope.settings.app.allowed_origin_hosts);
+        sendMessage({ type: "close", cart: $scope.data.cart, order: $scope.data.order }, $scope.settings.app.allowed_origin_hosts);
 
-        // If scope.data.payment, then they are closing a successful payment. Set the payment to null so any future load will not show the receipt.
+        // If scope.data.payment, then they are closing a successful payment. Set the payment to null so any future load will not show the receipt. Reset the order to null.
         if ($scope.data.payment) {
             $scope.data.payment = null;
+            $scope.data.order = null;
         }
 
-    }
-
-    $scope.close = function () {
         // If a modal, close it
         if ($scope.modalInstance) {
             $scope.modalInstance.close();
@@ -370,8 +372,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
     // Handle if the user closes the tab directly.
     window.onbeforeunload = function () {
-        if (asModal)
-            onModalClose();
+        $scope.close();
     }
 
     function setLanguage(params) {
@@ -420,6 +421,7 @@ app.controller("ReviewController", ['$scope', '$location', '$routeParams', 'Cart
 
     // Define a place to hold your data
     $scope.data = {};
+    $scope.data.order = null;
     $scope.options = {};
 
     // Define the payment_id
@@ -481,8 +483,13 @@ app.controller("ReviewController", ['$scope', '$location', '$routeParams', 'Cart
     // Handle a successful payment
     $scope.onPaymentSuccess = function (payment) {
 
+        $scope.data.order = payment.order;
+
         // If the payment comes back with a redirect URL, it means significant changes to the cart have been done that has changed the payment amount significantly enough that the buyer must re-approve the total through PayPal. Redirect.
         if (payment.response_data.redirect_url) {
+
+            // Clear the onbeforeunload event to prevent a "close" event from being sent to the parent.
+            window.onbeforeunload = null;
 
             // Redirect to the supplied redirect URL.
             window.location.replace(payment.response_data.redirect_url);
@@ -519,14 +526,13 @@ app.controller("ReviewController", ['$scope', '$location', '$routeParams', 'Cart
     }
 
     $scope.close = function () {
+        window.location = $scope.data.return_url;
+    }
 
-        // For mobile devices, the page opened in a new tab. Just close the tab. For desktop, the page is in the same so redirect back to the parent.
-        // This same page is resolved with different URLs in the app settings, so you can tell the nature of the page by looking at the path.
-        if ($location.path() == "review") {
-
-        } else {
-            window.location = $scope.data.return_url;
-        }
+    // Handle if the user closes the tab directly.
+    window.onbeforeunload = function () {
+        // Send a close event to the parent.
+        sendMessage({ type: "close", cart: $scope.data.sale, order: $scope.data.order }, $scope.settings.app.allowed_origin_hosts);
     }
 
     // Record a pageview.
