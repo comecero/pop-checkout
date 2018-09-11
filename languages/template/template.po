@@ -10,10 +10,10 @@ msgstr ""
 
 #: ./app/pages/simple/checkout.html:295
 #: ./app/pages/simple/review.html:176
-msgid "An email has been sent to {{data.payment.order.customer.email}}."
+msgid "An email has been sent to {{email}}."
 msgstr ""
 
-#: ./dist/js/kit.js:5026
+#: ./dist/js/kit.js:6312
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr ""
 
@@ -89,36 +89,36 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: ./dist/js/kit.js:1642
+#: ./dist/js/kit.js:2805
 msgid "Please check the box to provide consent to save your payment method for future payments."
 msgstr ""
 
-#: ./dist/js/kit.js:4150
+#: ./dist/js/kit.js:5339
 msgid "Please confirm"
 msgstr ""
 
-#: ./dist/js/kit.js:4145
-#: ./dist/js/kit.js:4181
+#: ./dist/js/kit.js:5334
+#: ./dist/js/kit.js:5370
 msgid "Please make a selection"
 msgstr ""
 
-#: ./dist/js/kit.js:4140
+#: ./dist/js/kit.js:5329
 msgid "Please provide a value"
 msgstr ""
 
-#: ./dist/js/kit.js:1599
+#: ./dist/js/kit.js:2762
 msgid "Please provide an amount for your payment."
 msgstr ""
 
-#: ./dist/js/kit.js:4190
+#: ./dist/js/kit.js:5379
 msgid "Please provide one of the available options"
 msgstr ""
 
-#: ./dist/js/kit.js:4173
+#: ./dist/js/kit.js:5362
 msgid "Please supply a number"
 msgstr ""
 
-#: ./dist/js/kit.js:4166
+#: ./dist/js/kit.js:5355
 msgid "Please supply a number without decimals"
 msgstr ""
 
@@ -171,41 +171,41 @@ msgstr ""
 msgid "Thank you for your purchase!"
 msgstr ""
 
-#: ./dist/js/kit.js:5020
+#: ./dist/js/kit.js:6306
 msgid "The item you are trying to access could not be found."
 msgstr ""
 
-#: ./dist/js/kit.js:4216
+#: ./dist/js/kit.js:5405
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4222
+#: ./dist/js/kit.js:5411
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4199
+#: ./dist/js/kit.js:5388
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4205
+#: ./dist/js/kit.js:5394
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4635
+#: ./dist/js/kit.js:5921
 msgid "There was a problem obtaining authorization for this session. Please reload the page to try your request again."
 msgstr ""
 
-#: ./dist/js/kit.js:1493
-#: ./dist/js/kit.js:1587
-#: ./dist/js/kit.js:1837
+#: ./dist/js/kit.js:2656
+#: ./dist/js/kit.js:2750
+#: ./dist/js/kit.js:3000
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr ""
 
