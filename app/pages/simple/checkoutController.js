@@ -10,7 +10,7 @@
     $scope.geoService = GeoService;
     $scope.settings = SettingsService.get();
     $scope.helpers = HelperService;
-    $scope.options = { showSpinner: false, showForm: false };
+    $scope.options = { showSpinner: false, showForm: false, "payment_method": "credit_card" };
     $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options" };
 
     // Set the cart parameters
@@ -25,7 +25,7 @@
 
     // Build your payment method models
     $scope.data.card = { "type": "credit_card" };
-
+    $scope.data.amazon_pay = { "type": "amazon_pay" };
     $scope.data.paypal = {
         "type": "paypal",
         data: {

@@ -78,20 +78,20 @@
     "default_value": "#40a5f5"
   },
   {
-    "name": "buynow-button-bg-color",
+    "name": "brand-primary",
     "type": "color",
-    "label": "Buy Now Button Background Color",
-    "description": "The color of the 'buy now' button.",
-    "section": "Main Content Area",
+    "label": "Primary Color",
+    "description": "'Primary' color, used for 'call to action' text and buttons. Generally your brand color is used.",
+    "section": "Primary Colors",
     "required": true,
-    "default_value": "#2196f3"
+    "default_value": "#3181aa"
   },
   {
-    "name": "buynow-button-color",
+    "name": "btn-primary-color",
     "type": "color",
-    "label": "Buy Now Button Text Color",
-    "description": "The text color of the 'buy now' button.",
-    "section": "Main Content Area",
+    "label": "Primary Button Text Color",
+    "description": "'Primary' button text color. Should be a strong contrast to your Primary Brand Color.",
+    "section": "Primary Colors",
     "required": true,
     "default_value": "#ffffff"
   },
@@ -109,10 +109,10 @@
     "type": "string",
     "label": "Popup Border Radius",
     "description": "Allows you to set a curve to the corners of the popup window.",
-    "section": "General",
+    "section": "Main Content Area",
     "required": true,
     "default_value": "4px",
-    "options":  [
+    "options": [
       {
         "display": "Square corners",
         "value": "0"
@@ -142,5 +142,67 @@
         "value": "12px"
       }
     ]
+  },
+  {
+    "name": "input-border-radius",
+    "type": "string",
+    "label": "Input Border Radius",
+    "description": "Allows you to set a curve to the border of form input elements.",
+    "section": "Inputs",
+    "required": true,
+    "default_value": "2px",
+    "options": [
+      {
+        "display": "Square corners",
+        "value": "0"
+      },
+      {
+        "display": "1 pixel",
+        "value": "1px"
+      },
+      {
+        "display": "2 pixels",
+        "value": "2px"
+      },
+      {
+        "display": "3 pixels",
+        "value": "3px"
+      },
+      {
+        "display": "4 pixels",
+        "value": "4px"
+      },
+      {
+        "display": "5 pixels",
+        "value": "5px"
+      }
+    ]
+  },
+  {
+    "name": "input-bg",
+    "type": "color",
+    "label": "Input Background Color",
+    "description": "The background color for form inputs.",
+    "section": "Inputs",
+    "required": true,
+    "default_value": "#ffffff"
+  },
+  {
+    "name": "input-color",
+    "type": "color",
+    "label": "Input Text Color",
+    "description": "The text color for form inputs.",
+    "section": "Inputs",
+    "required": true,
+    "default_value": "#555555"
+  },
+  {
+    "name": "placeholder-color",
+    "type": "color",
+    "label": "Input Placeholder Text Color",
+    "description": "The text color for 'placeholder' text form inputs (used for prompts and icons within inputs, generally is lighter than the input text color).",
+    "section": "Inputs",
+    "required": true,
+    "default_value": "#999999"
   }
 ]
