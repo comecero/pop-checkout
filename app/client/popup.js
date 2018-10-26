@@ -162,7 +162,7 @@
             }
         }
 
-        writeDebug("Attempting to send a message", JSON.stringify(message));
+        writeDebug("Preparing to send a message", JSON.stringify(message));
 
         // Don't send the message until the iframe is ready.
         if (iframeReady) {
@@ -609,11 +609,25 @@
 // If embedded as a script reference (rather than a JavaScript reference), invoke the initialize function automatically. Otherwise, it's invoked by the snippet.
 (function () {
     var script = document.getElementById("_popup_script");
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return "";
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
     if (script) {
         if (!script.getAttribute("data-self-init")) {
 
             var enableDebug = false;
             if (script.getAttribute("data-debug") != null && script.getAttribute("data-debug") === "true")
+                enableDebug = true;
+
+            if (getParameterByName("debug") === "true")
                 enableDebug = true;
 
             _popup.initialize(null, enableDebug);
