@@ -186,7 +186,7 @@
 
         if (message.data) {
 
-            writeDebug("Received message from app", JSON.stringify(message));
+            writeDebug("Received message from app", JSON.stringify(message.data));
 
             // Ignore messages that aren't from the iframe origin
             if (message.origin != childOrigin) {
