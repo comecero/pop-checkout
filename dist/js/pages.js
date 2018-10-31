@@ -165,6 +165,9 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     // Define a place to hold your data
     $scope.data = {};
 
+    // Load in the default payment method
+    $scope.options = { "payment_method": "credit_card" };
+
     // Load in some helpers
     $scope.geoService = GeoService;
     $scope.settings = SettingsService.get();
@@ -325,6 +328,13 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
                 }
                 break;
 
+            case "amazon_pay":
+                
+                // Redirect to the review page.
+                $location.path("/simple/review/" + payment.payment_id);
+
+                break;
+
             default:
                 // Show the receipt.
                 $scope.data.payment = payment;
@@ -398,10 +408,10 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
         if (asModal) {
             // Scroll to the top of the modal location
-                var elem = document.getElementsByClassName("modal");
-                if (elem && elem.length) {
-                    elem[0].scrollTop = 0;
-                }
+            var elem = document.getElementsByClassName("modal");
+            if (elem && elem.length) {
+                elem[0].scrollTop = 0;
+            }
         } else {
             // Scroll to the top of the document
             $document.scrollTop(0, 500);

@@ -383,8 +383,6 @@ var _popup = (function () {
         iframe.setAttribute("frameborder", 0);
         iframe.setAttribute("scrolling", "no");
         iframe.setAttribute("allowtransparency", true);
-        iframe.setAttribute("sandbox", "allow-scripts allow-forms allow-same-origin allow-popups");
-
         // You can feed these in as a single string for most browsers but not IE (maybe others), so we'll load styles as an object.
         iframe.style["display"] = "none";
         iframe.style["z-index"] = 2147483647;
