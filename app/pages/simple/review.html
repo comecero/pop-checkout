@@ -27,6 +27,7 @@
                 </div>
             </div>
             <!-- Begin payment page -->
+
             <div ng-show="!data.payment" class="modal-body">
 
                 <div class="row">
@@ -114,7 +115,7 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit commit-payment="data.payment_id" sale="data.sale" sale-type="{{data.sale.object}}" on-success="onPaymentSuccess" params="data.params" error="data.error" translate>Confirm Payment</button>
+                        <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit commit-payment="data.payment_id" sale="data.sale" sale-type="cart" on-success="onPaymentSuccess" params="data.params" error="data.error" translate>Confirm Payment</button>
                     </div>
                 </div>
 

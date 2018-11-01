@@ -167,13 +167,14 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
     // Load in the default payment method
     $scope.options = { "payment_method": "credit_card" };
+    $scope.data.showSection = "payment"; // payment, review, receipt
 
     // Load in some helpers
     $scope.geoService = GeoService;
     $scope.settings = SettingsService.get();
     $scope.helpers = HelperService;
     $scope.options = { showSpinner: false, showForm: false, "payment_method": "credit_card" };
-    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,invoice.options" };
+    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options" };
 
     // Set the cart parameters
     $scope.data.params = {};
@@ -329,10 +330,8 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
                 break;
 
             case "amazon_pay":
-                
-                // Redirect to the review page.
-                $location.path("/simple/review/" + payment.payment_id);
-
+                $scope.data.payment = payment;
+                $scope.data.showSection = "review";
                 break;
 
             default:
@@ -378,6 +377,15 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             // Otherwise, close the new tab
             window.close();
         }
+    }
+
+    $scope.setPaymentMethod = function (paymentMethod) {
+        $scope.options.payment_method = paymentMethod;
+    }
+
+    $scope.selectNewPaymentMethod = function() {
+        $scope.options.payment_method = "credit_card";
+        $scope.data.showSection = "payment";
     }
 
     // Handle if the user closes the tab directly.
