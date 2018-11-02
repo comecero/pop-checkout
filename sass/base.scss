@@ -895,3 +895,8 @@ li.dropdown, .pointer {
 .padding-b36 {
     padding-bottom: 36px !important;
 }
+
+// Amazon Pay iframes. These will not work if the Amazon Pay SDK changes element id structures
+#OffAmazonPaymentsWidgets1IFrame, #OffAmazonPaymentsWidgets2IFrame, #OffAmazonPaymentsWidgets3IFrame {
+    border-radius: 0 !important;
+}
