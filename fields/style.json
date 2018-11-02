@@ -84,7 +84,7 @@
     "description": "'Primary' color, used for 'call to action' text and buttons. Generally your brand color is used.",
     "section": "Primary Colors",
     "required": true,
-    "default_value": "#3181aa"
+    "default_value": "#2196f3"
   },
   {
     "name": "btn-primary-color",

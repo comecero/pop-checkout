@@ -1,36 +1,37 @@
-﻿<div class="modal-content">
-    <form name="form" customer-fields options="data.cart.options" items="data.cart.items" shipping-is-billing="true" customer-background-save="data.cart" params="data.params" novalidate>
-        <div class="modal-header brand-background" ng-style="settings.app.popup_header_bg_image_medium != null && {'background-image': 'url({{settings.app.popup_header_bg_image_medium}})'}">
-            <div class="modal-options">
-                <button type="button" class="close" ng-click="close()"><i class="fa fa-times-circle"></i></button>
-                <div class="text-right">
-                    <div class="dropdown pull-right currency-button spacer-b12" uib-dropdown ng-if="settings.account.currencies.length > 1">
-                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
-                            <span class="pointer">{{currency}}</span> <i class="caret"></i>
-                        </button>
-                        <ul class="dropdown-menu" currency-select as-dropdown cart="data.cart" error="data.error" params="data.params"></ul>
-                    </div>
-                    <div class="dropdown pull-right spacer-r12" uib-dropdown ng-if="settings.app.enable_languages">
-                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
-                            <i class="fa fa-globe"></i> <span class="pointer">{{language}}</span> <i class="caret"></i>
-                        </button>
-                        <ul class="dropdown-menu" language-select as-dropdown></ul>
-                    </div>
+﻿<div class="modal-content" ng-show="options.showForm">
+    <div class="modal-header brand-background" ng-style="settings.app.popup_header_bg_image_medium != null && {'background-image': 'url({{settings.app.popup_header_bg_image_medium}})'}">
+        <div class="modal-options">
+            <button type="button" class="close" ng-click="close()"><i class="fa fa-times-circle"></i></button>
+            <div class="text-right">
+                <div class="dropdown pull-right currency-button spacer-b12" uib-dropdown ng-if="settings.account.currencies.length > 1">
+                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
+                        <span class="pointer">{{currency}}</span> <i class="caret"></i>
+                    </button>
+                    <ul class="dropdown-menu" currency-select as-dropdown cart="data.cart" error="data.error" params="data.params"></ul>
                 </div>
-            </div>
-            <div class="modal-branding">
-                <div class="brand-image" ng-style="{'background-image': 'url({{data.header_image}})'}">
-                </div>
-                <div class="brand-name">
-                    <span>{{settings.app.company_name}}</span>
-                </div>
-                <div class="product-name" ng-repeat="item in data.cart.items">
-                    <span ng-if="item.quantity > 1">({{item.quantity}}) </span><span>{{item.name}}</span>
+                <div class="dropdown pull-right spacer-r12" uib-dropdown ng-if="settings.app.enable_languages">
+                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
+                        <i class="fa fa-globe"></i> <span class="pointer">{{language}}</span> <i class="caret"></i>
+                    </button>
+                    <ul class="dropdown-menu" language-select as-dropdown></ul>
                 </div>
             </div>
         </div>
-        <!-- Begin payment page -->
-        <div ng-show="!data.payment" class="modal-body">
+        <div class="modal-branding">
+            <div class="brand-image" ng-style="{'background-image': 'url({{data.header_image}})'}">
+            </div>
+            <div class="brand-name">
+                <span>{{settings.app.company_name}}</span>
+            </div>
+            <div class="product-name" ng-repeat="item in data.cart.items">
+                <span ng-if="item.quantity > 1">({{item.quantity}}) </span><span>{{item.name}}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Begin payment page -->
+    <div ng-if="data.showSection == 'payment'" class="modal-body">
+        <ng-form name="form" customer-fields options="data.cart.options" items="data.cart.items" shipping-is-billing="true" customer-background-save="data.cart" params="data.params" novalidate>
 
             <div class="row">
                 <div class="alert alert-danger alert-dismissable" ng-if="data.error">
@@ -38,22 +39,22 @@
                     {{data.error.message}}
                 </div>
             </div>
-
-            <div ng-show="!data.amazon_pay.data">
+            {{data.options}}
+            <div ng-show="showPaymentSelections()">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group">
                             <ul class="payment-methods">
-                                <li>
-                                    <input type="radio" id="payment_method_credit_card" class="radio" name="payment_methods" ng-model="options.payment_method" value="credit_card" required>
+                                <li ng-show="helpers.supportsPaymentMethod('credit_card', data.cart.options)">
+                                    <input type="radio" id="payment_method_credit_card" class="radio" name="payment_methods" ng-click="setPaymentMethod('credit_card')" ng-checked="options.payment_method == 'credit_card'" required>
                                     <label for="payment_method_credit_card" class="radio-label"><span translate>Credit Card</span></label>
                                 </li>
                                 <li ng-show="helpers.supportsPaymentMethod('paypal', data.cart.options)">
-                                    <input type="radio" id="payment_method_paypal" class="radio" name="payment_methods" ng-model="options.payment_method" value="paypal" required>
+                                    <input type="radio" id="payment_method_paypal" class="radio" name="payment_methods" ng-click="setPaymentMethod('paypal')" ng-checked="options.payment_method == 'paypal'" required>
                                     <label for="payment_method_paypal" class="radio-label"><img src="images/paypal_logo.png" alt="PayPal" /></label>
                                 </li>
                                 <li ng-show="helpers.supportsPaymentMethod('amazon_pay', data.cart.options)">
-                                    <input type="radio" id="payment_method_amazon_pay" class="radio" name="payment_methods" ng-model="options.payment_method" value="amazon_pay" required>
+                                    <input type="radio" id="payment_method_amazon_pay" class="radio" name="payment_methods" ng-click="setPaymentMethod('amazon_pay')" ng-checked="options.payment_method == 'amazon_pay'" required>
                                     <label for="payment_method_amazon_pay" class="radio-label"><img src="images/amazonpay_logo.png" alt="Amazon Pay" /></label>
                                 </li>
                             </ul>
@@ -66,10 +67,11 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <p>Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{settings.app.company_name}}, you can complete your order.</p>
+                        <p ng-if="data.cart.items[0].subscription_terms"><span class="text-light"><small>{{data.cart.items[0].subscription_terms.description}}</small></span></p>
                         <div class="payment-button">
-                            <img submit-payment="data.paypal" class="pointer" cart="data.cart" shipping-is-billing="data.shipping_is_billing" on-success="onPaymentSuccess" error="data.error" src="images/paypal_checkout.png" />
+                            <img submit-payment="data.paypal" class="pointer" cart="data.cart" shipping-is-billing="data.shipping_is_billing" on-success="onPaymentSuccess" on-submit="showSpinner" on-error="hideSpinner" error="data.error" src="images/paypal_checkout.png" />
                         </div>
-                        <p class="text-light"><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your PayPal payment information is never shared with {{companyName}}.</span></p>
+                        <p class="text-light text-xs"><small><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your PayPal payment information is never shared with {{companyName}}.</span></small></p>
                     </div>
                 </div>
             </div>
@@ -78,12 +80,13 @@
                 <div class="row spacer-t24" ng-show="!data.amazon_pay.data">
                     <div class="col-xs-12">
                         <p translate>Click the button below to checkout using Amazon Pay. You will be prompted to securely sign in with your Amazon username and password.</p>
+                        <p ng-if="data.cart.items[0].subscription_terms"><span class="text-light"><small>{{data.cart.items[0].subscription_terms.description}}</small></span></p>
                         <div class="payment-button">
                             <a id="amazon_pay_button" amazon-pay-button payment-method="data.amazon_pay" options="data.cart.options" items="data.cart.items" amazon-pay-address-id="apaddress" amazon-pay-wallet-id="apwallet" amazon-pay-consent-id="apconsent" get-consent-status="getConsentStatus" amazon-pay-button-size="small">
                                 <img class="alt-amazonpay-button-inner-image" src="images/amazonpay_checkout.png">
                             </a>
                         </div>
-                        <p class="text-light"><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your Amazon payment information is never shared with {{companyName}}.</span></p>
+                        <p class="text-light"><small><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your Amazon payment information is never shared with {{companyName}}.</span></small></p>
                     </div>
                 </div>
                 <div class="row spacer-t12" ng-show="data.amazon_pay.data">
@@ -99,17 +102,20 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div id="apconsent" style="width:100%; height:100px; margin-top:12px; display:none;"></div>
+                                    <div id="apconsent" style="width:100%; height:110px; margin-top:12px; display:none;"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 spacer-t24">
-                                    <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" submit-payment="data.amazon_pay" cart="data.cart" get-consent-status="getConsentStatus" on-success="onPaymentSuccess" error="data.error" translate>Continue</button>
+                                    <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" submit-payment="data.amazon_pay" cart="data.cart" params="paymentParams" get-consent-status="getConsentStatus" on-success="onPaymentSuccess" error="data.error" translate>Continue</button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 text-center spacer-t12">
-                                    <div class="faux-link" amazon-pay-reset payment-method="data.amazon_pay" translate>Use another payment method</div>
+                                    <span class="faux-link" ng-click="selectNewPaymentMethod()" translate>Use another payment method</span>
+                                </div>
+                                <div class="col-xs-12 text-center">
+                                    <span class="faux-link" amazon-pay-reset payment-method="data.amazon_pay" on-complete="selectNewPaymentMethod" translate>Logout of Amazon Payments</span>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +190,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-5" ng-class="{ 'bottom': helpers.isCustomerField('billing_address.address_1', data.cart.options), 'seamless-input left': helpers.isCustomerField('billing_address.country', data.cart.options), 'stretch': !helpers.isCustomerField('billing_address.country', data.cart.options) }" ng-show="helpers.isCustomerField('billing_address.postal_code', data.cart.options)">
+                    <div class="col-xs-5" ng-class="{ 'bottom': helpers.isCustomerField('billing_address.address_1', data.cart.options), 'seamless-input left': helpers.isCustomerField('billing_address.country', data.cart.options), 'stretch': data.cart.options && !helpers.isCustomerField('billing_address.country', data.cart.options) }" ng-show="helpers.isCustomerField('billing_address.postal_code', data.cart.options)">
                         <div class="form-group" show-errors="data.cart.options">
                             <div class="inner-addon left-addon" ng-class="{ 'remove': helpers.isCustomerField('billing_address.address_1', data.cart.options) }">
                                 <i class="fa fa-map-marker"></i>
@@ -192,7 +198,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-7" ng-class="{ 'bottom': helpers.isCustomerField('billing_address.address_1', data.cart.options), 'seamless-input right': helpers.isCustomerField('billing_address.postal_code', data.cart.options), 'stretch': !helpers.isCustomerField('billing_address.postal_code', data.cart.options) }" ng-show="helpers.isCustomerField('billing_address.country', data.cart.options)">
+                    <div class="col-xs-7" ng-class="{ 'bottom': helpers.isCustomerField('billing_address.address_1', data.cart.options), 'seamless-input right': helpers.isCustomerField('billing_address.postal_code', data.cart.options), 'stretch': data.cart.options && !helpers.isCustomerField('billing_address.postal_code', data.cart.options) }" ng-show="helpers.isCustomerField('billing_address.country', data.cart.options)">
                         <div class="form-group" show-errors="data.cart.options">
                             <select class="form-control customer-background-save" name="billing_address[country]" customer-countries="data.cart.options.allowed_customer_countries" ng-model="data.cart.customer.billing_address.country" ng-required="helpers.isRequiredCustomerField('billing_address.country', data.cart.options)"></select>
                         </div>
@@ -271,7 +277,7 @@
 
                 <div class="row" ng-if="data.cart.items[0].subscription_terms">
                     <div class="col-xs-12">
-                        <span class="text-light">{{data.cart.items[0].subscription_terms.description}}</span>
+                        <span class="text-light"><small>{{data.cart.items[0].subscription_terms.description}}</small></span>
                     </div>
                 </div>
 
@@ -295,7 +301,6 @@
                     </div>
 
                 </div>
-
                 <div class="row">
                     <div class="col-xs-12">
                         <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit submit-payment="data.card" params="paymentParams" cart="data.cart" shipping-is-billing="true" on-success="onPaymentSuccess" error="data.error"><i class="fa fa-lock"></i> <span ng-show="data.cart.items"><span ng-if="data.cart.total > 0" translate>Complete Order</span><span ng-if="data.cart.total == 0" translate>Submit Order</span> &middot {{data.cart.formatted.total}}</span></button>
@@ -306,21 +311,215 @@
             <div ng-if="settings.account.global_footer_html">
                 <p class="global-footer ng-binding" ng-bind-html="settings.account.global_footer_html"></p>
             </div>
-        </div>
-        <!-- End payment page -->
+        </ng-form>
 
-        <!-- Begin receipt -->
-        <div ng-show="data.payment" class="modal-body animate-show">
-            <div ng-include src="'app/templates/receipt.html'"></div>
-        </div>
-        <!-- End receipt -->
+    </div>
+    <!-- End payment page -->
 
-        <div class="col-xs-12 spacer-t12" ng-if="settings.account.test && !options.hideTestMessage">
-            <div class="alert alert-warning alert-dismissable test-message">
-                <a class="close" ng-click="options.hideTestMessage = true">&times;</a>
-                Running in test mode
+    <!-- Begin review page -->
+    <div ng-if="data.showSection == 'review'" class="modal-body animate-show">
+        <ng-form name="form" customer-fields options="data.cart.options" items="data.cart.items" shipping-is-billing="true" novalidate>
+            <div class="row">
+                <div class="alert alert-danger alert-dismissable" ng-if="data.error">
+                    <a class="close" ng-click="data.error = null">&times;</a>
+                    {{data.error.message}}
+                </div>
+            </div>
+
+            <div class="row" ng-show="data.error.meta.payment.payment_method.type == 'paypal'">
+                <div class="alert alert-info">
+                    <i class="fa fa-external-link"></i> <span class="faux-link" ng-click="redirect(data.error.meta.payment.response_data.redirect_url)"><strong translate>Return to PayPal to try your payment again.</strong></span>
+                </div>
+            </div>
+
+            <div class="row" ng-show="data.error.meta.payment.payment_method.type == 'amazon_pay'">
+                <div id="widgets" amazon-pay-widget-refresh payment-error="data.error.meta.payment" options="data.cart.options" amazon-pay-wallet-id="apwallet-review">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="apwallet-review" style="width:100%; height:230px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Show if the payment method was declined so a new payment method can be selected -->
+            <div class="row spacer-b24" ng-show="data.error.meta.payment">
+                <div class="col-xs-12 text-center">
+                    <span class="faux-link" ng-click="selectNewPaymentMethod()" translate>Use another payment method</span>
+                </div>
+                <div class="col-xs-12 text-center" ng-show="data.error.meta.payment.payment_method.type == 'amazon_pay'">
+                    <span class="faux-link" amazon-pay-reset payment-method="data.amazon_pay" on-complete="selectNewPaymentMethod" translate>Logout of Amazon Payments</span>
+                </div>
+            </div>
+
+            <div class="row" ng-show="helpers.isCustomerField('company_name', data.cart.options)">
+                <div class="col-xs-12" ng-class="{ 'seamless-input top': options.showPhone }">
+                    <div class="form-group" show-errors="data.cart.options">
+                        <div class="inner-addon left-addon">
+                            <i class="fa fa-building-o"></i>
+                            <input class="form-control customer-background-save" name="company_name" type="text" ng-model="data.cart.customer.company_name" ng-required="helpers.isRequiredCustomerField('company_name', data.cart.options)" placeholder="{{'Company Name' | translate}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-show="options.showPhone">
+                <div class="col-xs-12" ng-class="{ 'seamless-input bottom': options.showCompanyName }">
+                    <div class="form-group" show-errors="data.cart.options">
+                        <div class="inner-addon left-addon">
+                            <i class="fa fa-phone"></i>
+                            <input class="form-control customer-background-save" name="phone" type="text" ng-model="data.cart.customer.phone" ng-required="helpers.isRequiredCustomerField('phone', data.cart.options)" placeholder="{{'Phone' | translate}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="small spacer-b12 text-right" ng-show="geoService.isEu(data.cart.customer.billing_address.country) && settings.app.ask_vat_number && (data.cart.tax || data.cart.customer.tax_number) && !options.showVatNumber">
+                <label class="faux-link" ng-click="options.showVatNumber = true" translate>Enter VAT Number</label>
+            </div>
+
+            <div class="row" ng-show="geoService.isEu(data.cart.customer.billing_address.country) && options.showVatNumber">
+                <div class="col-xs-12">
+                    <div class="form-group" show-errors="data.cart.options">
+                        <div class="input-group">
+                            <input class="form-control customer-background-save" name="tax_number" type="text" ng-model="data.cart.customer.tax_number" placeholder="{{'VAT Number' | translate}}">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" ng-if="data.cart.object == 'cart'" update-cart="data.cart" error="data.error" params="data.cartParams" type="button"><i class="fa fa-check"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row spacer-t16">
+                <div class="col-xs-12">
+                    <table class="order-summary">
+                        <tr ng-repeat="item in data.cart.items">
+                            <td>{{item.name}}<span ng-show="item.quantity > 1"> ({{item.quantity}})</span></td>
+                            <td class="text-right">{{item.formatted.subtotal}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="order-summary">
+                        <tr>
+                            <td translate>Subtotal</td>
+                            <td class="text-right">{{data.cart.formatted.subtotal}}</td>
+                        </tr>
+                        <tr ng-if="data.cart.shipping">
+                            <td>{{data.cart.shipping_item.name}}</td>
+                            <td class="text-right">{{data.cart.formatted.shipping}}</td>
+                        </tr>
+                        <tr>
+                            <td translate>Tax</td>
+                            <td class="text-right">{{data.cart.formatted.tax}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong translate>Total</strong></td>
+                            <td class="text-right"><strong>{{data.cart.formatted.total}} {{data.cart.currency}}</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit commit-payment="data.payment.payment_id" sale="data.payment.cart" sale-type="cart" on-success="onPaymentSuccess" params="paymentParams" error="data.error"><i class="fa fa-lock"></i> <span ng-if="data.cart.total > 0" translate>Complete Order</span><span ng-if="data.cart.total == 0" translate>Submit Order</span> &middot {{data.cart.formatted.total}}</button>
+                </div>
+            </div>
+
+            <div ng-if="settings.account.global_footer_html">
+                <p class="global-footer ng-binding" ng-bind-html="settings.account.global_footer_html"></p>
+            </div>
+        </ng-form>
+    </div>
+    <!-- End review page -->
+
+    <!-- Begin receipt page -->
+    <div ng-if="data.showSection == 'receipt'" class="modal-body animate-show">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-title">
+                    <span translate>Thank you! Your order is complete.</span>
+                </div>
+                <div class="form-subtitle">
+                    <span>Order ID: {{data.payment.order.order_id}}</span>
+                </div>
+                <div class="form-subtitle">
+                    <span translate translate-params-email="data.payment.order.customer.email">An email has been sent to {{email}}.</span>
+                </div>
             </div>
         </div>
 
-    </form>
+        <div class="row spacer-t24">
+            <div class="col-xs-12">
+                <div class="form-title">
+                    <span translate>Summary</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="order-summary">
+                    <tr>
+                        <td>{{data.payment.order.items[0].name}}</td>
+                        <td class="text-right">{{data.payment.order.items[0].formatted.subtotal}}</td>
+                    </tr>
+                    <tr ng-show="data.payment.order.discount">
+                        <td translate>Discount</td>
+                        <td class="text-right">{{data.payment.order.formatted.discount}}</td>
+                    </tr>
+                    <tr ng-show="data.payment.order.shipping">
+                        <td translate>Shipping</td>
+                        <td class="text-right">{{data.payment.order.formatted.shipping}}</td>
+                    </tr>
+                    <tr ng-show="data.payment.order.tax">
+                        <td translate>Tax</td>
+                        <td class="text-right">{{data.payment.order.formatted.tax}}</td>
+                    </tr>
+                    <tr class="order-total">
+                        <td><strong translate>Total</strong></td>
+                        <td class="text-right"><strong>{{data.payment.order.formatted.total}} {{data.payment.currency}}</strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12" ng-show="settings.app.receipt_close_button_text != 'false'">
+                <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" ng-click="close()">
+                    <span ng-show="settings.app.receipt_close_button_text == 'continue_shopping'" translate>Continue Shopping</span>
+                    <span ng-show="settings.app.receipt_close_button_text == 'continue'" translate>Continue</span>
+                    <span ng-show="settings.app.receipt_close_button_text == 'return'" translate>Return</span>
+                    <span ng-show="settings.app.receipt_close_button_text == 'close'" translate>Close</span>
+                    <span ng-show="settings.app.receipt_close_button_text == 'finish'" translate>Finish</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div class="print-receipt">
+                    <a class="pointer" download-receipt order-id="data.payment.order.order_id" order-url="data.payment.order.url"><i class="fa fa-print"></i> <span translate>Print receipt</span></a>
+                </div>
+            </div>
+        </div>
+        <div ng-if="settings.account.global_footer_html">
+            <p class="global-footer ng-binding" ng-bind-html="settings.account.global_footer_html"></p>
+        </div>
+    </div>
+    <!-- End receipt page -->
+
+    <div class="col-xs-12 spacer-t12" ng-if="settings.account.test && !options.hideTestMessage">
+        <div class="alert alert-warning alert-dismissable test-message">
+            <a class="close" ng-click="options.hideTestMessage = true">&times;</a>
+            Running in test mode
+        </div>
+    </div>
+
 </div>

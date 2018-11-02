@@ -1,7 +1,7 @@
 /*
 Comecero Kit version: ﻿1.0.13-beta
-Build time: 2018-10-31T16:02:18.275Z
-Checksum (SHA256): 3f9f66d2d5f894d2583653b5f1068a2dd46b95585fd03c2b7c502a674aba3af1
+Build time: 2018-11-02T19:38:27.600Z
+Checksum (SHA256): a7deb9e6571ac96774a83523806f58eacfd830160cc2d448876df43a926663e5
 https://comecero.com
 https://github.com/comecero/kit
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -5628,19 +5628,27 @@ app.directive('amazonPayReset', ['gettextCatalog', function (gettextCatalog) {
 
     // Shared scope:
     // paymentMethod: Provide the payment method object that will hold the Amazon Pay settings that are returned from the Amazon Pay button and widgets.
+    // onComplete: A function that is called after the reset is complete
 
     return {
         restrict: 'A',
         scope: {
-            paymentMethod: '=?'
-        },
+            paymentMethod: '=?',
+            onComplete: '=?',
+    },
         link: function (scope, elem, attrs, ctrl) {
 
             elem.bind("click", function () {
 
                 // Reset the payment method data
                 scope.$apply(function () {
+                    amazonPay.logout();
+
+                    if (scope.paymentMethod && scope.paymentMethod.data)
                     delete scope.paymentMethod.data;
+
+                    if (scope.onComplete)
+                        scope.onComplete();
                 });
 
                 // Hide the widgets
