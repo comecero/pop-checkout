@@ -173,7 +173,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     $scope.settings = SettingsService.get();
     $scope.helpers = HelperService;
     $scope.options = { showSpinner: false, showForm: false, payment_method: "credit_card" };
-    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,cart.options" };
+    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,cart.items.subscription_terms" };
 
     // Set the cart parameters
     $scope.data.params = {};
