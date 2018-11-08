@@ -152,11 +152,6 @@ app.directive('insertHtml', function () {
         }
     }
 });
-app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
-
-    window.location = "getting-started";
-
-}]);
 app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'PaymentService', 'LanguageService', 'StorageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', '$routeParams', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, PaymentService, LanguageService, StorageService, $uibModal, $timeout, gettextCatalog, $location, $document, $routeParams) {
 
     // Determine if you are running as a modal
@@ -173,7 +168,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
     $scope.settings = SettingsService.get();
     $scope.helpers = HelperService;
     $scope.options = { showSpinner: false, showForm: false, payment_method: "credit_card" };
-    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,cart.items.subscription_terms" };
+    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product.images,order.items.subscription,cart.options,cart.items.subscription_terms,cart.items.product.images" };
 
     // Set the cart parameters
     $scope.data.params = {};
@@ -225,6 +220,11 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
             $scope.data.payment = payment;
             $scope.data.cart = payment.cart;
+
+            // Override the header image, as necessary.
+            if ($scope.settings.app.use_product_icon && payment.cart.items[0].product.images[0]) {
+                $scope.data.header_image = payment.cart.items[0].product.images[0].link_square;
+            }
 
             // Check if the payment is already done. The status could be completed (captured) or pending (completed but not yet captured).
             if (payment.status == "completed" || payment.status == "pending") {
@@ -568,6 +568,11 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             setCart(JSON.parse(data.cart));
         }
     });
+
+}]);
+app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
+
+    window.location = "getting-started";
 
 }]);
 //# sourceMappingURL=pages.js.map

@@ -17,8 +17,9 @@
                 </div>
             </div>
         </div>
+
         <div class="modal-branding">
-            <div class="brand-image" ng-style="{'background-image': 'url({{data.header_image}})'}">
+            <div class="brand-image" style="background-image: url({{data.header_image}})">
             </div>
             <div class="brand-name">
                 <span>{{settings.app.company_name}}</span>
@@ -320,15 +321,15 @@
                 </div>
             </div>
 
-            <div class="row spacer-t12 spacer-b12">
-                <div class="col-xs-12 text-left">
-                    <span class="faux-link" ng-click="selectNewPaymentMethod()"><i class="fa fa-caret-left" aria-hidden="true"></i> <span translate>Back to Payment Methods</span></span>
-                </div>
-            </div>
-
             <div class="row" ng-show="data.error.meta.payment.payment_method.type == 'paypal'">
                 <div class="alert alert-info">
                     <i class="fa fa-external-link"></i> <span class="faux-link" ng-click="redirect(data.error.meta.payment.response_data.redirect_url)"><strong translate>Return to PayPal to try your payment again.</strong></span>
+                </div>
+            </div>
+
+            <div class="row spacer-t12 spacer-b12" ng-show="data.error.meta">
+                <div class="col-xs-12 text-left">
+                    <span class="faux-link" ng-click="selectNewPaymentMethod()"><i class="fa fa-caret-left" aria-hidden="true"></i> <span translate>Back to Payment Methods</span></span>
                 </div>
             </div>
 

@@ -14,7 +14,7 @@
     $scope.settings = SettingsService.get();
     $scope.helpers = HelperService;
     $scope.options = { showSpinner: false, showForm: false, payment_method: "credit_card" };
-    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product,order.items.subscription,order.options,cart.options,cart.items.subscription_terms" };
+    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product.images,order.items.subscription,cart.options,cart.items.subscription_terms,cart.items.product.images" };
 
     // Set the cart parameters
     $scope.data.params = {};
@@ -66,6 +66,11 @@
 
             $scope.data.payment = payment;
             $scope.data.cart = payment.cart;
+
+            // Override the header image, as necessary.
+            if ($scope.settings.app.use_product_icon && payment.cart.items[0].product.images[0]) {
+                $scope.data.header_image = payment.cart.items[0].product.images[0].link_square;
+            }
 
             // Check if the payment is already done. The status could be completed (captured) or pending (completed but not yet captured).
             if (payment.status == "completed" || payment.status == "pending") {
