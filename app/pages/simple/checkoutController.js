@@ -357,6 +357,14 @@
         amazonPay.logout();
     }
 
+    $scope.showCurrencies = function () {
+        // Only show on the payment page, and not if Amazon Pay has been selected.
+        if ($scope.data.showSection == 'payment' && !$scope.data.amazon_pay.data) {
+            return true;
+        }
+        return false;
+    }
+
     // Select the default payment method
     $scope.$watch("data.cart.options.payment_methods", function (newVal, oldVal) {
         if (newVal && newVal != oldVal) {

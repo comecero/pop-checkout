@@ -152,6 +152,11 @@ app.directive('insertHtml', function () {
         }
     }
 });
+app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
+
+    window.location = "getting-started";
+
+}]);
 app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'PaymentService', 'LanguageService', 'StorageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', '$routeParams', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, PaymentService, LanguageService, StorageService, $uibModal, $timeout, gettextCatalog, $location, $document, $routeParams) {
 
     // Determine if you are running as a modal
@@ -511,6 +516,14 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
         amazonPay.logout();
     }
 
+    $scope.showCurrencies = function () {
+        // Only show on the payment page, and not if Amazon Pay has been selected.
+        if ($scope.data.showSection == 'payment' && !$scope.data.amazon_pay.data) {
+            return true;
+        }
+        return false;
+    }
+
     // Select the default payment method
     $scope.$watch("data.cart.options.payment_methods", function (newVal, oldVal) {
         if (newVal && newVal != oldVal) {
@@ -555,11 +568,6 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             setCart(JSON.parse(data.cart));
         }
     });
-
-}]);
-app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
-
-    window.location = "getting-started";
 
 }]);
 //# sourceMappingURL=pages.js.map

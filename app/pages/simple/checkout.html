@@ -3,7 +3,7 @@
         <div class="modal-options">
             <button type="button" class="close" ng-click="close()"><i class="fa fa-times-circle"></i></button>
             <div class="text-right">
-                <div class="dropdown pull-right currency-button spacer-b12" uib-dropdown ng-if="settings.account.currencies.length > 1">
+                <div class="dropdown pull-right currency-button spacer-b12" uib-dropdown ng-if="settings.account.currencies.length > 1 && showCurrencies()">
                     <button class="btn btn-default btn-sm dropdown-toggle" type="button" uib-dropdown-toggle>
                         <span class="pointer">{{currency}}</span> <i class="caret"></i>
                     </button>
@@ -28,7 +28,6 @@
             </div>
         </div>
     </div>
-
     <!-- Begin payment page -->
     <div ng-if="data.showSection == 'payment'" class="modal-body">
         <ng-form name="form" customer-fields options="data.cart.options" items="data.cart.items" shipping-is-billing="true" customer-background-save="data.cart" params="data.params" novalidate>
@@ -39,7 +38,6 @@
                     {{data.error.message}}
                 </div>
             </div>
-            {{data.options}}
             <div ng-show="showPaymentSelections()">
                 <div class="row">
                     <div class="col-xs-12">
