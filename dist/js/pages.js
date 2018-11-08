@@ -152,11 +152,6 @@ app.directive('insertHtml', function () {
         }
     }
 });
-app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
-
-    window.location = "getting-started";
-
-}]);
 app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'PaymentService', 'LanguageService', 'StorageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', '$routeParams', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, PaymentService, LanguageService, StorageService, $uibModal, $timeout, gettextCatalog, $location, $document, $routeParams) {
 
     // Determine if you are running as a modal
@@ -333,7 +328,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             function clearModal() {
                 $timeout(function () {
                     // Reset the payment method. We don't want sensitive payment details to be persisted after the modal is closed.
-                    $scope.selectNewPaymentMethod();
+                    $scope.selectNewPaymentMethod(true);
                     // Clear any errors
                     $scope.data.error = null;
                 }, 500);
@@ -363,6 +358,11 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
 
             // Scroll to the top of the page.
             scrollTop(asModal);
+
+            // Log out of wallets
+            if (!$scope.settings.app.keep_wallet_session) {
+                logoutWallet();
+            }
 
             // Load the conversion
             if (window.__conversion && window.__conversion.recordConversion) {
@@ -418,13 +418,17 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
         $scope.options.payment_method = paymentMethod;
     }
 
-    $scope.selectNewPaymentMethod = function () {
+    $scope.selectNewPaymentMethod = function (keepWalletSession) {
 
         delete $scope.data.error;
         delete $scope.data.amazon_pay.data;
         $scope.data.card = { "type": "credit_card" };
         $scope.data.exp = null;
         $scope.options.payment_method = "credit_card";
+
+        if (!keepWalletSession) {
+            logoutWallet();
+        }
 
         // If the URL contains the payment_id, we are on the dedicated review page. In that case, we will change the URL to re-start the payment. Otherwise, we will just show the payment section.
         if (payment_id) {
@@ -503,6 +507,10 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
         return true;
     }
 
+    function logoutWallet() {
+        amazonPay.logout();
+    }
+
     // Select the default payment method
     $scope.$watch("data.cart.options.payment_methods", function (newVal, oldVal) {
         if (newVal && newVal != oldVal) {
@@ -547,6 +555,11 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'Cu
             setCart(JSON.parse(data.cart));
         }
     });
+
+}]);
+app.controller("IndexController", ['$scope', 'ApiService', 'SettingsService', function ($scope, ApiService, SettingsService) {
+
+    window.location = "getting-started";
 
 }]);
 //# sourceMappingURL=pages.js.map

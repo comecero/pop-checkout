@@ -133,6 +133,15 @@
     "default_value": false
   },
   {
+    "name": "keep_wallet_session",
+    "type": "boolean",
+    "label": "Keep Wallet Session",
+    "description": "Indicates if you should keep the user signed into their wallet, such as Amazon Pay, after they complete an order. This should only be set to true in circumstances where it is common for users to make multiple purchases in a short period of time.",
+    "section": "Features",
+    "required": true,
+    "default_value": false
+  },
+  {
     "name": "receipt_close_button_text",
     "type": "string",
     "label": "Receipt Button Text",

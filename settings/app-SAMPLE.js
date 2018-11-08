@@ -23,6 +23,7 @@ window.__settings = window.__settings || {}; window.__settings.app =
     "receipt_close_button_text": "finish",
     "hide_email_if_provided": false,
     "hide_name_if_provided": false,
+    "keep_wallet_session": false,
     "allowed_origin_hosts": "www.example.com,example.com,something.example.com",
     "main_shopping_url": "http://www.example.com"
 }

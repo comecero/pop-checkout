@@ -897,6 +897,6 @@ li.dropdown, .pointer {
 }
 
 // Amazon Pay iframes. These will not work if the Amazon Pay SDK changes element id structures
-#OffAmazonPaymentsWidgets1IFrame, #OffAmazonPaymentsWidgets2IFrame, #OffAmazonPaymentsWidgets3IFrame {
+#apaddress iframe, #apwallet iframe, #apwallet-review iframe, #apconsent iframe  {
     border: none !important;
 }
