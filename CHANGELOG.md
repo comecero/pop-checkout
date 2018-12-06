@@ -1,4 +1,12 @@
-﻿<a name="1.0.7"></a>
+﻿<a name="1.0.8"></a>
+# 1.0.8
+
+- Add support for Amazon Pay
+- Removal of dedicated review page and addition of common templates for consistency and maintenence
+- Option to output debug information to console by adding parameter to parent page URL query string
+- Integrate kit 1.0.13. See kit changelog for details.
+
+<a name="1.0.7"></a>
 # 1.0.7
 
 - Bug fix to ensure messages are sent to the parent page when POP Checkout is loaded in a new tab
