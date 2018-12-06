@@ -10,6 +10,18 @@
     background: rgba(0, 0, 0, 0.6); /* R, G, B, A */
 }
 
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    margin: 0;
+}
+
+h4, .h4 {
+    font-weight: 700;
+}
+
+a, a:link, a:visited {
+    color: $link-color;
+}
+
 .global-spinner {
     color: #ccc;
     position: fixed;
@@ -38,7 +50,7 @@
     display: inline-block;
     text-align: left;
     vertical-align: middle;
-    max-width: 400px;
+    max-width: 460px;
 }
 
 .modal-content {
@@ -47,15 +59,15 @@
     border: 0;
     background-color: #fff;
     margin: 0 auto;
-    max-width: 400px;
+    max-width: 460px;
 }
 
 .non-modal .modal-content {
-    margin-top: 35px;
-    margin-bottom: 35px;
+    margin-top: 36px;
+    margin-bottom: 36px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 460px) {
     .non-modal .modal-content {
         height: 100vh;
         margin-top: 0;
@@ -74,7 +86,7 @@
     padding: 16px;
     border-bottom: none;
     width: 100%;
-    max-width: 400px;
+    max-width: 460px;
     color: $header-color;
     background: $header-bg-color;
     border-bottom: 1px solid #c8c8c8;
@@ -117,15 +129,11 @@
     font-family: $font-family-company-name;
     color: $company-name-color;
 }
-
-a, a:link, a:visited {
-    color: $link-color;
-}
 /* End header */
 /* Help block overrides */
 .help-block {
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
     font-size: 12px;
 }
 /* End Help block overrides */
@@ -137,7 +145,7 @@ a, a:link, a:visited {
 /* End Error overrides */
 /* Alert overrides */
 .alert {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .alert button {
@@ -150,12 +158,11 @@ a, a:link, a:visited {
 .modal-branding {
     clear: both;
     text-align: center;
-    margin-top: 12px;
 }
 
 .brand-image {
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
     border: 1px solid #c8c8c8;
     border-radius: 100px;
     background-size: 44px;
@@ -187,7 +194,7 @@ a, a:link, a:visited {
 /* End branding */
 /* Start form */
 .form-title, .form-subtitle {
-    margin: 0 0 16px;
+    margin: 0;
 }
 
 .form-title span {
@@ -196,7 +203,7 @@ a, a:link, a:visited {
 }
 
 .form-subtitle span {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 200;
 }
 
@@ -239,7 +246,6 @@ a, a:link, a:visited {
     -webkit-box-shadow: none;
     box-shadow: none;
     height: 40px;
-    border-radius: 4px;
 }
 
 .form-control:focus, .input-group.addon-input-group .form-control:focus + .input-group-addon {
@@ -280,38 +286,130 @@ a, a:link, a:visited {
 .language-toggle, .currency-toggle {
     font-size: 12px;
 }
+
+/*Set the placeholder color */
+.form-control::-webkit-input-placeholder {
+    color: $placeholder-color;
+}
+
+.form-control:-moz-placeholder {
+    color: $placeholder-color;
+}
+
+.form-control::-moz-placeholder {
+    color: $placeholder-color;
+}
+
+.form-control:-ms-input-placeholder {
+    color: $placeholder-color;
+}
+
+/* "Faux" placeholders on select controls */
+.select-placeholder {
+    color: $placeholder-color;
+}
+
+.select-options-color {
+    color: $input-color;
+}
+
+/* Radio buttons / groups */
+.radio-group-label,
+.checkbox-group-label {
+    clear: both;
+    margin-bottom: 10px;
+}
+
+.checkbox,
+.radio {
+    opacity: 0;
+    position: absolute;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.radio-group label,
+.checkbox-group label {
+    margin-right: 16px;
+    cursor: pointer;
+    display: block;
+    font-weight: normal;
+}
+
+.radio-group label.strong,
+.checkbox-group label.strong {
+    font-weight: 700;
+}
+
+.radio-group.inline label,
+.checkbox-group.inline label {
+    display: inline;
+}
+/* Remove inline display on small screens */
+@media (max-width: $screen-xs-min) {
+    .radio-group.inline label,
+    .checkbox-group.inline label {
+        display: block;
+    }
+}
+
+.radio-group .radio-group-description {
+    font-size: 95%;
+    font-style: italic;
+}
+
+.checkbox-label.inline,
+.radio-label.inline {
+    position: relative;
+    display: inline;
+}
+
+.checkbox + .checkbox-label:before,
+.radio + .radio-label:before {
+    content: '';
+    background: #fff;
+    border: 2px solid #b9b8b8;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    margin-right: 4px;
+    text-align: center;
+}
+
+.checkbox[disabled] + .checkbox-label:before,
+.radio[disabled] + .radio-label:before {
+    border: 2px solid #f1f0f0;
+    cursor: not-allowed;
+}
+
+.checkbox:checked + .checkbox-label:before {
+    background: #3498db;
+    box-shadow: inset 0px 0px 0px 4px #fff;
+}
+
+.radio + label:before {
+    border-radius: 50%;
+}
+
+.radio:checked + label:before {
+    background: #3498db;
+    box-shadow: inset 0px 0px 0px 4px #fff;
+}
+
+.radio-group-label,
+.checkbox-group-label {
+    clear: both;
+    display: block;
+}
+
+.checkbox:focus + .checkbox-label,
+.radio:focus + label {
+    outline: none;
+    /* focus style */
+}
 /* Buttons */
-.btn-paynow {
-    border: 0;
-    height: 44px;
-    background-color: $buynow-button-bg-color;
-    font-size: 18px;
-    font-weight: 700;
-    color: $buynow-button-color;
-}
-
-.btn-paynow:hover, .btn-paynow:focus {
-    background-color: $buynow-button-bg-hover-color;
-}
-
-.btn-paypal {
-    border: 1px solid #e8e8e8;
-    height: 44px;
-    background-color: rgba(246,246,246, 1);
-    font-size: 18px;
-    font-weight: 700;
-    color: #616161;
-}
-
-.btn-paypal:hover, btn-paypal:focus {
-    border: 1px solid #e4e4e4;
-    background-color: rgba(246,246,246, .90);
-    color: #616161;
-}
-.btn-paynow:hover, .btn-paynow:focus, .btn-paynow.focus {
-    color: $buynow-button-color;
-}
-
 .seamless-input.left {
     padding-right: 0;
 }
@@ -361,18 +459,6 @@ a, a:link, a:visited {
     padding-top: 24px;
 }
 
-.p-r-16 {
-    padding-right: 16px;
-}
-
-.padding-r-0 {
-    padding-right: 0;
-}
-
-.padding-l-0 {
-    padding-left: 0;
-}
-
 .stretch {
     width: 100%;
 }
@@ -390,6 +476,9 @@ a, a:link, a:visited {
     padding-top: 4px;
     padding-bottom: 4px;
 }
+.text-light {
+    color: $body-alt-color;
+}
 
 /* End helpers */
 /* Input add-ons */
@@ -401,7 +490,7 @@ a, a:link, a:visited {
     position: absolute;
     padding: 13px 11px 13px 11px;
     pointer-events: none;
-    color: #ccc;
+    color: $placeholder-color;
 }
 
 .left-addon .fa {
@@ -459,18 +548,55 @@ a, a:link, a:visited {
     max-height: 20px;
 }
 
+/* Payment Options */
+ul.payment-methods {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.payment-methods li {
+    float: left;
+    margin-right: 12px;
+    margin-bottom: 4px;
+    font-size: 16px;
+    color: $body-color;
+}
+
+ul.payment-methods li:last-child {
+    margin-right: 0;
+}
+
+ul.payment-methods li label {
+    margin-bottom: 0;
+}
+
+.payment-button {
+    position: relative;
+    margin: 16px 0;
+}
+
+.amazonpay-button-inner-image {
+    max-height: none !important;
+    opacity: 0 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 152px;
+    height: 52px;
+}
+
 /* Start responsive settings */
 /* Desktops, tablets, some large mobile devices */
 iframe {
-    width: 400px;
+    width: 100%;
 }
 
 .modal-body {
-    padding: 20px 50px 30px 50px;
+    padding: 16px 24px 24px;
 }
 
 .modal-body.wide {
-    padding: 20px 20px 30px 20px;
+    padding: 16px 16px 24px 16px;
 }
 /* Mobile devices */
 @media (max-width: 400px) {
@@ -508,11 +634,11 @@ iframe {
     }
 
     .form-title {
-        margin: 0 0 10px;
+        margin: 0;
     }
 
     .modal-body {
-        padding: 15px;
+        padding: 16px;
     }
 }
 /* Pointer on dropdowns */
@@ -531,175 +657,155 @@ li.dropdown, .pointer {
 
 /* Global footer  */
 .global-footer {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: normal;
     text-align: center;
     margin-top: 0;
-    padding-top: 20px;
+    padding-top: 24px;
     margin-bottom: 0;
 }
 
 .submessage {
     font-style: italic;
     font-size: 85%;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 /* Spacers */
-.spacer-t0 {
-    margin-top: 0px;
-}
-
-.spacer-b0 {
-    margin-bottom: 0px;
+.spacer-l0 {
+    margin-left: 0;
 }
 
 .spacer-r0 {
-    margin-right: 0px;
+    margin-right: 0;
 }
 
-.spacer-l0 {
-    margin-left: 0px;
+.spacer-t0 {
+    margin-top: 0;
 }
 
-.spacer-t5 {
-    margin-top: 5px;
+.spacer-b0 {
+    margin-bottom: 0;
 }
 
-.spacer-b5 {
-    margin-bottom: 5px;
+.spacer-t6 {
+    margin-top: 6px;
 }
 
-.spacer-r5 {
-    margin-right: 5px;
+.spacer-b6 {
+    margin-bottom: 6px;
 }
 
-.spacer-l5 {
-    margin-left: 5px;
+.spacer-r6 {
+    margin-right: 6px;
 }
 
-.spacer-5 {
-    margin: 5px;
+.spacer-l6 {
+    margin-left: 6px;
 }
 
-.spacer-t10 {
-    margin-top: 10px;
+.spacer-6 {
+    margin: 6px;
 }
 
-.spacer-b10 {
-    margin-bottom: 10px;
+.spacer-t12 {
+    margin-top: 12px;
 }
 
-.spacer-r10 {
-    margin-right: 10px;
+.spacer-b12 {
+    margin-bottom: 12px;
 }
 
-.spacer-l10 {
-    margin-left: 10px;
+.spacer-r12 {
+    margin-right: 12px;
 }
 
-.spacer-10 {
-    margin: 10px;
+.spacer-l12 {
+    margin-left: 12px;
 }
 
-.spacer-t15 {
-    margin-top: 15px;
+.spacer-12 {
+    margin: 12px;
 }
 
-.spacer-b15 {
-    margin-bottom: 15px;
+.spacer-t16 {
+    margin-top: 16px;
 }
 
-.spacer-r15 {
-    margin-right: 15px;
+.spacer-b16 {
+    margin-bottom: 16px;
 }
 
-.spacer-l15 {
-    margin-left: 15px;
+.spacer-r16 {
+    margin-right: 16px;
 }
 
-.spacer-15 {
-    margin: 15px;
+.spacer-l16 {
+    margin-left: 16px;
 }
 
-.spacer-t20 {
-    margin-top: 20px;
+.spacer-16 {
+    margin: 16px;
 }
 
-.spacer-b20 {
-    margin-bottom: 20px;
+.spacer-t24 {
+    margin-top: 24px;
 }
 
-.spacer-r20 {
-    margin-right: 20px;
+.spacer-b24 {
+    margin-bottom: 24px;
 }
 
-.spacer-l20 {
-    margin-left: 20px;
+.spacer-r24 {
+    margin-right: 24px;
 }
 
-.spacer-20 {
-    margin: 20px;
+.spacer-l24 {
+    margin-left: 24px;
 }
 
-.spacer-t30 {
-    margin-top: 30px;
+.spacer-24 {
+    margin: 24px;
 }
 
-.spacer-b30 {
-    margin-bottom: 30px;
+.spacer-t36 {
+    margin-top: 36px;
 }
 
-.spacer-r30 {
-    margin-right: 30px;
+.spacer-b36 {
+    margin-bottom: 36px;
 }
 
-.spacer-l30 {
-    margin-left: 30px;
+.spacer-r36 {
+    margin-right: 36px;
 }
 
-.spacer-30 {
-    margin: 30px;
+.spacer-l36 {
+    margin-left: 36px;
 }
 
-.spacer-t40 {
-    margin-top: 40px;
+.spacer-36 {
+    margin: 36px;
 }
 
-.spacer-b40 {
-    margin-bottom: 40px;
+.spacer-t48 {
+    margin-top: 48px;
 }
 
-.spacer-r40 {
-    margin-right: 40px;
+.spacer-b48 {
+    margin-bottom: 48px;
 }
 
-.spacer-l40 {
-    margin-left: 40px;
+.spacer-r48 {
+    margin-right: 48px;
 }
 
-.spacer-40 {
-    margin: 40px;
+.spacer-l48 {
+    margin-left: 48px;
 }
 
-.spacer-t100 {
-    margin-top: 100px;
-}
-
-.spacer-b100 {
-    margin-bottom: 100px;
-}
-
-.spacer-r100 {
-    margin-right: 100px;
-}
-
-.spacer-l100 {
-    margin-left: 100px;
-}
-
-.spacer-100 {
-    margin: 100px;
+.spacer-48 {
+    margin: 48px;
 }
 
 .padding-l0 {
@@ -718,74 +824,79 @@ li.dropdown, .pointer {
     padding-bottom: 0 !important;
 }
 
-.padding-l5 {
-    padding-left: 5px !important;
+.padding-l6 {
+    padding-left: 6px !important;
 }
 
-.padding-r5 {
-    padding-right: 5px !important;
+.padding-r6 {
+    padding-right: 6px !important;
 }
 
-.padding-t5 {
-    padding-top: 5px !important;
+.padding-t6 {
+    padding-top: 6px !important;
 }
 
-.padding-b5 {
-    padding-bottom: 5px !important;
+.padding-b6 {
+    padding-bottom: 6px !important;
 }
 
-.padding-l10 {
-    padding-left: 10px !important;
+.padding-l12 {
+    padding-left: 12px !important;
 }
 
-.padding-r10 {
-    padding-right: 10px !important;
+.padding-r12 {
+    padding-right: 12px !important;
 }
 
-.padding-t10 {
-    padding-top: 10px !important;
+.padding-t12 {
+    padding-top: 12px !important;
 }
 
-.padding-b10 {
-    padding-bottom: 10px !important;
+.padding-b12 {
+    padding-bottom: 12px !important;
 }
 
-.padding-l15 {
-    padding-left: 15px !important;
+.padding-l16 {
+    padding-left: 16px !important;
 }
 
-.padding-r15 {
-    padding-right: 15px !important;
+.padding-r16 {
+    padding-right: 16px !important;
 }
 
-.padding-t15 {
-    padding-top: 15px !important;
+.padding-t16 {
+    padding-top: 16px !important;
 }
 
-.padding-b15 {
-    padding-bottom: 15px !important;
+.padding-b16 {
+    padding-bottom: 16px !important;
 }
 
-.padding-l20 {
-    padding-left: 20px !important;
+.padding-l24 {
+    padding-left: 24px !important;
 }
 
-.padding-r20 {
-    padding-right: 20px !important;
+.padding-r24 {
+    padding-right: 24px !important;
 }
 
-.padding-t20 {
-    padding-top: 20px !important;
+.padding-t24 {
+    padding-top: 24px !important;
 }
 
-.padding-b20 {
-    padding-bottom: 20px !important;
+.padding-b24 {
+    padding-bottom: 24px !important;
 }
 
-.padding-t30 {
-    padding-top: 30px !important;
+.padding-t36 {
+    padding-top: 36px !important;
 }
 
-.padding-b30 {
-    padding-bottom: 30px !important;
+.padding-b36 {
+    padding-bottom: 36px !important;
+}
+
+// Amazon Pay iframes. These will not work if the Amazon Pay SDK changes element id structures
+#apaddress iframe, #apwallet iframe, #apwallet-review iframe, #apconsent iframe  {
+    border: none !important;
 }

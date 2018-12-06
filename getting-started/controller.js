@@ -1,4 +1,4 @@
-﻿app.controller("GettingStartedController", ['$scope', 'ProductService', function ($scope, ProductService) {
+﻿app.controller("GettingStartedController", ['$scope', 'ProductService', '$location', function ($scope, ProductService, $location) {
 
     $scope.data = {};
 
@@ -6,6 +6,7 @@
     var path = window.location.pathname.substring(1);
     path = path.substring(0, path.indexOf("/"));
     $scope.data.src = window.location.protocol + "//" + window.location.hostname + "/" + path;
+    $scope.data.debugUrl = $location.absUrl().split('?')[0] + "?debug=true";
 
     $scope.data.test = false;
 

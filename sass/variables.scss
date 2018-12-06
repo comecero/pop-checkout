@@ -1,7 +1,7 @@
 ﻿/* USER DEFINED */
 
 /* Main Colors */
-$brand-primary: #3181aa;
+$brand-primary: #2196f3;
 $brand-success: #36ab0c;
 $brand-info: #5bc0de;
 $brand-danger: #d9534f;
@@ -35,11 +35,16 @@ $header-bg-color: #d8d8d8;
 $header-color: #444444;
 $company-name-color: #3a3a3a;
 $border-radius: 4px;
-$buynow-button-bg-color: #2196f3;
-$buynow-button-color: #ffffff;
 $body-bg-color: #ffffff;
 $body-color: #444444;
 $link-color: #40a5f5;
+
+/* Form elements */
+$input-border-radius: 2px;
+$input-bg: #ffffff;
+$input-color: #555555;
+$input-border: #d6d7d8;
+$placeholder-color: #999999;
 
 /* Inputs */
 $form-error-bg-color: #fce3e3;
@@ -48,5 +53,5 @@ $form-error-bg-color: #fce3e3;
 
 $btn-default-border: darken($btn-default-bg, 5%);
 $link-hover-color: darken($link-color, 10%);
-$buynow-button-bg-hover-color: darken($buynow-button-bg-color, 10%);
 $link-hover-decoration: none;
+$body-alt-color: lighten($body-color, 20%);

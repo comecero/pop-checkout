@@ -8,7 +8,7 @@ Copyright Comecero and other contributors. Released under MIT license. See LICEN
 var _popup = (function () {
 
     // Define variables to hold values that we'll set after we create our hidden iframe.
-    var childElem, iframe, childOrigin, src, appPath, asModal, iframeReady, open;
+    var childElem, iframe, childOrigin, src, appPath, asModal, iframeReady, open, debug;
 
     // isMobile.js v0.4.1, https://github.com/kaimallea/isMobile
     (function (global) {
@@ -153,6 +153,7 @@ var _popup = (function () {
         // Always allow locahost as a valid origin host, and also allow if the origin host is the same as the page host.
         if (window.location.hostname != "localhost" && window.location.hostname != "127.0.0.1" && (window.location.protocol + "//" + window.location.hostname != childOrigin)) {
             if (!settings.app || !settings.app.allowed_origin_hosts) {
+                writeDebug("Send message failed. The parent hostname is not listed in allowed_origin_hosts (check 1)", window.location.hostname);
                 alert(errorMsg);
                 closeIframe();
                 return;
@@ -161,18 +162,24 @@ var _popup = (function () {
             // The hosts are delimited by space, comma or newline.
             var validHosts = settings.app.allowed_origin_hosts.split(/[\n\s,]+/);
             if (validHosts.indexOf(window.location.hostname) == -1) {
+                writeDebug("Send message failed. The parent hostname is not listed in allowed_origin_hosts (check 2)", window.location.hostname);
                 alert(errorMsg);
                 closeIframe();
                 return;
             }
         }
 
+        writeDebug("Preparing to send a message", JSON.stringify(message));
+
         // Don't send the message until the iframe is ready.
         if (iframeReady) {
+            writeDebug("The iframe is ready, sending message now.");
             childElem.postMessage(JSON.stringify(message), childOrigin);
         } else {
             var iframeReadyCheckInterval = setInterval(function () {
+                writeDebug("Checking to see if the iframe is ready before attempting to send the message.");
                 if (iframeReady) {
+                    writeDebug("The iframe is ready, sending message now (from interval).");
                     clearInterval(iframeReadyCheckInterval);
                     childElem.postMessage(JSON.stringify(message), childOrigin);
                 }
@@ -185,6 +192,8 @@ var _popup = (function () {
     window.addEventListener("message", function (message) {
 
         if (message.data) {
+
+            writeDebug("Received message from app", JSON.stringify(message.data));
 
             // Ignore messages that aren't from the iframe origin
             if (message.origin != childOrigin) {
@@ -200,12 +209,14 @@ var _popup = (function () {
 
                 // If we have an iframe, close it
                 if (iframe) {
+                    writeDebug("Preparing to close the iframe.");
                     closeIframe();
                 }
 
                 // Fire the onclose event with the current cart
                 if (_popup.onClose) {
                     var data = { cart: obj.cart, order: obj.order };
+                    writeDebug("Calling the onClose event.", JSON.stringify(data));
                     _popup.onClose(data);
                 }
 
@@ -213,14 +224,17 @@ var _popup = (function () {
 
             if (obj.type == "on_load" && _popup.onLoad) {
                 var data = { cart: obj.cart };
+                writeDebug("Calling onLoad event.", JSON.stringify(data));
                 _popup.onLoad(data);
             }
 
             if (obj.type == "redirect") {
+                writeDebug("The app is requesting the parent page to perform a redirect.", obj.url);
                 window.location = obj.url;
             }
 
             if (obj.type == "ready") {
+                writeDebug("The app is indicating that it is ready.");
                 iframeReady = true;
             }
 
@@ -229,6 +243,8 @@ var _popup = (function () {
     });
 
     var openIframe = function (cart) {
+
+        writeDebug("Opening the iframe", JSON.stringify(cart));
 
         // Show the iframe
         iframe.style.display = "block";
@@ -242,6 +258,9 @@ var _popup = (function () {
     }
 
     var closeIframe = function () {
+
+        writeDebug("Closing the iframe");
+
         // Hide the iframe
         setTimeout(function () {
             document.getElementById("_popup_iframe").style.display = "none";
@@ -249,6 +268,8 @@ var _popup = (function () {
     }
 
     var appendAsyncScript = function (url, callback) {
+
+        writeDebug("Adding the app script to the page", url);
 
         var head = document.getElementsByTagName("head")[0], done = false;
         var script = document.createElement("script");
@@ -267,6 +288,8 @@ var _popup = (function () {
     };
 
     var createCartJsonFromAttributes = function (elem) {
+
+        writeDebug("Creating the cart from JSON attributes", JSON.stringify(elem));
 
         var cart = {};
         
@@ -330,12 +353,14 @@ var _popup = (function () {
     }
 
     var getClickables = function (onComplete) {
-
+        
         // Watch for the body to complete loading; when done select the elements that should respond to click events.
         var readyStateCheckInterval = setInterval(function () {
+            writeDebug("Preparing to look for clickables, will repeat until the body has finished loading.");
             if (document.readyState === "complete") {
                 clearInterval(readyStateCheckInterval);
                 var clickables = document.getElementsByClassName("popup-buy-now");
+                writeDebug("The clickables have been loaded.");
                 onComplete(clickables);
             }
         }, 20);
@@ -344,6 +369,8 @@ var _popup = (function () {
 
     // Used when launching in a modal, usually used in desktop and tablet environments
     var addModalListeners = function (target, language) {
+
+        writeDebug("Adding modal listeners", target);
 
         // First, append the iframe to the document.
         iframe = document.createElement('iframe')
@@ -356,8 +383,6 @@ var _popup = (function () {
         iframe.setAttribute("frameborder", 0);
         iframe.setAttribute("scrolling", "no");
         iframe.setAttribute("allowtransparency", true);
-        iframe.setAttribute("sandbox", "allow-scripts allow-forms allow-same-origin allow-popups");
-
         // You can feed these in as a single string for most browsers but not IE (maybe others), so we'll load styles as an object.
         iframe.style["display"] = "none";
         iframe.style["z-index"] = 2147483647;
@@ -378,6 +403,8 @@ var _popup = (function () {
         // Append to the body
         document.body.appendChild(iframe);
 
+        writeDebug("The iframe has been appended to the parent window");
+
         // Get the content window from the appended iframe
         childElem = document.getElementById("_popup_iframe").contentWindow;
 
@@ -386,6 +413,8 @@ var _popup = (function () {
 
             for (var i = 0; i < clickables.length; i++) {
                 clickables[i].addEventListener('click', function (event) {
+
+                    writeDebug("A clickable has been clicked and the iframe will be opened.");
 
                     // Prevent any other native actions bound to this element.
                     event.preventDefault();
@@ -409,6 +438,8 @@ var _popup = (function () {
             for (var i = 0; i < clickables.length; i++) {
                 clickables[i].addEventListener('click', function (event) {
 
+                    writeDebug("A clickable has been clicked and a new tab will be opened.");
+
                     // Prevent any other native actions bound to this element.
                     event.preventDefault();
 
@@ -426,6 +457,8 @@ var _popup = (function () {
 
     function openTab(cart, target, language) {
 
+        writeDebug("The tab is being opened.");
+
         // Send the cart json into the url
         var q = encodeURIComponent(JSON.stringify(cart));
 
@@ -441,10 +474,26 @@ var _popup = (function () {
 
     }
 
+    function writeDebug(name, value) {
+        if (debug) {
+            if (!value) {
+                console.log("debug: " + name);
+            } else {
+                console.log("debug: " + name + ": " + value);
+            }
+        }
+    }
+
     // This prepares the page for popup
-    var initialize = function (callback) {
+    var initialize = function (callback, enableDebug) {
 
         readyCallback = callback;
+
+        if (enableDebug)
+            debug = true;
+
+        writeDebug("Initialization started.");
+        writeDebug("Has a callback been provided?", callback != null ? "Yes" : "No");
 
         // Get the element that loaded the script
         var script = document.getElementById("_popup_script");
@@ -460,12 +509,15 @@ var _popup = (function () {
 
             // Set the type of checkout to invoke. The default is "simple" if not provided.
             var type = script.getAttribute("data-popup-type") || "simple";
+            writeDebug("type", type);
 
             // Set the UI. Not all checkout types will have different UIs. Set as "basic" if not provided.
             var ui = script.getAttribute("data-popup-ui") || "basic";
+            writeDebug("ui", ui);
 
             // Set the langauge, if provided. Otherwise, the language will be automatically selected.
             var language = script.getAttribute("data-language");
+            writeDebug("language", language || "not specified, will use default language for user");
 
             // Determine if the user has specified explicitily to use the modal or non modal. If so, overwrite the default choice.
             var setAsModal = script.getAttribute("data-as-modal");
@@ -475,6 +527,7 @@ var _popup = (function () {
                 if (setAsModal === "false")
                     asModal = false;
             }
+            writeDebug("Will the app be served as a modal?", asModal ? "Yes" : "No");
 
             // Define the target URL
             var target = appPath + '#/' + type;
@@ -496,6 +549,7 @@ var _popup = (function () {
             if (src.substring(0, 8) != "https://" && src.substring(0, 8) != "http://") {
                 childOrigin = window.location.protocol + "//" + window.location.hostname;
             }
+            writeDebug("childOrigin", childOrigin);
 
             appendAsyncScript(appPath + "settings/app.js", function () {
 
@@ -507,10 +561,16 @@ var _popup = (function () {
 
                     // Set an open function that the user can call to manually trigger the popup
                     _popup.open = function (cart) {
+                        writeDebug("Modal launched based on open() call from parent page.");
                         openTab(cart, target, language);
                     }
 
-                    if (callback) callback();
+                    // If a callback is provided, fire it.
+                    if (callback) {
+                        writeDebug("Callback from initialize will be fired.");
+                        callback();
+                    }
+
                 } else {
 
                     // Append the iframe to the body when ready
@@ -522,10 +582,15 @@ var _popup = (function () {
 
                             // Set an open function that the user can call to manually trigger the popup
                             _popup.open = function (cart) {
+                                writeDebug("Modal launched based on open() call from parent page.");
                                 openIframe(cart);
                             }
 
-                            if (callback) callback();
+                            // If a callback is provided, fire it.
+                            if (callback) {
+                                writeDebug("Callback from initialize will be fired.");
+                                callback();
+                            }
                         }
 
                     }, 20);
@@ -549,9 +614,28 @@ var _popup = (function () {
 // If embedded as a script reference (rather than a JavaScript reference), invoke the initialize function automatically. Otherwise, it's invoked by the snippet.
 (function () {
     var script = document.getElementById("_popup_script");
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return "";
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
     if (script) {
         if (!script.getAttribute("data-self-init")) {
-            _popup.initialize();
+
+            var enableDebug = false;
+            if (script.getAttribute("data-debug") != null && script.getAttribute("data-debug") === "true")
+                enableDebug = true;
+
+            if (getParameterByName("debug") === "true")
+                enableDebug = true;
+
+            _popup.initialize(null, enableDebug);
         }
     }
 })();

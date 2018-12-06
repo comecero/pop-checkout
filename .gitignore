@@ -6,3 +6,8 @@
 *.zip
 *.piz
 /node_modules
+/settings/account.js
+/settings/app.js
+/settings/script.js
+/settings/style.css
+/settings/style.js

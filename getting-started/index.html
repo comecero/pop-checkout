@@ -219,12 +219,10 @@ _popup.open(cart);
         _popup.onLoad = function(data) {
            // console.log(data)
         } 
-
         // Optional, listen for when the popup is closed. See the Callback Functions documentation below for details.
         _popup.onClose = function(data) {
            // console.log(data)
         }   
-
         // Want to open POP Checkout programatically? Below is a code sample.
         // Note that on mobile devices POP Checkout loads in a new tab. To prevent issues with popup blockers, make sure to run this function in response to a user click event.
         // var cart = { items: [{ product_id: "1001" }] }
@@ -270,12 +268,10 @@ loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
     _popup.onLoad = function(data) {
        // console.log(data)
     } 
-
     // Optional, listen for when the popup is closed. See the Callback Functions documentation below for details.
     _popup.onClose = function(data) {
        // console.log(data)
     }
-
     // Want to open POP Checkout programatically? Below is a code sample.
     // Note that on mobile devices POP Checkout loads in a new tab. To prevent issues with popup blockers, make sure to run this function in response to a user click event.
     // var cart = { items: [{ product_id: "1001" }] }
@@ -326,6 +322,28 @@ loadApp("{{data.src}}/dist/js/popup.min.js", "simple", "basic", function() {
 
         <p>
             For best results, we generally recommend that you allow POP Checkout to determine the best launch method. If you do not supply the <code>data-as-modal</code> attribute, the launch method will be automatically selected.
+        </p>
+
+        <h4>Debug Mode</h4>
+        <p>
+            You can set a parameter to run in Debug mode. Debug mode prints messages to the browser console so you can watch various events in the lifecycle of POP Checkout. It introduces only minor overhead, so you should not be concerned about having Debug mode enabled for live customers. There are three ways to enable Debug mode:
+        </p>
+
+        <p>
+            <strong>Method 1: Add a query string parameter to the parent page</strong><br /><br />
+            Add <code>debug=true</code> to the query string parameter of the page that launches POP Checkout. For example, to enable it for this page, you would use the following URL:
+            <pre>{{data.debugUrl}}</pre>
+        </p>
+
+        <p>
+            <strong>Method 2: Add the attribute <code>data-debug</code> to your <code>&lt;script&gt;</code> tag</strong>
+            <pre><code>&lt;script data-debug="true" src="{{data.src}}/dist/js/popup.min.js" id="_popup_script" type="text/javascript"&gt;&lt;/script&gt;</code></pre>
+        </p>
+
+        <p>
+            <strong>Method 3: Add a parameter in the <code>_popup.initialize()</code> function</strong><br /><br />
+            If you are using the async method of launching the popup, you can include <code>true</code> as the second parameter to indicate that debug mode should be enabled.
+            <pre><code>_popup.initialize(callback, true)</code></pre>
         </p>
 
     </div>
