@@ -1,4 +1,4 @@
-﻿app.controller("CheckoutController", ['$scope', 'CartService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'PaymentService', 'LanguageService', 'StorageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', '$routeParams', function ($scope, CartService, GeoService, CurrencyService, SettingsService, HelperService, PaymentService, LanguageService, StorageService, $uibModal, $timeout, gettextCatalog, $location, $document, $routeParams) {
+﻿app.controller("CheckoutController", ['$scope', 'CartService', 'OrderService', 'GeoService', 'CurrencyService', 'SettingsService', 'HelperService', 'PaymentService', 'LanguageService', 'StorageService', '$uibModal', '$timeout', 'gettextCatalog', '$location', '$document', '$routeParams', function ($scope, CartService, OrderService, GeoService, CurrencyService, SettingsService, HelperService, PaymentService, LanguageService, StorageService, $uibModal, $timeout, gettextCatalog, $location, $document, $routeParams) {
 
     // Determine if you are running as a modal
     var asModal = $scope.$resolve.asModal;
@@ -15,6 +15,10 @@
     $scope.helpers = HelperService;
     $scope.options = { showSpinner: false, showForm: false, payment_method: "credit_card" };
     $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product.images,order.items.subscription,cart.options,cart.items.subscription_terms,cart.items.product.images" };
+
+    if (SettingsService.get().app.show_digital_delivery == true) {
+        $scope.paymentParams.expand += ",order.items.download,order.items.license";
+    }
 
     // Set the cart parameters
     $scope.data.params = {};
@@ -220,6 +224,11 @@
                 window.__conversion.recordConversion(payment.order.order_id);
             }
 
+            // Load unpopulated licenses as necessary.
+            setTimeout(function () {
+                getLicenses(payment.order.order_id);
+            }, 1000);
+
         } else {
 
             // Handle follow-on steps, according to the payment method.
@@ -360,6 +369,52 @@
 
     function logoutWallet() {
         amazonPay.logout();
+    }
+
+    function getLicenses(order_id, count) {
+
+        // This function checks for digital items in the order that do not have licenses yet assigned. It polls the API several times to refresh the license data after the receipt is loaded.
+
+        if (SettingsService.get().app.show_digital_delivery == false || $scope.data.payment.order == null) {
+            return;
+        }
+
+        count = count || 0;
+
+        if (_.where($scope.data.payment.order.items, { license_pending: true }).length > 0) {
+            $scope.data.awaitingLicense = true;
+        } else {
+            $scope.data.awaitingLicense = false;
+        }
+
+        if ($scope.data.awaitingLicense == false || count > 3) {
+            $scope.$apply(function () {
+                $scope.data.awaitingLicense = false;
+            });
+            return;
+        }
+
+        var params = { show: "items.item_id,items.license.*", expand: "items.license" };
+        OrderService.get(order_id, params).then(function (order) {
+            // Update each of the items with the items from the newly fetched order.
+            _.each(order.items, function (orderItem) {
+                if (orderItem.license) {
+                    _.find($scope.data.payment.order.items, function (item) { return item.item_id == orderItem.item_id }).license = orderItem.license;
+                }
+            });
+
+            if (_.where($scope.data.payment.order.items, { type: "digital", license: null }).length == 0) {
+                $scope.data.awaitingLicense = false;
+                return;
+            }
+
+            // Try again after a delay.
+            count++;
+            setTimeout(function () {
+                getLicenses(order_id, count);
+            }, 3500);
+
+        });
     }
 
     $scope.showCurrencies = function () {
