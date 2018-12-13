@@ -4,121 +4,130 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: ./app/pages/simple/checkout.html:88
+#: ./app/pages/simple/checkout.html:167
 msgid "Address"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:295
-#: ./app/pages/simple/review.html:176
-msgid "An email has been sent to {{data.payment.order.customer.email}}."
+#: ./app/pages/simple/checkout.html:457
+msgid "An email has been sent to {{email}}."
 msgstr ""
 
-#: ./dist/js/kit.js:5017
+#: ./dist/js/kit.js:6469
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:146
+#: ./app/pages/simple/checkout.html:332
+#: ./app/pages/simple/checkout.html:94
+msgid "Back to Payment Methods"
+msgstr ""
+
+#: ./app/pages/simple/checkout.html:225
 msgid "Card Number"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:231
-msgid "Choose other payment method"
-msgstr ""
-
-#: ./app/pages/simple/checkout.html:96
+#: ./app/pages/simple/checkout.html:175
 msgid "City"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:305
-#: ./app/pages/simple/review.html:186
+#: ./app/pages/simple/checkout.html:68
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
+msgstr ""
+
+#: ./app/pages/simple/checkout.html:81
+msgid "Click the button below to checkout using Amazon Pay. You will be prompted to securely sign in with your Amazon username and password."
+msgstr ""
+
+#: ./app/pages/simple/checkout.html:528
 msgid "Close"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:78
-#: ./app/pages/simple/review.html:44
+#: ./app/pages/simple/checkout.html:157
+#: ./app/pages/simple/checkout.html:359
 msgid "Company Name"
 msgstr ""
 
-#: ./app/pages/simple/review.html:117
-msgid "Confirm Payment"
+#: ./app/pages/simple/checkout.html:301
+#: ./app/pages/simple/checkout.html:434
+msgid "Complete Order"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:303
-#: ./app/pages/simple/review.html:184
+#: ./app/pages/simple/checkout.html:113
+#: ./app/pages/simple/checkout.html:526
 msgid "Continue"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:302
-#: ./app/pages/simple/review.html:183
+#: ./app/pages/simple/checkout.html:525
 msgid "Continue Shopping"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:274
-#: ./app/pages/simple/review.html:155
+#: ./app/pages/simple/checkout.html:49
+msgid "Credit Card"
+msgstr ""
+
+#: ./app/pages/simple/checkout.html:503
 msgid "Discount"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:216
+#: ./app/pages/simple/checkout.html:295
 msgid "Discount applied."
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:48
+#: ./app/pages/simple/checkout.html:488
+msgid "Download Now"
+msgstr ""
+
+#: ./app/pages/simple/checkout.html:127
 msgid "Email Address"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:125
-#: ./app/pages/simple/review.html:62
+#: ./app/pages/simple/checkout.html:204
+#: ./app/pages/simple/checkout.html:377
 msgid "Enter VAT Number"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:306
-#: ./app/pages/simple/review.html:187
+#: ./app/pages/simple/checkout.html:529
 msgid "Finish"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:58
+#: ./app/pages/simple/checkout.html:137
 msgid "Name"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:223
-msgid "Pay Now"
-msgstr ""
-
-#: ./app/pages/simple/checkout.html:68
-#: ./app/pages/simple/review.html:55
+#: ./app/pages/simple/checkout.html:147
+#: ./app/pages/simple/checkout.html:370
 msgid "Phone"
 msgstr ""
 
-#: ./dist/js/kit.js:1640
+#: ./dist/js/kit.js:2804
 msgid "Please check the box to provide consent to save your payment method for future payments."
 msgstr ""
 
-#: ./dist/js/kit.js:4138
+#: ./dist/js/kit.js:5338
 msgid "Please confirm"
 msgstr ""
 
-#: ./dist/js/kit.js:4133
-#: ./dist/js/kit.js:4169
+#: ./dist/js/kit.js:5333
+#: ./dist/js/kit.js:5369
 msgid "Please make a selection"
 msgstr ""
 
-#: ./dist/js/kit.js:4128
+#: ./dist/js/kit.js:5328
 msgid "Please provide a value"
 msgstr ""
 
-#: ./dist/js/kit.js:1597
+#: ./dist/js/kit.js:2761
 msgid "Please provide an amount for your payment."
 msgstr ""
 
-#: ./dist/js/kit.js:4178
+#: ./dist/js/kit.js:5378
 msgid "Please provide one of the available options"
 msgstr ""
 
-#: ./dist/js/kit.js:4161
+#: ./dist/js/kit.js:5361
 msgid "Please supply a number"
 msgstr ""
 
-#: ./dist/js/kit.js:4154
+#: ./dist/js/kit.js:5354
 msgid "Please supply a number without decimals"
 msgstr ""
 
@@ -126,96 +135,106 @@ msgstr ""
 msgid "Postal Code"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:313
-#: ./app/pages/simple/review.html:194
+#: ./app/pages/simple/checkout.html:536
 msgid "Print receipt"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:102
+#: ./app/pages/simple/checkout.html:181
 msgid "Region"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:304
-#: ./app/pages/simple/review.html:185
+#: ./app/pages/simple/checkout.html:527
 msgid "Return"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:278
-#: ./app/pages/simple/review.html:159
+#: ./app/pages/simple/checkout.html:326
+msgid "Return to PayPal to try your payment again."
+msgstr ""
+
+#: ./app/pages/simple/checkout.html:349
+msgid "Review"
+msgstr ""
+
+#: ./app/pages/simple/checkout.html:507
 msgid "Shipping"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:223
+#: ./app/pages/simple/checkout.html:301
+#: ./app/pages/simple/checkout.html:434
 msgid "Submit Order"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:179
-#: ./app/pages/simple/review.html:96
+#: ./app/pages/simple/checkout.html:258
+#: ./app/pages/simple/checkout.html:413
 msgid "Subtotal"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:262
-#: ./app/pages/simple/review.html:143
+#: ./app/pages/simple/checkout.html:474
 msgid "Summary"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:187
-#: ./app/pages/simple/checkout.html:282
-#: ./app/pages/simple/review.html:104
-#: ./app/pages/simple/review.html:163
+#: ./app/pages/simple/checkout.html:266
+#: ./app/pages/simple/checkout.html:421
+#: ./app/pages/simple/checkout.html:511
 msgid "Tax"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:252
-#: ./app/pages/simple/review.html:133
-msgid "Thank you for your purchase!"
+#: ./app/pages/simple/checkout.html:451
+msgid "Thank you! Your order is complete."
 msgstr ""
 
-#: ./dist/js/kit.js:5011
+#: ./dist/js/kit.js:6463
 msgid "The item you are trying to access could not be found."
 msgstr ""
 
-#: ./dist/js/kit.js:4204
+#: ./dist/js/kit.js:5404
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4210
+#: ./dist/js/kit.js:5410
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4187
+#: ./dist/js/kit.js:5387
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4193
+#: ./dist/js/kit.js:5393
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ./dist/js/kit.js:4626
+#: ./dist/js/kit.js:6078
 msgid "There was a problem obtaining authorization for this session. Please reload the page to try your request again."
 msgstr ""
 
-#: ./dist/js/kit.js:1491
-#: ./dist/js/kit.js:1585
-#: ./dist/js/kit.js:1825
+#: ./dist/js/kit.js:2655
+#: ./dist/js/kit.js:2749
+#: ./dist/js/kit.js:2999
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:286
-#: ./app/pages/simple/review.html:108
-#: ./app/pages/simple/review.html:167
+#: ./app/pages/simple/checkout.html:425
+#: ./app/pages/simple/checkout.html:515
 msgid "Total"
 msgstr ""
 
-#: ./app/pages/simple/checkout.html:132
-#: ./app/pages/simple/review.html:69
+#: ./app/pages/simple/checkout.html:211
+#: ./app/pages/simple/checkout.html:384
 msgid "VAT Number"
+msgstr ""
+
+#: ./app/pages/simple/checkout.html:88
+msgid "Your Amazon payment information is never shared with {{companyName}}."
+msgstr ""
+
+#: ./app/pages/simple/checkout.html:73
+msgid "Your PayPal payment information is never shared with {{companyName}}."
 msgstr ""

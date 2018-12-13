@@ -107,6 +107,15 @@
     "default_value": true
   },
   {
+    "name": "show_digital_delivery",
+    "type": "boolean",
+    "label": "Show Digital Delivery",
+    "description": "For items that are fulfilled digitally, this indicates if you want to present delivery items (such as file download links or license codes) on the receipt page. If not, they will be provided in the email confirmation only.",
+    "section": "Features",
+    "required": true,
+    "default_value": true
+  },
+  {
     "name": "main_shopping_url",
     "type": "string",
     "label": "Main Shopping URL",
@@ -130,6 +139,15 @@
     "description": "Indicates if you wish to hide the customer name field, if you provide the customer's name when POP Checkout loads.",
     "section": "Features",
     "required": false,
+    "default_value": false
+  },
+  {
+    "name": "keep_wallet_session",
+    "type": "boolean",
+    "label": "Keep Wallet Session",
+    "description": "Indicates if you should keep the user signed into their wallet, such as Amazon Pay, after they complete an order. This should only be set to true in circumstances where it is common for users to make multiple purchases in a short period of time.",
+    "section": "Features",
+    "required": true,
     "default_value": false
   },
   {
