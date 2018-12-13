@@ -107,6 +107,15 @@
     "default_value": true
   },
   {
+    "name": "show_digital_delivery",
+    "type": "boolean",
+    "label": "Show Digital Delivery",
+    "description": "For items that are fulfilled digitally, this indicates if you want to present delivery items (such as file download links or license codes) on the receipt page. If not, they will be provided in the email confirmation only.",
+    "section": "Features",
+    "required": true,
+    "default_value": true
+  },
+  {
     "name": "main_shopping_url",
     "type": "string",
     "label": "Main Shopping URL",

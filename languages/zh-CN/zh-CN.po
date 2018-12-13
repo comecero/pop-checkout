@@ -8,63 +8,89 @@ msgstr ""
 "Language: zh-CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ./app/pages/simple/checkout.html:88
+#: ./app/pages/simple/checkout.html:167
 msgid "Address"
 msgstr "地址"
 
-#: ./app/pages/cart/cart.html:194
-#: ./app/pages/cart/cart.html:269
+#: ./app/pages/cart/cart-one-column.html:417
+#: ./app/pages/cart/cart-one-column.html:418
+#: ./app/pages/cart/cart-one-column.html:502
+#: ./app/pages/cart/cart-one-column.html:503
+#: ./app/pages/cart/cart-two-column.html:418
+#: ./app/pages/cart/cart-two-column.html:419
+#: ./app/pages/cart/cart-two-column.html:501
+#: ./app/pages/cart/cart-two-column.html:502
 msgid "Address 2"
 msgstr "地址 2"
 
-#: ./dist/js/kit.js:6312
+#: ./dist/js/kit.js:6469
 msgid "An error occured while attempting to process your request. Please try your request again. If the problem persists, please contact support."
 msgstr "尝试处理您的请求时发生错误。请重试您的请求。如果问题仍然存在，请与支持团队联系。"
 
-#: ./app/pages/cart/cart.html:323
-#: ./app/pages/cart/cart.html:88
-#: ./app/pages/payment/review.html:72
-#: ./app/pages/payment/review.html:73
+#: ./app/pages/cart/cart-one-column.html:149
+#: ./app/pages/cart/cart-one-column.html:559
+#: ./app/pages/cart/cart-two-column.html:145
+#: ./app/pages/cart/cart-two-column.html:558
+#: ./app/pages/review/review-one-column.html:249
+#: ./app/pages/review/review-one-column.html:250
+#: ./app/pages/review/review-two-column.html:249
+#: ./app/pages/review/review-two-column.html:250
 msgid "Apply"
 msgstr "应用"
 
-#: ./app/pages/cart/cart.html:150
-#: ./app/pages/payment/review.html:27
+#: ./app/pages/cart/cart-one-column.html:324
+#: ./app/pages/cart/cart-two-column.html:325
+#: ./app/pages/review/review-one-column.html:174
+#: ./app/pages/review/review-two-column.html:174
 msgid "Billing Address"
 msgstr "帐单地址"
 
-#: ./app/pages/products/products.html:29
+#: ./app/pages/products/products-one-column.html:63
+#: ./app/pages/products/products-two-column.html:59
 msgid "Buy Now"
 msgstr "马上购买"
 
-#: ./app/pages/cart/cart.html:137
+#: ./app/pages/cart/cart-one-column.html:351
+#: ./app/pages/cart/cart-two-column.html:352
 msgid "Cancel"
 msgstr "取消"
 
-#: ./app/pages/simple/checkout.html:146
+#: ./app/pages/simple/checkout.html:225
 msgid "Card Number"
 msgstr "卡号"
 
-#: ./app/pages/cart/cart.html:339
+#: ./app/pages/cart/cart-one-column.html:596
+#: ./app/pages/cart/cart-two-column.html:595
+#: ./app/pages/invoice/invoice-one-column.html:329
+#: ./app/pages/invoice/invoice-two-column.html:323
 msgid "Choose a Payment Method"
 msgstr "选择付款方式"
 
-#: ./app/pages/simple/checkout.html:96
+#: ./app/pages/simple/checkout.html:175
 msgid "City"
 msgstr "城市"
 
-#: ./app/pages/simple/checkout.html:78
-#: ./app/pages/simple/review.html:44
+#: ./app/pages/simple/checkout.html:157
+#: ./app/pages/simple/checkout.html:359
 msgid "Company Name"
 msgstr "公司名称"
 
-#: ./app/pages/simple/checkout.html:302
-#: ./app/pages/simple/review.html:183
+#: ./app/pages/simple/checkout.html:525
 msgid "Continue Shopping"
 msgstr "继续购物"
 
-#: ./app/pages/cart/cart.html:232
-#: ./app/pages/cart/cart.html:307
+#: ./app/pages/cart/cart-one-column.html:456
+#: ./app/pages/cart/cart-one-column.html:457
+#: ./app/pages/cart/cart-one-column.html:458
+#: ./app/pages/cart/cart-one-column.html:541
+#: ./app/pages/cart/cart-one-column.html:542
+#: ./app/pages/cart/cart-one-column.html:543
+#: ./app/pages/cart/cart-two-column.html:455
+#: ./app/pages/cart/cart-two-column.html:456
+#: ./app/pages/cart/cart-two-column.html:457
+#: ./app/pages/cart/cart-two-column.html:540
+#: ./app/pages/cart/cart-two-column.html:541
+#: ./app/pages/cart/cart-two-column.html:542
 msgid "Country"
 msgstr "国家"
 
@@ -72,16 +98,18 @@ msgstr "国家"
 msgid "Currency"
 msgstr "货币"
 
-#: ./app/pages/simple/checkout.html:274
-#: ./app/pages/simple/review.html:155
+#: ./app/pages/simple/checkout.html:503
 msgid "Discount"
 msgstr "折扣"
 
-#: ./app/pages/simple/checkout.html:216
+#: ./app/pages/simple/checkout.html:295
 msgid "Discount applied."
 msgstr "折扣已应用。"
 
-#: ./app/pages/cart/cart.html:170
+#: ./app/pages/cart/cart-one-column.html:383
+#: ./app/pages/cart/cart-one-column.html:384
+#: ./app/pages/cart/cart-two-column.html:384
+#: ./app/pages/cart/cart-two-column.html:385
 msgid "Email"
 msgstr "电子邮件"
 
@@ -89,24 +117,34 @@ msgstr "电子邮件"
 msgid "Enter Promo Code"
 msgstr "输入促销代码"
 
-#: ./app/pages/cart/cart.html:364
+#: ./app/pages/cart/cart-one-column.html:655
+#: ./app/pages/cart/cart-two-column.html:654
+#: ./app/pages/invoice/invoice-one-column.html:392
+#: ./app/pages/invoice/invoice-two-column.html:386
 msgid "Expiration Month"
 msgstr "到期月份"
 
-#: ./app/pages/cart/cart.html:372
+#: ./app/pages/cart/cart-one-column.html:665
+#: ./app/pages/cart/cart-two-column.html:664
+#: ./app/pages/invoice/invoice-one-column.html:401
+#: ./app/pages/invoice/invoice-two-column.html:395
 msgid "Expiration Year"
 msgstr "到期年份"
 
-#: ./app/pages/receipt/receipt.html:37
+#: ./app/pages/receipt/receipt-one-column.html:167
+#: ./app/pages/receipt/receipt-two-column.html:190
 msgid "Expires"
 msgstr "到期"
 
-#: ./app/pages/cart/cart.html:117
+#: ./app/pages/cart/cart-one-column.html:328
+#: ./app/pages/cart/cart-two-column.html:329
 msgid "Have an account?"
 msgstr "已有帐户？"
 
-#: ./app/pages/cart/cart.html:325
-#: ./app/pages/payment/review.html:75
+#: ./app/pages/cart/cart-one-column.html:561
+#: ./app/pages/cart/cart-two-column.html:560
+#: ./app/pages/review/review-one-column.html:252
+#: ./app/pages/review/review-two-column.html:252
 msgid "If this order is for a business, please provide your VAT Number."
 msgstr "如果此订单为企业订单，请提供您的增值税号。"
 
@@ -114,11 +152,11 @@ msgstr "如果此订单为企业订单，请提供您的增值税号。"
 msgid "Language"
 msgstr "语言"
 
-#: ./app/pages/simple/checkout.html:58
+#: ./app/pages/simple/checkout.html:137
 msgid "Name"
 msgstr "名称"
 
-#: ./app/templates/fields.html:54
+#: ./app/templates/fields.html:55
 msgid "No"
 msgstr "不"
 
@@ -127,11 +165,21 @@ msgstr "不"
 msgid "Optional"
 msgstr "可选"
 
-#: ./app/pages/cart/cart.html:131
+#: ./app/pages/cart/cart-one-column.html:346
+#: ./app/pages/cart/cart-one-column.html:347
+#: ./app/pages/cart/cart-two-column.html:347
+#: ./app/pages/cart/cart-two-column.html:348
+#: ./app/pages/receipt/receipt-one-column.html:103
+#: ./app/pages/receipt/receipt-one-column.html:106
+#: ./app/pages/receipt/receipt-two-column.html:102
+#: ./app/pages/receipt/receipt-two-column.html:99
 msgid "Password"
 msgstr "密码"
 
-#: ./app/pages/cart/cart.html:347
+#: ./app/pages/cart/cart-one-column.html:620
+#: ./app/pages/cart/cart-two-column.html:619
+#: ./app/pages/invoice/invoice-one-column.html:355
+#: ./app/pages/invoice/invoice-two-column.html:349
 msgid "Pay with a new card"
 msgstr "使用新卡支付"
 
@@ -139,218 +187,280 @@ msgstr "使用新卡支付"
 msgid "Payment Information"
 msgstr "付款信息"
 
-#: ./app/pages/receipt/receipt.html:34
+#: ./app/pages/receipt/receipt-one-column.html:158
+#: ./app/pages/receipt/receipt-two-column.html:181
 msgid "Payment Method"
 msgstr "付款方式"
 
-#: ./app/pages/simple/checkout.html:68
-#: ./app/pages/simple/review.html:55
+#: ./app/pages/simple/checkout.html:147
+#: ./app/pages/simple/checkout.html:370
 msgid "Phone"
 msgstr "电话"
 
-#: ./dist/js/kit.js:5339
+#: ./dist/js/kit.js:5338
 msgid "Please confirm"
 msgstr "请确认"
 
-#: ./dist/js/kit.js:5334
-#: ./dist/js/kit.js:5370
+#: ./dist/js/kit.js:5333
+#: ./dist/js/kit.js:5369
 msgid "Please make a selection"
 msgstr "请选择"
 
-#: ./app/pages/cart/cart.html:204
-#: ./app/pages/cart/cart.html:279
+#: ./app/pages/cart/cart-one-column.html:428
+#: ./app/pages/cart/cart-one-column.html:513
+#: ./app/pages/cart/cart-two-column.html:429
+#: ./app/pages/cart/cart-two-column.html:512
 msgid "Please provide a city"
 msgstr "请提供城市"
 
-#: ./app/pages/cart/cart.html:156
-#: ./app/pages/payment/review.html:55
+#: ./app/pages/cart/cart-one-column.html:394
+#: ./app/pages/cart/cart-two-column.html:395
+#: ./app/pages/review/review-one-column.html:232
+#: ./app/pages/review/review-two-column.html:232
 msgid "Please provide a company name"
 msgstr "请提高公司名"
 
-#: ./app/pages/cart/cart.html:234
-#: ./app/pages/cart/cart.html:309
+#: ./app/pages/cart/cart-one-column.html:460
+#: ./app/pages/cart/cart-one-column.html:545
+#: ./app/pages/cart/cart-two-column.html:459
+#: ./app/pages/cart/cart-two-column.html:544
 msgid "Please provide a country"
 msgstr "请提供国家"
 
-#: ./app/pages/cart/cart.html:164
-#: ./app/pages/cart/cart.html:255
+#: ./app/pages/cart/cart-one-column.html:376
+#: ./app/pages/cart/cart-one-column.html:488
+#: ./app/pages/cart/cart-two-column.html:377
+#: ./app/pages/cart/cart-two-column.html:487
 msgid "Please provide a name"
 msgstr "请提供名称"
 
-#: ./app/pages/cart/cart.html:218
-#: ./app/pages/cart/cart.html:293
+#: ./app/pages/cart/cart-one-column.html:444
+#: ./app/pages/cart/cart-one-column.html:529
+#: ./app/pages/cart/cart-two-column.html:443
+#: ./app/pages/cart/cart-two-column.html:526
 msgid "Please provide a region / province"
 msgstr "请提供地区/省份"
 
-#: ./app/pages/cart/cart.html:212
-#: ./app/pages/cart/cart.html:287
+#: ./app/pages/cart/cart-one-column.html:439
+#: ./app/pages/cart/cart-one-column.html:524
+#: ./app/pages/cart/cart-two-column.html:438
+#: ./app/pages/cart/cart-two-column.html:521
 msgid "Please provide a state / province"
 msgstr "请提供州/省"
 
-#: ./app/pages/cart/cart.html:358
+#: ./app/pages/cart/cart-one-column.html:650
+#: ./app/pages/cart/cart-two-column.html:649
+#: ./app/pages/invoice/invoice-one-column.html:385
+#: ./app/pages/invoice/invoice-two-column.html:379
 msgid "Please provide a valid card number"
 msgstr "请提供有效的卡号"
 
-#: ./app/pages/cart/cart.html:172
+#: ./app/pages/cart/cart-one-column.html:385
+#: ./app/pages/cart/cart-two-column.html:386
 msgid "Please provide a valid email address"
 msgstr "请提供有效的电子邮件地址"
 
-#: ./app/pages/cart/cart.html:366
+#: ./app/pages/cart/cart-one-column.html:660
+#: ./app/pages/cart/cart-two-column.html:659
+#: ./app/pages/invoice/invoice-one-column.html:395
+#: ./app/pages/invoice/invoice-two-column.html:389
 msgid "Please provide a valid expiration month"
 msgstr "请提供有效的到期月份"
 
-#: ./app/pages/cart/cart.html:374
+#: ./app/pages/cart/cart-one-column.html:670
+#: ./app/pages/cart/cart-two-column.html:669
+#: ./app/pages/invoice/invoice-one-column.html:404
+#: ./app/pages/invoice/invoice-two-column.html:398
 msgid "Please provide a valid expiration year"
 msgstr "请提供有效的到期年份"
 
-#: ./app/pages/cart/cart.html:180
-#: ./app/pages/payment/review.html:63
+#: ./app/pages/review/review-one-column.html:239
+#: ./app/pages/review/review-two-column.html:239
 msgid "Please provide a valid phone number"
 msgstr "请提供有效的电话号码"
 
-#: ./app/pages/cart/cart.html:382
+#: ./app/pages/cart/cart-one-column.html:677
+#: ./app/pages/cart/cart-two-column.html:676
+#: ./app/pages/invoice/invoice-one-column.html:412
+#: ./app/pages/invoice/invoice-two-column.html:406
 msgid "Please provide a valid security code"
 msgstr "请提供有效的安全码"
 
-#: ./app/pages/cart/cart.html:226
-#: ./app/pages/cart/cart.html:301
+#: ./app/pages/cart/cart-one-column.html:451
+#: ./app/pages/cart/cart-one-column.html:536
+#: ./app/pages/cart/cart-two-column.html:450
+#: ./app/pages/cart/cart-two-column.html:533
 msgid "Please provide a zip / postal code"
 msgstr "请提供邮政编码"
 
-#: ./app/pages/cart/cart.html:188
-#: ./app/pages/cart/cart.html:196
-#: ./app/pages/cart/cart.html:263
-#: ./app/pages/cart/cart.html:271
+#: ./app/pages/cart/cart-one-column.html:412
+#: ./app/pages/cart/cart-one-column.html:419
+#: ./app/pages/cart/cart-one-column.html:497
+#: ./app/pages/cart/cart-one-column.html:504
+#: ./app/pages/cart/cart-two-column.html:413
+#: ./app/pages/cart/cart-two-column.html:420
+#: ./app/pages/cart/cart-two-column.html:496
+#: ./app/pages/cart/cart-two-column.html:503
 msgid "Please provide an address"
 msgstr "请提供地址"
 
-#: ./dist/js/kit.js:2762
+#: ./dist/js/kit.js:2761
 msgid "Please provide an amount for your payment."
 msgstr "请提供您的付款金额。"
 
-#: ./dist/js/kit.js:5379
+#: ./dist/js/kit.js:5378
 msgid "Please provide one of the available options"
 msgstr "请提供一个可用选项"
 
-#: ./dist/js/kit.js:5362
+#: ./dist/js/kit.js:5361
 msgid "Please supply a number"
 msgstr "请提供一个号码"
 
-#: ./dist/js/kit.js:5355
+#: ./dist/js/kit.js:5354
 msgid "Please supply a number without decimals"
 msgstr "请提供一个不带小数的数字"
 
-#: ./app/pages/products/products.html:17
+#: ./app/pages/products/products-one-column.html:25
+#: ./app/pages/products/products-two-column.html:23
 msgid "Products"
 msgstr "产品"
 
-#: ./app/pages/cart/cart.html:34
-#: ./app/pages/payment/review.html:91
-#: ./app/pages/receipt/receipt.html:50
+#: ./app/pages/invoice/invoice-one-column.html:165
+#: ./app/pages/invoice/invoice-two-column.html:85
+#: ./app/pages/receipt/receipt-one-column.html:262
+#: ./app/pages/receipt/receipt-two-column.html:248
+#: ./app/pages/review/review-one-column.html:83
+#: ./app/pages/review/review-two-column.html:79
 msgid "Quantity"
 msgstr "数量"
 
-#: ./app/pages/receipt/receipt.html:9
+#: ./app/pages/receipt/receipt-one-column.html:24
+#: ./app/pages/receipt/receipt-two-column.html:22
 msgid "Receipt"
 msgstr "收据"
 
-#: ./app/pages/cart/cart.html:216
-#: ./app/pages/cart/cart.html:291
+#: ./app/pages/cart/cart-one-column.html:442
+#: ./app/pages/cart/cart-one-column.html:443
+#: ./app/pages/cart/cart-one-column.html:527
+#: ./app/pages/cart/cart-one-column.html:528
+#: ./app/pages/cart/cart-two-column.html:441
+#: ./app/pages/cart/cart-two-column.html:442
+#: ./app/pages/cart/cart-two-column.html:524
+#: ./app/pages/cart/cart-two-column.html:525
 msgid "Region / Province"
 msgstr "地区/省份"
 
-#: ./app/pages/payment/review.html:21
+#: ./app/pages/simple/checkout.html:326
 msgid "Return to PayPal to try your payment again."
 msgstr "返回 PayPal 再次尝试付款。"
 
-#: ./app/pages/payment/review.html:11
+#: ./app/pages/review/review-one-column.html:26
+#: ./app/pages/review/review-two-column.html:24
 msgid "Review Your Order"
 msgstr "检查您的订单"
 
-#: ./app/pages/cart/cart.html:380
+#: ./app/pages/cart/cart-one-column.html:675
+#: ./app/pages/cart/cart-one-column.html:676
+#: ./app/pages/cart/cart-two-column.html:674
+#: ./app/pages/cart/cart-two-column.html:675
+#: ./app/pages/invoice/invoice-one-column.html:410
+#: ./app/pages/invoice/invoice-one-column.html:411
+#: ./app/pages/invoice/invoice-two-column.html:404
+#: ./app/pages/invoice/invoice-two-column.html:405
 msgid "Security Code"
 msgstr "安全码"
 
-#: ./app/pages/cart/cart.html:243
-#: ./app/pages/payment/review.html:38
+#: ./app/pages/cart/cart-one-column.html:470
+#: ./app/pages/cart/cart-two-column.html:469
+#: ./app/pages/receipt/receipt-one-column.html:184
+#: ./app/pages/receipt/receipt-two-column.html:150
+#: ./app/pages/review/review-one-column.html:198
+#: ./app/pages/review/review-two-column.html:198
 msgid "Shipping Address"
 msgstr "配送地址"
 
-#: ./app/pages/cart/cart.html:25
+#: ./app/pages/cart/cart-one-column.html:78
+#: ./app/pages/cart/cart-two-column.html:74
 msgid "Shopping Cart"
 msgstr "购物车"
 
-#: ./app/pages/cart/cart.html:118
-#: ./app/pages/cart/cart.html:138
+#: ./app/pages/cart/cart-one-column.html:329
+#: ./app/pages/cart/cart-one-column.html:352
+#: ./app/pages/cart/cart-two-column.html:330
+#: ./app/pages/cart/cart-two-column.html:353
 msgid "Sign In"
 msgstr "登录"
 
-#: ./app/pages/cart/cart.html:144
+#: ./app/pages/cart/cart-one-column.html:361
+#: ./app/pages/cart/cart-two-column.html:362
 msgid "Sign out"
 msgstr "登出"
 
-#: ./app/pages/cart/cart.html:210
-#: ./app/pages/cart/cart.html:285
+#: ./app/pages/cart/cart-one-column.html:435
+#: ./app/pages/cart/cart-one-column.html:437
+#: ./app/pages/cart/cart-one-column.html:520
+#: ./app/pages/cart/cart-one-column.html:522
+#: ./app/pages/cart/cart-two-column.html:436
+#: ./app/pages/cart/cart-two-column.html:519
 msgid "State / Province"
 msgstr "州/省"
 
-#: ./app/pages/simple/checkout.html:179
-#: ./app/pages/simple/review.html:96
+#: ./app/pages/simple/checkout.html:258
+#: ./app/pages/simple/checkout.html:413
 msgid "Subtotal"
 msgstr "小计"
 
-#: ./app/pages/simple/checkout.html:187
-#: ./app/pages/simple/checkout.html:282
-#: ./app/pages/simple/review.html:104
-#: ./app/pages/simple/review.html:163
+#: ./app/pages/simple/checkout.html:266
+#: ./app/pages/simple/checkout.html:421
+#: ./app/pages/simple/checkout.html:511
 msgid "Tax"
 msgstr "税"
 
-#: ./app/pages/receipt/receipt.html:17
+#: ./app/pages/simple/checkout.html:451
 msgid "Thank you! Your order is complete."
 msgstr "谢谢！您的订单已完成。"
 
-#: ./dist/js/kit.js:6306
+#: ./dist/js/kit.js:6463
 msgid "The item you are trying to access could not be found."
 msgstr "找不到您要访问的商品。"
 
-#: ./dist/js/kit.js:5405
+#: ./dist/js/kit.js:5404
 msgid "The value must be at least one character"
 msgid_plural "The value must be at least {{$count}} characters"
 msgstr[0] "该值必须至少为一个字符\n"
 "该值必须至少为{{$count}}个字符"
 
-#: ./dist/js/kit.js:5411
+#: ./dist/js/kit.js:5410
 msgid "The value must be less than one character"
 msgid_plural "The value must be less than {{$count}} characters"
 msgstr[0] "该值必须小于一个字符\n"
 "该值必须小于{{$count}}个字符"
 
-#: ./dist/js/kit.js:5388
+#: ./dist/js/kit.js:5387
 msgid "The value you provide must be greater than {{$count}}"
 msgid_plural "The value you provide must be greater than {{$count}}"
 msgstr[0] "您提供的值必须大于{{$count}}\n"
 "您提供的值必须大于{{$count}}"
 
-#: ./dist/js/kit.js:5394
+#: ./dist/js/kit.js:5393
 msgid "The value you provide must be less than {{$count}}"
 msgid_plural "The value you provide must be less than {{$count}}"
 msgstr[0] "您提供的值必须小于{{$count}}\n"
 "您提供的值必须小于{{$count}}"
 
-#: ./app/pages/cart/cart.html:74
+#: ./app/pages/cart/cart-one-column.html:60
+#: ./app/pages/cart/cart-two-column.html:56
 msgid "There are no items in your cart"
 msgstr "您的购物车中没有商品"
 
-#: ./dist/js/kit.js:2656
-#: ./dist/js/kit.js:2750
-#: ./dist/js/kit.js:3000
+#: ./dist/js/kit.js:2655
+#: ./dist/js/kit.js:2749
+#: ./dist/js/kit.js:2999
 msgid "There was a problem with some of the information you supplied. Please review for errors and try again."
 msgstr "您提供的信息有部分存在问题。请检查错误并重试。"
 
-#: ./app/pages/simple/checkout.html:286
-#: ./app/pages/simple/review.html:108
-#: ./app/pages/simple/review.html:167
+#: ./app/pages/simple/checkout.html:425
+#: ./app/pages/simple/checkout.html:515
 msgid "Total"
 msgstr "总计"
 
@@ -358,16 +468,23 @@ msgstr "总计"
 msgid "Update Cart"
 msgstr "更新购物车"
 
-#: ./app/pages/cart/cart.html:124
+#: ./app/pages/cart/cart-one-column.html:340
+#: ./app/pages/cart/cart-one-column.html:341
+#: ./app/pages/cart/cart-two-column.html:341
+#: ./app/pages/cart/cart-two-column.html:342
+#: ./app/pages/receipt/receipt-one-column.html:93
+#: ./app/pages/receipt/receipt-one-column.html:96
+#: ./app/pages/receipt/receipt-two-column.html:89
+#: ./app/pages/receipt/receipt-two-column.html:92
 msgid "Username"
 msgstr "用户名"
 
-#: ./app/pages/simple/checkout.html:132
-#: ./app/pages/simple/review.html:69
+#: ./app/pages/simple/checkout.html:211
+#: ./app/pages/simple/checkout.html:384
 msgid "VAT Number"
 msgstr "增值税号码"
 
-#: ./app/templates/fields.html:52
+#: ./app/templates/fields.html:53
 msgid "Yes"
 msgstr "是"
 
@@ -375,8 +492,14 @@ msgstr "是"
 msgid "Your Information"
 msgstr "您的信息"
 
-#: ./app/pages/cart/cart.html:224
-#: ./app/pages/cart/cart.html:299
+#: ./app/pages/cart/cart-one-column.html:449
+#: ./app/pages/cart/cart-one-column.html:450
+#: ./app/pages/cart/cart-one-column.html:534
+#: ./app/pages/cart/cart-one-column.html:535
+#: ./app/pages/cart/cart-two-column.html:448
+#: ./app/pages/cart/cart-two-column.html:449
+#: ./app/pages/cart/cart-two-column.html:531
+#: ./app/pages/cart/cart-two-column.html:532
 msgid "Zip / Postal Code"
 msgstr "邮政编码"
 
@@ -385,19 +508,17 @@ msgid "expiration"
 msgstr "到期"
 
 #: ./app/pages/invoice/invoice-one-column.html:88
-#: ./app/pages/invoice/invoice-two-column.html:170
+#: ./app/pages/invoice/invoice-two-column.html:172
 msgid "Billing Information"
 msgstr "账单信息"
 
-#: ./app/pages/cart/cart-one-column.html:678
-#: ./app/pages/cart/cart-two-column.html:676
-#: ./app/pages/review/review-one-column.html:285
-#: ./app/pages/review/review-two-column.html:285
+#: ./app/pages/simple/checkout.html:301
+#: ./app/pages/simple/checkout.html:434
 msgid "Complete Order"
 msgstr "完成订单"
 
-#: ./app/pages/pay/pay.html:351
-#: ./app/pages/review/review.html:137
+#: ./app/pages/invoice/invoice-one-column.html:432
+#: ./app/pages/invoice/invoice-two-column.html:426
 msgid "Complete Payment"
 msgstr "完成付款"
 
@@ -406,30 +527,38 @@ msgstr "完成付款"
 msgid "Copyright &copy; {{settings.account.year}} {{settings.app.company_name}}. All Rights Reserved."
 msgstr "版权所有 &copy; {{settings.account.year}} {{settings.app.company_name}}。保留所有权利。"
 
-#: ./app/pages/receipt/receipt.html:58
+#: ./app/pages/receipt/receipt-one-column.html:112
+#: ./app/pages/receipt/receipt-two-column.html:108
 msgid "Create Account"
 msgstr "创建账号"
 
-#: ./app/pages/receipt/receipt.html:29
+#: ./app/pages/receipt/receipt-one-column.html:55
+#: ./app/pages/receipt/receipt-two-column.html:51
 msgid "Date"
 msgstr "日期"
 
-#: ./app/pages/receipt/receipt-one-column.html:274
-#: ./app/pages/receipt/receipt-two-column.html:260
+#: ./app/pages/simple/checkout.html:488
 msgid "Download Now"
 msgstr "现在下载"
 
 #: ./app/pages/invoice/invoice-one-column.html:77
-#: ./app/pages/invoice/invoice-two-column.html:161
+#: ./app/pages/invoice/invoice-two-column.html:163
 msgid "Due Date"
 msgstr "截止日期"
 
-#: ./app/pages/cart/cart-one-column.html:138
-#: ./app/pages/cart/cart-two-column.html:134
+#: ./app/pages/cart/cart-one-column.html:146
+#: ./app/pages/cart/cart-two-column.html:142
 msgid "Enter"
 msgstr "输入"
 
-#: ./app/pages/pay/pay.html:151
+#: ./app/pages/cart/cart-one-column.html:374
+#: ./app/pages/cart/cart-one-column.html:375
+#: ./app/pages/cart/cart-one-column.html:486
+#: ./app/pages/cart/cart-one-column.html:487
+#: ./app/pages/cart/cart-two-column.html:375
+#: ./app/pages/cart/cart-two-column.html:376
+#: ./app/pages/cart/cart-two-column.html:485
+#: ./app/pages/cart/cart-two-column.html:486
 msgid "Full Name"
 msgstr "全名"
 
@@ -470,8 +599,10 @@ msgstr "订单摘要"
 msgid "Paid"
 msgstr "已付款"
 
-#: ./app/pages/pay/pay.html:248
-#: ./app/pages/receipt/receipt.html:96
+#: ./app/pages/cart/cart-one-column.html:631
+#: ./app/pages/cart/cart-two-column.html:630
+#: ./app/pages/invoice/invoice-one-column.html:366
+#: ./app/pages/invoice/invoice-two-column.html:360
 msgid "Payment Details"
 msgstr "付款详情"
 
@@ -480,26 +611,29 @@ msgstr "付款详情"
 msgid "Payment Summary"
 msgstr "付款摘要"
 
-#: ./app/pages/pay/pay.html:179
+#: ./app/pages/cart/cart-one-column.html:403
+#: ./app/pages/cart/cart-two-column.html:404
 msgid "Please provide a phone"
 msgstr "请提供一个电话号码"
 
-#: ./app/pages/pay/pay.html:327
+#: ./app/pages/cart/cart-one-column.html:683
+#: ./app/pages/cart/cart-two-column.html:682
+#: ./app/pages/invoice/invoice-one-column.html:420
+#: ./app/pages/invoice/invoice-two-column.html:414
 msgid "Save this card to my account"
 msgstr "在我的账号中保存此卡信息"
 
-#: ./app/pages/simple/checkout.html:278
-#: ./app/pages/simple/review.html:159
+#: ./app/pages/simple/checkout.html:507
 msgid "Shipping"
 msgstr "配送"
 
 #: ./app/pages/invoice/invoice-one-column.html:114
-#: ./app/pages/invoice/invoice-two-column.html:194
+#: ./app/pages/invoice/invoice-two-column.html:196
 msgid "Shipping Information"
 msgstr "配送信息"
 
-#: ./app/pages/cart/cart-one-column.html:462
-#: ./app/pages/cart/cart-two-column.html:460
+#: ./app/pages/cart/cart-one-column.html:479
+#: ./app/pages/cart/cart-two-column.html:478
 msgid "Shipping is same as billing"
 msgstr "配送地址与账单地址相同"
 
@@ -512,8 +646,8 @@ msgstr "卖往"
 msgid "Thank you for your business"
 msgstr "感谢您的业务"
 
-#: ./app/pages/receipt/receipt-one-column.html:342
-#: ./app/pages/receipt/receipt-two-column.html:328
+#: ./app/pages/receipt/receipt-one-column.html:346
+#: ./app/pages/receipt/receipt-two-column.html:332
 msgid "Thank you for your order"
 msgstr "感谢您的订单"
 
@@ -537,7 +671,8 @@ msgstr "请创建一个帐户来在线管理您的订单。"
 msgid "Your Order"
 msgstr "您的订单"
 
-#: ./app/pages/receipt/receipt.html:64
+#: ./app/pages/receipt/receipt-one-column.html:118
+#: ./app/pages/receipt/receipt-two-column.html:114
 msgid "Your account has been created."
 msgstr "您的账号已创建"
 
@@ -581,7 +716,7 @@ msgstr "由……制成"
 msgid "Make Another Payment"
 msgstr "支付另一笔款项"
 
-#: ./dist/js/kit.js:5329
+#: ./dist/js/kit.js:5328
 msgid "Please provide a value"
 msgstr "请提供一个值"
 
@@ -622,8 +757,7 @@ msgstr "已向{{data.payment.order.customer.email}}发送了一封电子邮件�
 msgid "Choose other payment method"
 msgstr "选择其他付款方式"
 
-#: ./app/pages/simple/checkout.html:305
-#: ./app/pages/simple/review.html:186
+#: ./app/pages/simple/checkout.html:528
 msgid "Close"
 msgstr "关闭"
 
@@ -631,22 +765,21 @@ msgstr "关闭"
 msgid "Confirm Payment"
 msgstr "确认付款"
 
-#: ./app/pages/simple/checkout.html:303
-#: ./app/pages/simple/review.html:184
+#: ./app/pages/simple/checkout.html:113
+#: ./app/pages/simple/checkout.html:526
 msgid "Continue"
 msgstr "继续"
 
-#: ./app/pages/simple/checkout.html:48
+#: ./app/pages/simple/checkout.html:127
 msgid "Email Address"
 msgstr "电子邮箱"
 
-#: ./app/pages/simple/checkout.html:125
-#: ./app/pages/simple/review.html:62
+#: ./app/pages/simple/checkout.html:204
+#: ./app/pages/simple/checkout.html:377
 msgid "Enter VAT Number"
 msgstr "输入 VAT 号"
 
-#: ./app/pages/simple/checkout.html:306
-#: ./app/pages/simple/review.html:187
+#: ./app/pages/simple/checkout.html:529
 msgid "Finish"
 msgstr "完成"
 
@@ -658,26 +791,24 @@ msgstr "现在付款"
 msgid "Postal Code"
 msgstr "邮箱编码"
 
-#: ./app/pages/simple/checkout.html:313
-#: ./app/pages/simple/review.html:194
+#: ./app/pages/simple/checkout.html:536
 msgid "Print receipt"
 msgstr "打印收据"
 
-#: ./app/pages/simple/checkout.html:102
+#: ./app/pages/simple/checkout.html:181
 msgid "Region"
 msgstr "地区"
 
-#: ./app/pages/simple/checkout.html:304
-#: ./app/pages/simple/review.html:185
+#: ./app/pages/simple/checkout.html:527
 msgid "Return"
 msgstr "返回"
 
-#: ./app/pages/simple/checkout.html:223
+#: ./app/pages/simple/checkout.html:301
+#: ./app/pages/simple/checkout.html:434
 msgid "Submit Order"
 msgstr "提交订单"
 
-#: ./app/pages/simple/checkout.html:262
-#: ./app/pages/simple/review.html:143
+#: ./app/pages/simple/checkout.html:474
 msgid "Summary"
 msgstr "摘要"
 
@@ -690,16 +821,16 @@ msgstr "感谢您的购买！"
 msgid "Remove"
 msgstr "移除"
 
-#: ./dist/js/kit.js:2805
+#: ./dist/js/kit.js:2804
 msgid "Please check the box to provide consent to save your payment method for future payments."
 msgstr "请选中相应的复选框来同意我们保存您的付款方式，方便您日后支付使用。"
 
-#: ./app/pages/cart/cart-one-column.html:292
-#: ./app/pages/cart/cart-two-column.html:292
-#: ./app/pages/invoice/invoice-one-column.html:317
-#: ./app/pages/invoice/invoice-two-column.html:311
-#: ./app/pages/review/review-one-column.html:160
-#: ./app/pages/review/review-two-column.html:160
+#: ./app/pages/cart/cart-one-column.html:309
+#: ./app/pages/cart/cart-two-column.html:310
+#: ./app/pages/invoice/invoice-one-column.html:319
+#: ./app/pages/invoice/invoice-two-column.html:313
+#: ./app/pages/review/review-one-column.html:162
+#: ./app/pages/review/review-two-column.html:162
 msgid "Use another payment method"
 msgstr "使用另一种付款方式"
 
@@ -711,7 +842,7 @@ msgstr "请提供一个值。"
 msgid "Review &amp; Finish"
 msgstr "检查 &amp; 完成"
 
-#: ./dist/js/kit.js:5921
+#: ./dist/js/kit.js:6078
 msgid "There was a problem obtaining authorization for this session. Please reload the page to try your request again."
 msgstr "获取此会话的授权存在问题。请重新加载页面以再次尝试您的请求。"
 
@@ -720,22 +851,24 @@ msgstr "获取此会话的授权存在问题。请重新加载页面以再次尝
 msgid "Reference"
 msgstr "参考"
 
-#: ./app/pages/cart/cart-one-column.html:260
-#: ./app/pages/cart/cart-two-column.html:260
-#: ./app/pages/invoice/invoice-one-column.html:285
-#: ./app/pages/invoice/invoice-two-column.html:279
+#: ./app/pages/simple/checkout.html:81
 msgid "Click the button below to checkout using Amazon Pay. You will be prompted to securely sign in with your Amazon username and password."
 msgstr "点击下面的按钮以使用 Amazon Pay 结帐。系统将提示您使用您的亚马逊用户名和密码进行安全登录。"
 
-#: ./index.html:59
-#: ./index.html:76
+#: ./app/pages/cart/cart-one-column.html:710
+#: ./app/pages/cart/cart-two-column.html:709
+#: ./app/pages/invoice/invoice-one-column.html:447
+#: ./app/pages/invoice/invoice-two-column.html:441
+#: ./app/pages/products/products-one-column.html:78
+#: ./app/pages/products/products-two-column.html:74
+#: ./app/pages/receipt/receipt-one-column.html:375
+#: ./app/pages/receipt/receipt-two-column.html:361
+#: ./app/pages/review/review-one-column.html:302
+#: ./app/pages/review/review-two-column.html:302
 msgid "Copyright {{symbol}} {{year}} {{companyName}}. All Rights Reserved."
 msgstr "版权{{symbol}} {{year}} {{companyName}}。版权所有。"
 
-#: ./app/pages/cart/cart-one-column.html:220
-#: ./app/pages/cart/cart-two-column.html:220
-#: ./app/pages/invoice/invoice-one-column.html:245
-#: ./app/pages/invoice/invoice-two-column.html:239
+#: ./app/pages/simple/checkout.html:49
 msgid "Credit Card"
 msgstr "信用卡"
 
@@ -753,17 +886,17 @@ msgstr "寄送方式："
 msgid "Electronic Delivery"
 msgstr "电子交付"
 
-#: ./app/pages/cart/cart-one-column.html:639
-#: ./app/pages/cart/cart-two-column.html:637
-#: ./app/pages/invoice/invoice-one-column.html:391
-#: ./app/pages/invoice/invoice-two-column.html:385
+#: ./app/pages/cart/cart-one-column.html:656
+#: ./app/pages/cart/cart-two-column.html:655
+#: ./app/pages/invoice/invoice-one-column.html:393
+#: ./app/pages/invoice/invoice-two-column.html:387
 msgid "Exp Month (MM)"
 msgstr "过期月份 (MM)"
 
-#: ./app/pages/cart/cart-one-column.html:649
-#: ./app/pages/cart/cart-two-column.html:647
-#: ./app/pages/invoice/invoice-one-column.html:400
-#: ./app/pages/invoice/invoice-two-column.html:394
+#: ./app/pages/cart/cart-one-column.html:666
+#: ./app/pages/cart/cart-two-column.html:665
+#: ./app/pages/invoice/invoice-one-column.html:402
+#: ./app/pages/invoice/invoice-two-column.html:396
 msgid "Exp Year (YY)"
 msgstr "过期年份 (YY)"
 
@@ -782,12 +915,12 @@ msgid "Immediate Download"
 msgstr "立即下载"
 
 #: ./app/pages/invoice/invoice-one-column.html:74
-#: ./app/pages/invoice/invoice-two-column.html:158
+#: ./app/pages/invoice/invoice-two-column.html:160
 msgid "Invoice ID"
 msgstr "发票 ID"
 
-#: ./app/pages/cart/cart-one-column.html:641
-#: ./app/pages/cart/cart-two-column.html:639
+#: ./app/pages/cart/cart-one-column.html:658
+#: ./app/pages/cart/cart-two-column.html:657
 msgid "Month"
 msgstr "月"
 
@@ -796,10 +929,10 @@ msgstr "月"
 msgid "Order ID"
 msgstr "订单号"
 
-#: ./app/pages/cart/cart-one-column.html:209
-#: ./app/pages/cart/cart-two-column.html:209
-#: ./app/pages/invoice/invoice-one-column.html:234
-#: ./app/pages/invoice/invoice-two-column.html:228
+#: ./app/pages/cart/cart-one-column.html:225
+#: ./app/pages/cart/cart-two-column.html:227
+#: ./app/pages/invoice/invoice-one-column.html:236
+#: ./app/pages/invoice/invoice-two-column.html:230
 msgid "Payment Options"
 msgstr "支付选项"
 
@@ -809,46 +942,40 @@ msgid "Please provide a valid quantity"
 msgstr "请提供有效数量"
 
 #: ./app/pages/receipt/receipt-one-column.html:223
-#: ./app/pages/receipt/receipt-one-column.html:354
+#: ./app/pages/receipt/receipt-one-column.html:358
 #: ./app/pages/receipt/receipt-two-column.html:207
-#: ./app/pages/receipt/receipt-two-column.html:340
+#: ./app/pages/receipt/receipt-two-column.html:344
 msgid "Return to {{companyName}}"
 msgstr "返回{{companyName}}"
 
-#: ./app/pages/cart/cart-one-column.html:620
-#: ./app/pages/cart/cart-two-column.html:618
-#: ./app/pages/invoice/invoice-one-column.html:370
-#: ./app/pages/invoice/invoice-two-column.html:364
+#: ./app/pages/cart/cart-one-column.html:637
+#: ./app/pages/cart/cart-two-column.html:636
+#: ./app/pages/invoice/invoice-one-column.html:372
+#: ./app/pages/invoice/invoice-two-column.html:366
 msgid "This is a secure 256-bit SSL encrypted payment."
 msgstr "这是一种安全的 256 位 SSL 加密支付。"
 
-#: ./app/pages/cart/cart-one-column.html:651
-#: ./app/pages/cart/cart-two-column.html:649
+#: ./app/pages/cart/cart-one-column.html:668
+#: ./app/pages/cart/cart-two-column.html:667
 msgid "Year"
 msgstr "年份"
 
-#: ./app/pages/cart/cart-one-column.html:266
-#: ./app/pages/cart/cart-two-column.html:266
-#: ./app/pages/invoice/invoice-one-column.html:291
-#: ./app/pages/invoice/invoice-two-column.html:285
+#: ./app/pages/simple/checkout.html:88
 msgid "Your Amazon payment information is never shared with {{companyName}}."
 msgstr "您的亚马逊付款信息绝不会共享给{{companyName}}。"
 
-#: ./app/pages/cart/cart-one-column.html:244
-#: ./app/pages/cart/cart-two-column.html:244
-#: ./app/pages/invoice/invoice-one-column.html:269
-#: ./app/pages/invoice/invoice-two-column.html:263
+#: ./app/pages/simple/checkout.html:73
 msgid "Your PayPal payment information is never shared with {{companyName}}."
 msgstr "您的 PayPal 付款信息绝不会共享给{{companyName}}。"
 
-#: ./app/pages/cart/cart-one-column.html:198
-#: ./app/pages/cart/cart-two-column.html:194
-#: ./app/pages/invoice/invoice-one-column.html:223
-#: ./app/pages/invoice/invoice-two-column.html:143
-#: ./app/pages/receipt/receipt-one-column.html:334
-#: ./app/pages/receipt/receipt-two-column.html:320
-#: ./app/pages/review/review-one-column.html:141
-#: ./app/pages/review/review-two-column.html:137
+#: ./app/pages/cart/cart-one-column.html:208
+#: ./app/pages/cart/cart-two-column.html:204
+#: ./app/pages/invoice/invoice-one-column.html:225
+#: ./app/pages/invoice/invoice-two-column.html:145
+#: ./app/pages/receipt/receipt-one-column.html:336
+#: ./app/pages/receipt/receipt-two-column.html:322
+#: ./app/pages/review/review-one-column.html:143
+#: ./app/pages/review/review-two-column.html:139
 msgid "Your total includes {{tax}} tax"
 msgstr "您的总计包含{{tax}}税"
 
@@ -867,12 +994,54 @@ msgstr "付款人"
 msgid "Review {{ampersandSymbol}} Finish"
 msgstr "审核{{ampersandSymbol}}完成"
 
-#: ./app/pages/simple/checkout.html:295
-#: ./app/pages/simple/review.html:176
+#: ./app/pages/simple/checkout.html:457
 msgid "An email has been sent to {{email}}."
 msgstr "电子邮件已发送至{{email}}。"
 
-#: 
+#: ./app/pages/simple/checkout.html:68
 msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order."
 msgstr "点击下面的按钮，重定向到PayPal网站，输入您的付款详细信息。返回{{companyName}}后，您可以完成订单。"
+
+#: ./app/templates/cross-sell.html:26
+#: ./app/templates/cross-sell.html:52
+#: ./app/templates/cross-sell.html:74
+msgid "Add to Cart"
+msgstr "添加到购物车"
+
+#: ./app/pages/cart/cart-one-column.html:257
+msgid "Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{settings.app.company_name}}, you can complete your order."
+msgstr "点击下面的按钮，连接到 PayPal 网站，输入您付款的详细信息。返回到 {{settings.app.company_name}} 后，您就可以完成您的订单了。"
+
+#: ./app/templates/cross-sell.html:8
+msgid "Customers Also Bought"
+msgstr "顾客也购买了"
+
+#: ./app/templates/cross-sell.html:9
+msgid "Frequently Purchased Together"
+msgstr "经常一起购买的产品"
+
+#: ./app/templates/cross-sell.html:6
+msgid "Recommended Products"
+msgstr "推荐产品"
+
+#: ./app/templates/cross-sell.html:7
+msgid "Related Products"
+msgstr "相关产品"
+
+#: ./app/templates/cross-sell.html:31
+msgid "Save {{percent}}!"
+msgstr "保存 {{percent}}！"
+
+#: ./app/templates/cross-sell.html:5
+msgid "You Might Also Be Interested In"
+msgstr "您也可能对……感兴趣"
+
+#: ./app/pages/simple/checkout.html:332
+#: ./app/pages/simple/checkout.html:94
+msgid "Back to Payment Methods"
+msgstr "返回支付方式"
+
+#: ./app/pages/simple/checkout.html:349
+msgid "Review"
+msgstr "检查"
 
