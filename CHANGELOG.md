@@ -1,5 +1,5 @@
-﻿<a name="1.0.8"></a>
-# 1.0.8
+﻿<a name="1.1.0"></a>
+# 1.1.0
 
 - Add support for Amazon Pay
 - Removal of dedicated review page and addition of common templates for consistency and maintenence
