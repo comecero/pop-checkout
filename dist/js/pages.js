@@ -1,5 +1,5 @@
 /*
-Comecero Popup Cart version: ﻿1.0.7
+Comecero Popup Cart version: ﻿1.1.0
 https://comecero.com
 https://github.com/comecero/cart
 Copyright Comecero and other contributors. Released under MIT license. See LICENSE for details.
@@ -173,7 +173,7 @@ app.controller("CheckoutController", ['$scope', 'CartService', 'OrderService', '
     $scope.settings = SettingsService.get();
     $scope.helpers = HelperService;
     $scope.options = { showSpinner: false, showForm: false, payment_method: "credit_card" };
-    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product.images,order.items.subscription,cart.options,cart.items.subscription_terms,cart.items.product.images" };
+    $scope.paymentParams = { expand: "payment_method.data,order.customer,order.items.product.images,order.items.subscription_terms,cart.options,cart.items.subscription_terms,cart.items.product.images" };
 
     if (SettingsService.get().app.show_digital_delivery == true) {
         $scope.paymentParams.expand += ",order.items.download,order.items.license";

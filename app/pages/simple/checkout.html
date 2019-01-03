@@ -483,6 +483,9 @@
                         <td>{{item.name}}</td>
                         <td class="text-right">{{item.formatted.subtotal}}</td>
                     </tr>
+                    <tr ng-if="item.subscription_terms">
+                        <td colspan="2"><span class="text-light"><small><em>{{item.subscription_terms.description}}</em></small></span></td>
+                    </tr>
                     <tr ng-if="item.download && settings.app.show_digital_delivery">
                         <td colspan="2">
                             <a class="btn btn-info" ng-href="{{item.download.link}}" target="_blank" translate>Download Now</a>
