@@ -68,7 +68,7 @@
                         <p translate translate-params-company-name="settings.app.company_name">Click the button below to be redirected to the PayPal site to enter your payment details. After returning to {{companyName}}, you can complete your order.</p>
                         <p ng-repeat="item in data.cart.items" ng-if="item.subscription_terms"><span class="text-light"><small>{{item.subscription_terms.description}}</small></span></p>
                         <div class="payment-button">
-                            <img submit-payment="data.paypal" class="pointer" cart="data.cart" shipping-is-billing="data.shipping_is_billing" on-success="onPaymentSuccess" on-submit="showSpinner" on-error="hideSpinner" error="data.error" src="images/paypal_checkout.png" />
+                            <img submit-payment="data.paypal" class="pointer" cart="data.cart" shipping-is-billing="data.shipping_is_billing" on-success="onPaymentSuccess" on-submit="showSpinner" params="paymentParams" cart-params="data.params" on-error="hideSpinner" error="data.error" src="images/paypal_checkout.png" />
                         </div>
                         <p class="text-light text-xs"><small><i class="fa fa-lock"></i> <span translate translate-params-company-name="settings.app.company_name">Your PayPal payment information is never shared with {{companyName}}.</span></small></p>
                     </div>
@@ -110,7 +110,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 spacer-t24">
-                                    <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" submit-payment="data.amazon_pay" cart="data.cart" params="paymentParams" get-consent-status="getConsentStatus" on-success="onPaymentSuccess" error="data.error" translate>Continue</button>
+                                    <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" submit-payment="data.amazon_pay" cart="data.cart" params="paymentParams" cart-params="data.params" get-consent-status="getConsentStatus" on-success="onPaymentSuccess" error="data.error" translate>Continue</button>
                                 </div>
                             </div>
                         </div>
@@ -298,7 +298,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit submit-payment="data.card" params="paymentParams" cart="data.cart" shipping-is-billing="true" on-success="onPaymentSuccess" error="data.error"><i class="fa fa-lock"></i> <span ng-show="data.cart.items"><span ng-if="data.cart.total > 0" translate>Complete Order</span><span ng-if="data.cart.total == 0" translate>Submit Order</span> &middot {{data.cart.formatted.total}}</span></button>
+                        <button type="button" class="btn btn-primary btn-cta btn-block btn-lg" validate-on-submit submit-payment="data.card" params="paymentParams" cart-params="data.params" cart="data.cart" shipping-is-billing="true" on-success="onPaymentSuccess" error="data.error"><i class="fa fa-lock"></i> <span ng-show="data.cart.items"><span ng-if="data.cart.total > 0" translate>Complete Order</span><span ng-if="data.cart.total == 0" translate>Submit Order</span> &middot {{data.cart.formatted.total}}</span></button>
                     </div>
                 </div>
             </div>
