@@ -141,7 +141,7 @@
 
         // Only send the message if the iFrame origin belongs to an allowed host
         var errorMsg = "This app is not properly configured to run from this website. To enable the payment window to launch from this website, you must supply the website hostname as an allowed origin in the app settings.";
-        errorMsg += "\n\nTo configure the payment window to run from this website, sign in to your account, navigate to Apps, go to the settings for the app and add " + window.location.hostname + " to the list of allowed websites.";
+        errorMsg += "\n\nTo configure the payment window to run from this website, sign in to your account, navigate to Online Storefront, go to the settings for the app and add " + window.location.hostname + " to the list of allowed websites.";
 
         // Always allow locahost as a valid origin host, and also allow if the origin host is the same as the page host.
         if (window.location.hostname != "localhost" && window.location.hostname != "127.0.0.1" && (window.location.protocol + "//" + window.location.hostname != childOrigin)) {

@@ -432,6 +432,13 @@
         }
     }, true);
 
+    // Keep the customer billing address name in sync with the customer name. We only ask for the customer name, so this makes sure the two are 
+    $scope.$watch("data.cart.customer.name", function (newVal, oldVal) {
+        if ($scope.data.cart && $scope.data.cart.customer) {
+            $scope.data.cart.customer.billing_address.name = newVal;
+        }
+    });
+
     function getDefaultPaymentMethodType(paymentMethods) {
 
         // Provide options.payment_methods object as the paymentMethods parameter in this function.
